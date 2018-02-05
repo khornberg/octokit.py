@@ -1,0 +1,16 @@
+[paths]
+source =
+   src/octokit
+   */site-packages/octokit
+
+[run]
+branch = true
+source =
+    octokit.py
+    tests
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*
