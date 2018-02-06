@@ -85,6 +85,11 @@ Default values::
 
     TODO Show them
 
+Webhooks::
+
+    from octokit import webhook
+    webhook.verify(headers, payload, secret, events=['push'])
+
 Authentication
 --------------
 
