@@ -11,5 +11,5 @@ def snake_case(string):
 
 
 def get_json_data(filename):
-    with open(os.path.join(os.path.dirname(__file__), 'data', 'rest.json'), 'r') as f:
+    with open(os.path.join(os.path.dirname(__file__), 'data', filename), 'r') as f:
         return json.load(f)
