@@ -40,12 +40,7 @@ class TestClientMethods(object):
 
     def test_request_has_body_parameters(self, mocker):
         mocker.patch('requests.post')
-        data = {
-          'scopes': [
-            'public_repo'
-          ],
-          'note': 'admin script'
-        }
+        data = {'scopes': ['public_repo'], 'note': 'admin script'}
         Octokit().authorization.create(**data)
         requests.post.assert_called_once_with(
             'https://api.github.com/authorizations', data=json.dumps(data), headers={}
