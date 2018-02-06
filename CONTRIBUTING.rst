@@ -63,13 +63,36 @@ To set up `octokit.py` for local development:
 Commit Message Guidelines
 -------------------------
 
-Prefix messages with one of the following:
+Prefix messages with one of the prefixes below followed by a colon:
 
-* Feature
-* Enhancement
-* Bug Fix
-* Peripheral
-* Dependency
+Example message::
+
+    Style: yapf
+
+Bug Fix
+    A fix for a bug
+Feature
+    Something that did not previously exist
+
+Enhancement
+    Something that previously existed, but now works slightly differently in some way
+Doc
+    Documentation
+Version
+    A new (semver) version number
+Dependency
+    Updating the dependencies
+    Updating 3rd party APIs ect
+Refactor
+    Improvements to code with no modification of external behavior
+    Include Performance Enhancements
+Test
+    New tests or altering old tests without changing any production code
+    Helper code intended to assist ONLY with test creation
+Style
+    Linting violations, code formatting, etc
+Peripheral
+    Updates to builds, deploys, etc
 
 Pull Request Guidelines
 -----------------------

@@ -3,7 +3,7 @@ octokit.py
 
 .. testsetup::
 
-    from octokit.py import *
+    from octokit import *
 
-.. automodule:: octokit.py
+.. automodule:: octokit
     :members:

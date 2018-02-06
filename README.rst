@@ -81,13 +81,13 @@ Example
 -------
 
 ::
+
     from octokit import Octokit
 
     repos = Octokit.repos.get_for_org(org='octokit', type='public')
 
-Default values
+Default values::
 
-::
     TODO Show them
 
 Authentication
@@ -95,25 +95,38 @@ Authentication
 
 Instatiate a client with the authentication scheme and credentials that you want to use.
 
-Example
-
-::
+Example::
 
     client = Octokit(type='app', token='xyz')
     client.repos.get_for_org(org='octokit', type='private')
 
-TODO
-[ ] basic
-[ ] oauth
-[ ] oauth key/secret
-[ ] token
-[ ] app
+basic::
+
+    TODO
+
+oauth::
+
+    TODO
+
+oauth key/secret::
+
+    TODO
+
+token::
+
+    TODO
+
+app::
+
+    TODO
 
 
 Pagination
 ----------
 
-TODO
+::
+
+    TODO
 
 
 Development
@@ -145,14 +158,14 @@ Contributing
 
 Pull requests are very welcome!
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+Please see :doc:`contributing` for more information.
 
 Credits
 =======
 
-Package based on [cookiecutter-pylibrary](https://github.com/ionelmc/cookiecutter-pylibrary)
+Package based on `cookiecutter-pylibrary <https://github.com/ionelmc/cookiecutter-pylibrary>`_
 
 License
 =======
 
-.. _MIT: LICENSE
+MIT
