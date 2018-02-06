@@ -10,7 +10,7 @@ __version__ = '0.1.0'
 
 class Base(object):
 
-    headers = {}
+    headers = {}  # TODO default headers
     base_url = 'https://api.github.com'
 
     def _get_headers(self, definition):
@@ -21,8 +21,10 @@ class Base(object):
         for p in required_params:
             assert p in kwargs  # has all required
         for kwarg, value in kwargs.items():
-            param = params.get(kwarg)
-            assert param  # is a valid param but not necessarily required
+            param_value = params.get(kwarg)
+            assert param_value  # is a valid param but not necessarily required
+            if param_value.get('enum'):
+                assert value in param_value.get('enum')  # is a valid option of the enum
             if kwarg in required_params:
                 assert value  # required param has a value
 
@@ -31,11 +33,15 @@ class Base(object):
         for name, value in values.items():
             _url, subs = re.subn(f':{name}', str(value), _url)
             if subs != 0:
-                # TODO
-                # it seems like params not in the url are in the body data
                 data_values.pop(name)
         url = f'{self.base_url}{_url}'
         return url, data_values
+
+    def _get_data(self, kwargs, params):
+        for param, value in params.items():
+            if value.get('default') and not kwargs.get(param):
+                kwargs[param] = value.get('default')
+        return json.dumps(kwargs) if kwargs else None
 
 
 class Octokit(Base):
@@ -65,10 +71,7 @@ class Octokit(Base):
         def _api_call(*args, **kwargs):
             self._validate(kwargs, definition.get('params'))
             url, data_kwargs = self._form_url(kwargs, definition['url'])
-            # TODO for post, put, patch data
-            # use defaults for params
-            # data = json.dumps(o_kwargs) if o_kwargs else None
-            data = None
+            data = self._get_data(data_kwargs, definition.get('params'))
             return getattr(requests, definition['method'].lower())(
                 url, headers=self._get_headers(definition), data=data
             )
