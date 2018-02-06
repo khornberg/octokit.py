@@ -16,10 +16,7 @@ from setuptools import setup
 
 
 def read(*names, **kwargs):
-    return io.open(
-        join(dirname(__file__), *names),
-        encoding=kwargs.get('encoding', 'utf8')
-    ).read()
+    return io.open(join(dirname(__file__), *names), encoding=kwargs.get('encoding', 'utf8')).read()
 
 
 setup(
@@ -53,9 +50,7 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Utilities',
     ],
-    keywords=[
-        'github', 'octokit', 'api'
-    ],
+    keywords=['github', 'octokit', 'api'],
     install_requires=[
         # eg: 'aspectlib==1.1.1', 'six>=1.7',
     ],

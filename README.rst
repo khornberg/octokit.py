@@ -10,11 +10,10 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - | |travis| |requires|
-        | |codeclimate|
+      - | |travis|
+        | |codeclimate| |codeclimate-tests|
     * - package
       - | |version| |wheel| |supported-versions| |supported-implementations|
-        | |commits-since|
 
 .. |docs| image:: https://readthedocs.org/projects/octokit.py/badge/?style=flat
     :target: https://readthedocs.org/projects/octokitpy
@@ -24,21 +23,17 @@ Overview
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/khornberg/octokit.py
 
-.. |requires| image:: https://requires.io/github/khornberg/octokit.py/requirements.svg?branch=master
-    :alt: Requirements Status
-    :target: https://requires.io/github/khornberg/octokit.py/requirements/?branch=master
-
 .. |codeclimate| image:: https://codeclimate.com/github/khornberg/octokit.py/badges/gpa.svg
    :target: https://codeclimate.com/github/khornberg/octokit.py
    :alt: CodeClimate Quality Status
 
+.. |codeclimate-tests| image:: https://api.codeclimate.com/v1/badges/7954d60682bc6d6c15cd/test_coverage
+   :target: https://codeclimate.com/github/khornberg/octokit.py
+   :alt: Test Coverage
+
 .. |version| image:: https://img.shields.io/pypi/v/octokitpy.svg
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/octokitpy
-
-.. |commits-since| image:: https://img.shields.io/github/commits-since/khornberg/octokit.py/v0.1.0.svg
-    :alt: Commits since latest release
-    :target: https://github.com/khornberg/octokit.py/compare/v0.1.0...master
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/octokitpy.svg
     :alt: PyPI Wheel
@@ -81,13 +76,13 @@ Example
 -------
 
 ::
+
     from octokit import Octokit
 
     repos = Octokit.repos.get_for_org(org='octokit', type='public')
 
-Default values
+Default values::
 
-::
     TODO Show them
 
 Authentication
@@ -95,25 +90,38 @@ Authentication
 
 Instatiate a client with the authentication scheme and credentials that you want to use.
 
-Example
-
-::
+Example::
 
     client = Octokit(type='app', token='xyz')
     client.repos.get_for_org(org='octokit', type='private')
 
-TODO
-[ ] basic
-[ ] oauth
-[ ] oauth key/secret
-[ ] token
-[ ] app
+basic::
+
+    TODO
+
+oauth::
+
+    TODO
+
+oauth key/secret::
+
+    TODO
+
+token::
+
+    TODO
+
+app::
+
+    TODO
 
 
 Pagination
 ----------
 
-TODO
+::
+
+    TODO
 
 
 Development
@@ -145,14 +153,14 @@ Contributing
 
 Pull requests are very welcome!
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+Please see CONTRIBUTING.md for more information.
 
 Credits
 =======
 
-Package based on [cookiecutter-pylibrary](https://github.com/ionelmc/cookiecutter-pylibrary)
+Package based on `cookiecutter-pylibrary <https://github.com/ionelmc/cookiecutter-pylibrary>`_
 
 License
 =======
 
-.. _MIT: LICENSE
+MIT
