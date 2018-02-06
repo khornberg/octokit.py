@@ -65,3 +65,27 @@ class TestWebhook(object):
         secret = 'secret'
         events = ['push']
         assert webhook.verify(headers, payload, secret, events=events) is False
+
+    def test_can_verify_user_agent(self):
+        headers = {
+            'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
+            'X-GitHub-Event': 'push',
+            'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958',
+            'User-Agent': 'GitHub-Hookshot/',
+        }
+        payload = {}
+        secret = 'secret'
+        events = ['push']
+        assert webhook.verify(headers, payload, secret, events=events, verify_user_agent=True)
+
+    def test_verifies_user_agent(self):
+        headers = {
+            'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
+            'X-GitHub-Event': 'push',
+            'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958',
+            'User-Agent': 'GitHub-Hooks',
+        }
+        payload = {}
+        secret = 'secret'
+        events = ['push']
+        assert webhook.verify(headers, payload, secret, events=events, verify_user_agent=True) is False

@@ -27,9 +27,15 @@ def invalid_event(event, events):
         return True
 
 
-def verify(headers, payload, secret, events=[]):
+def valid_user_agent(ua):
+    return ua.startswith('GitHub-Hookshot/')
+
+
+def verify(headers, payload, secret, events=[], verify_user_agent=False):
     if invalid_guid(headers.get('X-GitHub-Delivery')):
         return False
     if invalid_event(headers.get('X-GitHub-Event'), events):
         return False
+    if verify_user_agent and not valid_user_agent(headers.get('User-Agent', '')):
+            return False
     return _compare(headers, payload, secret)
