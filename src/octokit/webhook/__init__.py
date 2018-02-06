@@ -6,14 +6,6 @@ from uuid import UUID
 from octokit import utils
 
 
-def verify(headers, payload, secret, events=[]):
-    if invalid_guid(headers.get('X-GitHub-Delivery')):
-        return False
-    if invalid_event(headers.get('X-GitHub-Event'), events):
-        return False
-    return _compare(headers, payload, secret)
-
-
 def _compare(headers, payload, secret):
     encoding = 'utf-8'
     algo, sig = headers.get('X-Hub-Signature').split('=')
@@ -33,3 +25,11 @@ def invalid_event(event, events):
         return True
     if event not in events and '*' not in events:
         return True
+
+
+def verify(headers, payload, secret, events=[]):
+    if invalid_guid(headers.get('X-GitHub-Delivery')):
+        return False
+    if invalid_event(headers.get('X-GitHub-Event'), events):
+        return False
+    return _compare(headers, payload, secret)
