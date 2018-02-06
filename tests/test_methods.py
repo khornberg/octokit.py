@@ -17,7 +17,7 @@ class TestClientMethods(object):
 
     def test_method_calls_requests(self, mocker):
         mocker.patch('requests.get')
-        Octokit().authorization.get()
+        Octokit().authorization.get(id=1)
         assert requests.get.called
         assert requests.get.call_count == 1
 
