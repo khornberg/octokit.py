@@ -75,11 +75,11 @@ https://octokitpy.readthedocs.io/
 Example
 -------
 
-::
+REST API::
 
     from octokit import Octokit
 
-    repos = Octokit.repos.get_for_org(org='octokit', type='public')
+    repos = Octokit().repos.get_for_org(org='octokit', type='public')
 
 Default values::
 
