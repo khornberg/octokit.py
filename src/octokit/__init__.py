@@ -1,7 +1,8 @@
+import json
 import os
 import re
-import json
 from collections import ChainMap
+
 import requests
 from octokit import utils
 

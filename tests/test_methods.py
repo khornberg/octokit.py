@@ -1,7 +1,8 @@
-from octokit import Octokit
-import requests
-import pytest
 import json
+
+import pytest
+import requests
+from octokit import Octokit
 
 
 class TestClientMethods(object):
