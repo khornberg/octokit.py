@@ -1,5 +1,4 @@
 import json
-import os
 import re
 from collections import ChainMap
 
@@ -48,9 +47,7 @@ class Base(object):
 class Octokit(Base):
 
     def __init__(self):
-        with open(os.path.join(os.path.dirname(__file__), 'data', 'rest.json'), 'r') as f:
-            definitions = json.load(f)
-        self._create(definitions)
+        self._create(utils.get_json_data('rest.json'))
 
     def _create(self, definitions):
         for name, value in definitions.items():
