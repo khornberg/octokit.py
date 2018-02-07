@@ -5,12 +5,10 @@ from collections import ChainMap
 import requests
 from octokit import utils
 
-__version__ = '0.1.0'
-
 
 class Base(object):
 
-    headers = {}  # TODO default headers
+    headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
     base_url = 'https://api.github.com'
 
     def _get_headers(self, definition):

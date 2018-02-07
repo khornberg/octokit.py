@@ -36,14 +36,16 @@ class TestClientMethods(object):
     def test_validate_method_parameters(self, mocker):
         mocker.patch('requests.get')
         Octokit().authorization.get(id=100)
-        requests.get.assert_called_once_with('https://api.github.com/authorizations/100', data=None, headers={})
+        requests.get.assert_called_once_with(
+            'https://api.github.com/authorizations/100', data=None, headers=Octokit().headers
+        )
 
     def test_request_has_body_parameters(self, mocker):
         mocker.patch('requests.post')
         data = {'scopes': ['public_repo'], 'note': 'admin script'}
         Octokit().authorization.create(**data)
         requests.post.assert_called_once_with(
-            'https://api.github.com/authorizations', data=json.dumps(data), headers={}
+            'https://api.github.com/authorizations', data=json.dumps(data), headers=Octokit().headers
         )
 
     def test_must_include_required_body_parameters(self):
@@ -53,7 +55,7 @@ class TestClientMethods(object):
 
     def test_use_default_parameter_values(self, mocker):
         mocker.patch('requests.patch')
-        headers = {'accept': 'application/vnd.github.squirrel-girl-preview'}
+        headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
         data = {'state': 'open'}
         Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
         requests.patch.assert_called_once_with(
@@ -62,7 +64,7 @@ class TestClientMethods(object):
 
     def test_use_passed_value_instead_of_default_parameter_values(self, mocker):
         mocker.patch('requests.patch')
-        headers = {'accept': 'application/vnd.github.squirrel-girl-preview'}
+        headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
         data = {'state': 'closed'}
         Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, **data)
         requests.patch.assert_called_once_with(
