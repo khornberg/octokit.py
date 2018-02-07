@@ -41,7 +41,6 @@ before_deploy:
 deploy:
   - provider: releases
     api_key: $KEY
-    name: $VERSION
     file_glob: true
     file: dist/octokit-*
     skip_cleanup: true
