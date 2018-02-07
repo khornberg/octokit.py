@@ -15,7 +15,7 @@ Overview
     * - package
       - | |version| |wheel| |supported-versions| |supported-implementations|
 
-.. |docs| image:: https://readthedocs.org/projects/octokit.py/badge/?style=flat
+.. |docs| image:: http://octokitpy.readthedocs.io/en/latest/?badge=latest
     :target: https://readthedocs.org/projects/octokitpy
     :alt: Documentation Status
 
