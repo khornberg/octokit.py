@@ -14,7 +14,7 @@ matrix:
   include:
     - python: '3.6'
       env:
-        - TOXENV=py36,report
+        - TOXENV=py36
 before_install:
   - python --version
   - uname -a
