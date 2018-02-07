@@ -7,21 +7,26 @@ Overview
 .. list-table::
     :stub-columns: 1
 
-    * - docs
-      - |docs|
     * - tests
-      - | |travis|
+      - | |travis| |pyup|
         | |codeclimate| |codeclimate-tests|
     * - package
-      - | |version| |wheel| |supported-versions| |supported-implementations|
+      - | |version| |wheel|
+        | |supported-versions| |supported-implementations|
+    * - docs
+      - |docs|
 
-.. |docs| image:: https://readthedocs.org/projects/octokit.py/badge/?style=flat
+.. |docs| image:: http://octokitpy.readthedocs.io/en/latest/?badge=latest
     :target: https://readthedocs.org/projects/octokitpy
     :alt: Documentation Status
 
 .. |travis| image:: https://travis-ci.org/khornberg/octokit.py.svg?branch=master
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/khornberg/octokit.py
+
+.. |pyup| image:: https://pyup.io/repos/github/khornberg/octokit.py/shield.svg
+     :target: https://pyup.io/repos/github/khornberg/octokit.py/
+     :alt: Updates
 
 .. |codeclimate| image:: https://codeclimate.com/github/khornberg/octokit.py/badges/gpa.svg
    :target: https://codeclimate.com/github/khornberg/octokit.py
