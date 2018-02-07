@@ -36,6 +36,20 @@ after_script:
 after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
+before_deploy:
+  - ./tag.sh
+deploy:
+  - provider: releases
+    api_key: $KEY
+    name: $version
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: pypi
+    user: $PYPIU
+    password: $PYPIP
+    on:
+      tags: true
 notifications:
   email:
     on_success: never
