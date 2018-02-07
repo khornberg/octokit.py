@@ -3,8 +3,8 @@ import json
 import re
 from collections import ChainMap
 
-from jose import jwt
 import requests
+from jose import jwt
 from octokit import utils
 
 
