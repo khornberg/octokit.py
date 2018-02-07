@@ -43,6 +43,14 @@ class Base(object):
                 kwargs[param] = value.get('default')
         return kwargs
 
+    def _data(self, data_kwargs, params, method):
+        data = self._get_data(data_kwargs, params)
+        if method == 'get':
+            return {'params': data}
+        if method in ['post', 'patch', 'put', 'delete']:
+            return {'data': json.dumps(data)}
+        return {}
+
     def _setup_authentication(self, kwargs):
         authentication_schemes = {
             'basic': self._setup_basic_authentication,
@@ -91,6 +99,15 @@ class Base(object):
         }
         return jwt.encode(payload, key, algorithm='RS256')
 
+    def _auth(self, requests_kwargs):
+        if getattr(self, 'auth', None) == 'basic':
+            return {'auth': (self.username, self.password)}
+        if getattr(self, 'auth', None) in ['token', 'app']:
+            headers = requests_kwargs['headers']
+            headers.update({'Authorization': f'token {self.token}'})
+            return {'headers': headers}
+        return {}
+
 
 class Octokit(Base):
 
@@ -120,17 +137,8 @@ class Octokit(Base):
             method = definition['method'].lower()
             requests_kwargs = {'headers': self._get_headers(definition)}
             url, data_kwargs = self._form_url(kwargs, definition['url'])
-            data = self._get_data(data_kwargs, definition.get('params'))
-            if method == 'get':
-                requests_kwargs.update({'params': data})
-            if method in ['post', 'patch', 'put', 'delete']:
-                requests_kwargs.update({'data': json.dumps(data)})
-            if self.auth == 'basic':
-                requests_kwargs.update({'auth': (self.username, self.password)})
-            if self.auth in ['token', 'app']:
-                headers = requests_kwargs['headers']
-                headers.update({'Authorization': f'token {self.token}'})
-                requests_kwargs['headers'] = headers
+            requests_kwargs.update(self._data(data_kwargs, definition.get('params'), method))
+            requests_kwargs.update(self._auth(requests_kwargs))
             return getattr(requests, method)(url, **requests_kwargs)
 
         _api_call.__name__ = name
