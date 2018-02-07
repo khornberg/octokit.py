@@ -5,12 +5,10 @@ from collections import ChainMap
 import requests
 from octokit import utils
 
-__version__ = '0.1.0'
-
 
 class Base(object):
 
-    headers = {}  # TODO default headers
+    headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
     base_url = 'https://api.github.com'
 
     def _get_headers(self, definition):
@@ -41,7 +39,7 @@ class Base(object):
         for param, value in params.items():
             if value.get('default') and not kwargs.get(param):
                 kwargs[param] = value.get('default')
-        return json.dumps(kwargs) if kwargs else None
+        return kwargs
 
 
 class Octokit(Base):
@@ -68,12 +66,15 @@ class Octokit(Base):
 
         def _api_call(*args, **kwargs):
             self._validate(kwargs, definition.get('params'))
+            method = definition['method'].lower()
+            requests_kwargs = {'headers': self._get_headers(definition)}
             url, data_kwargs = self._form_url(kwargs, definition['url'])
             data = self._get_data(data_kwargs, definition.get('params'))
-            return getattr(requests, definition['method'].lower())(
-                url, headers=self._get_headers(definition), data=data
-            )
-            pass
+            if method == 'get':
+                requests_kwargs.update({'params': data})
+            if method in ['post', 'patch', 'put', 'delete']:
+                requests_kwargs.update({'data': json.dumps(data)})
+            return getattr(requests, method)(url, **requests_kwargs)
 
         _api_call.__name__ = name
         _api_call.__doc__ = definition['description']
