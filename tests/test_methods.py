@@ -37,7 +37,7 @@ class TestClientMethods(object):
         mocker.patch('requests.get')
         Octokit().authorization.get(id=100)
         requests.get.assert_called_once_with(
-            'https://api.github.com/authorizations/100', data=None, headers=Octokit().headers
+            'https://api.github.com/authorizations/100', params={}, headers=Octokit().headers
         )
 
     def test_request_has_body_parameters(self, mocker):
@@ -74,3 +74,11 @@ class TestClientMethods(object):
     def test_validate_enum_values(self):
         with pytest.raises(AssertionError):
             Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, state='closeddddd')
+
+    def test_non_default_params_not_in_the_url_for_get_requests_go_in_the_query_string(self, mocker):
+        mocker.patch('requests.get')
+        params = {'page': 2, 'per_page': '30'}
+        Octokit().authorization.get_grant(id=404, page=2)
+        requests.get.assert_called_once_with(
+            'https://api.github.com/applications/grants/404', params=params, headers=Octokit().headers
+        )
