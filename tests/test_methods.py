@@ -23,13 +23,13 @@ class TestClientMethods(object):
         assert requests.get.called
         assert requests.get.call_count == 1
 
-    def test_has_required_method_parameters(self, mocker):
+    def test_has_required_method_parameters(self):
         with pytest.raises(AssertionError):
             Octokit().authorization.get()
         with pytest.raises(AssertionError):
             Octokit().authorization.get(id=None)
 
-    def test_only_allows_valid_method_parameters(self, mocker):
+    def test_only_allows_valid_method_parameters(self):
         with pytest.raises(AssertionError):
             Octokit().authorization.get_grants(notvalid=1)
 
@@ -47,9 +47,7 @@ class TestClientMethods(object):
         )
 
     def test_must_include_required_body_parameters(self):
-        data = {
-            'gist_id': 'abc123',
-        }
+        data = {'gist_id': 'abc123'}
         with pytest.raises(AssertionError):
             Octokit().authorization.create(**data)
 
