@@ -21,7 +21,7 @@ def read(*names, **kwargs):
 
 setup(
     name='octokitpy',
-    version='0.4.1',
+    version='0.4.2',
     license='MIT license',
     description='Python client for GitHub API',
     long_description='%s\n%s' % (
@@ -51,6 +51,6 @@ setup(
         'Topic :: Utilities',
     ],
     keywords=['github', 'octokit', 'api'],
-    install_requires=[],
+    install_requires=open('requirements.txt').read().split("\n"),
     extras_require={},
 )
