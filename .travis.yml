@@ -45,14 +45,15 @@ deploy:
     file: dist/octokit-*
     skip_cleanup: true
     on:
-      condition: '$TOXENV = py36'
       branch: master
+      condition: '$TOXENV = py36'
       condition: '$TRAVIS_TAG != $(python setup.py--version)'
   - provider: pypi
     user: $PYPIU
     password: $PYPIP
     on:
-      tags: true
+      branch: master
+      condition: '$TRAVIS_TAG != $(python setup.py--version)'
       condition: '$TOXENV = py36'
 notifications:
   email:
