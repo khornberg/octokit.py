@@ -1,8 +1,10 @@
+import datetime
 import json
 import re
 from collections import ChainMap
 
 import requests
+from jose import jwt
 from octokit import utils
 
 
@@ -41,11 +43,77 @@ class Base(object):
                 kwargs[param] = value.get('default')
         return kwargs
 
+    def _data(self, data_kwargs, params, method):
+        data = self._get_data(data_kwargs, params)
+        if method == 'get':
+            return {'params': data}
+        if method in ['post', 'patch', 'put', 'delete']:
+            return {'data': json.dumps(data)}
+        return {}
+
+    def _setup_authentication(self, kwargs):
+        authentication_schemes = {
+            'basic': self._setup_basic_authentication,
+            'token': self._setup_token_authentication,
+            'app': self._setup_app_authentication,
+        }
+        if kwargs.get('auth'):
+            authentication_schemes.get(kwargs.get('auth'))(kwargs)
+
+    def _setup_basic_authentication(self, kwargs):
+        assert kwargs['username']
+        assert kwargs['password']
+        self.username = kwargs['username']
+        self.password = kwargs['password']
+        self.auth = kwargs['auth']
+
+    def _setup_token_authentication(self, kwargs):
+        assert kwargs['token']
+        self.token = kwargs['token']
+        self.auth = kwargs['auth']
+
+    def _setup_app_authentication(self, kwargs):
+        assert kwargs['app_id']
+        assert kwargs['private_key']
+        self.token, self.expires_at = self._app_auth_get_token(kwargs['app_id'], kwargs['private_key'])
+        self.auth = kwargs['auth']
+        self.headers['accept'] = 'application/vnd.github.machine-man-preview+json'
+
+    def _app_auth_get_token(self, app_id, key):
+        headers = {
+            'Authorization': 'Bearer {}'.format(self._app_auth_get_jwt(app_id, key)),
+            'Accept': 'application/vnd.github.machine-man-preview+json',
+        }
+        installation_url = f'{self.base_url}/app/installations'
+        installations = requests.get(installation_url, headers=headers).json()
+        installation_id = installations[0]['id']
+        installation_token_url = f'{self.base_url}/installations/{installation_id}/access_tokens'
+        response = requests.post(installation_token_url, headers=headers).json()
+        return response['token'], response['expires_at']
+
+    def _app_auth_get_jwt(self, app_id, key):
+        payload = {
+            'iat': int(datetime.datetime.timestamp(datetime.datetime.now())),
+            'exp': int(datetime.datetime.timestamp(datetime.datetime.now())) + (10 * 60),
+            'iss': app_id,
+        }
+        return jwt.encode(payload, key, algorithm='RS256')
+
+    def _auth(self, requests_kwargs):
+        if getattr(self, 'auth', None) == 'basic':
+            return {'auth': (self.username, self.password)}
+        if getattr(self, 'auth', None) in ['token', 'app']:
+            headers = requests_kwargs['headers']
+            headers.update({'Authorization': f'token {self.token}'})
+            return {'headers': headers}
+        return {}
+
 
 class Octokit(Base):
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self._create(utils.get_json_data('rest.json'))
+        self._setup_authentication(kwargs)
 
     def _create(self, definitions):
         for name, value in definitions.items():
@@ -69,11 +137,8 @@ class Octokit(Base):
             method = definition['method'].lower()
             requests_kwargs = {'headers': self._get_headers(definition)}
             url, data_kwargs = self._form_url(kwargs, definition['url'])
-            data = self._get_data(data_kwargs, definition.get('params'))
-            if method == 'get':
-                requests_kwargs.update({'params': data})
-            if method in ['post', 'patch', 'put', 'delete']:
-                requests_kwargs.update({'data': json.dumps(data)})
+            requests_kwargs.update(self._data(data_kwargs, definition.get('params'), method))
+            requests_kwargs.update(self._auth(requests_kwargs))
             return getattr(requests, method)(url, **requests_kwargs)
 
         _api_call.__name__ = name
