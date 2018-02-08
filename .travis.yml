@@ -37,8 +37,12 @@ after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
 before_deploy:
+  - echo $TRAVIS_TAG
+  - git tag -l
   - export TRAVIS_TAG=$(python setup.py --version)
   - git tag $(python setup.py --version)
+  - echo $TRAVIS_TAG
+  - git tag -l
 deploy:
   - provider: releases
     api_key: $KEY
@@ -46,8 +50,8 @@ deploy:
     file: dist/octokit-*
     skip_cleanup: true
     on:
-      tags: true
       condition: '$TOXENV = py36'
+      branch: master
   - provider: pypi
     user: $PYPIU
     password: $PYPIP
