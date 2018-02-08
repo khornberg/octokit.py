@@ -195,6 +195,21 @@ Best Practices
 
     [ ] pagination
 
+Documentation
+-------------
+
+::
+
+    [ ] Auto generated documentation
+
+Deployment
+----------
+
+::
+
+    [ ] Deploy wheels
+    [ ] Make GitHub releases work
+
 
 **Check box guide**
 
