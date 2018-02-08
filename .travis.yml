@@ -37,6 +37,7 @@ after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
 before_deploy:
+  - export TRAVIS_TAG=$(python setup.py --version)
   - git tag $(python setup.py --version)
 deploy:
   - provider: releases
