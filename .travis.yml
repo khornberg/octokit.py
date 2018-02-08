@@ -14,7 +14,7 @@ matrix:
   include:
     - python: '3.6'
       env:
-        - TOXENV=py36,report
+        - TOXENV=py36
 before_install:
   - python --version
   - uname -a
@@ -36,6 +36,25 @@ after_script:
 after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
+before_deploy:
+  - git tag $(python setup.py --version)
+deploy:
+  - provider: releases
+    api_key: $KEY
+    file_glob: true
+    file: dist/octokit-*
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: '$TOXENV = py36'
+      condition: '$TRAVIS_TAG != $(python setup.py--version)'
+  - provider: pypi
+    user: $PYPIU
+    password: $PYPIP
+    on:
+      branch: master
+      condition: '$TRAVIS_TAG != $(python setup.py--version)'
+      condition: '$TOXENV = py36'
 notifications:
   email:
     on_success: never
