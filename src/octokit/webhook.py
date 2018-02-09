@@ -9,7 +9,7 @@ from octokit import utils
 def valid_signature(headers, payload, secret):
     encoding = 'utf-8'
     algo, sig = headers.get('X-Hub-Signature').split('=')
-    digest = hmac.new(secret.encode(encoding), json.dumps(payload).encode(encoding), getattr(hashlib, algo)).hexdigest()
+    digest = hmac.new(secret.encode(encoding), payload.encode(encoding), getattr(hashlib, algo)).hexdigest()
     return hmac.compare_digest(sig.encode(encoding), digest.encode(encoding))
 
 
@@ -43,5 +43,5 @@ def verify(headers, payload, secret, events=[], verify_user_agent=False, return_
         return False
     validity = valid_signature(headers, payload, secret)
     if validity and return_app_id and headers.get('X-GitHub-Event') == 'ping':
-        return payload.get('hook').get('app_id')
+        return json.loads(payload).get('hook').get('app_id')
     return validity
