@@ -99,15 +99,17 @@ class TestWebhook(object):
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958',
             'User-Agent': 'GitHub-Hookshot/',
         }
-        payload = json.dumps({
-            'hook': {
-                'type': 'App',
-                'id': 11,
-                'active': True,
-                'events': ['pull_request'],
-                'app_id': 42,
+        payload = json.dumps(
+            {
+                'hook': {
+                    'type': 'App',
+                    'id': 11,
+                    'active': True,
+                    'events': ['pull_request'],
+                    'app_id': 42,
+                }
             }
-        })
+        )
         secret = 'secret'
         assert webhook.verify(headers, payload, secret, events=['*'], return_app_id=True) == 42
 
