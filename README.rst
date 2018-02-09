@@ -97,7 +97,7 @@ Webhooks::
         dictionary of request headers
 
     payload
-        payload of request; will be converted to a string via ``json.dumps`` for signature validation
+        string; payload of request
 
     secret
         string; secret provided to GitHub to sign webhook
