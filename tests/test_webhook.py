@@ -1,3 +1,5 @@
+import json
+
 from octokit import webhook
 
 
@@ -5,11 +7,11 @@ class TestWebhook(object):
 
     def test_can_verify_webhook(self):
         headers = {
-            'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
+            'X-Hub-Signature': 'sha1=25af6174a0fcecc4d346680a72b7ce644b9a88e8',
             'X-GitHub-Event': 'push',
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958'
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         events = ['push']
         assert webhook.verify(headers, payload, secret, events=events)
@@ -19,7 +21,7 @@ class TestWebhook(object):
             'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958'
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         events = ['push']
         assert webhook.verify(headers, payload, secret, events=events) is False
@@ -29,17 +31,17 @@ class TestWebhook(object):
             'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958'
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         assert webhook.verify(headers, payload, secret) is False
 
     def test_can_specify_all_events(self):
         headers = {
-            'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
+            'X-Hub-Signature': 'sha1=25af6174a0fcecc4d346680a72b7ce644b9a88e8',
             'X-GitHub-Event': 'push',
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958'
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         events = ['*']
         assert webhook.verify(headers, payload, secret, events=events)
@@ -50,7 +52,7 @@ class TestWebhook(object):
             'X-GitHub-Event': 'pushy',
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958'
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         events = ['pushy']
         assert webhook.verify(headers, payload, secret, events=events) is False
@@ -61,31 +63,31 @@ class TestWebhook(object):
             'X-GitHub-Event': 'push',
             'X-GitHub-Delivery': 'not-a-guid'
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         events = ['push']
         assert webhook.verify(headers, payload, secret, events=events) is False
 
     def test_can_verify_user_agent(self):
         headers = {
-            'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
+            'X-Hub-Signature': 'sha1=25af6174a0fcecc4d346680a72b7ce644b9a88e8',
             'X-GitHub-Event': 'push',
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958',
             'User-Agent': 'GitHub-Hookshot/',
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         events = ['push']
         assert webhook.verify(headers, payload, secret, events=events, verify_user_agent=True)
 
     def test_verifies_user_agent(self):
         headers = {
-            'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
+            'X-Hub-Signature': 'sha1=25af6174a0fcecc4d346680a72b7ce644b9a88e8',
             'X-GitHub-Event': 'push',
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958',
             'User-Agent': 'GitHub-Hooks',
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         events = ['push']
         assert webhook.verify(headers, payload, secret, events=events, verify_user_agent=True) is False
@@ -97,25 +99,27 @@ class TestWebhook(object):
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958',
             'User-Agent': 'GitHub-Hookshot/',
         }
-        payload = {
-            'hook': {
-                'type': 'App',
-                'id': 11,
-                'active': True,
-                'events': ['pull_request'],
-                'app_id': 42,
+        payload = json.dumps(
+            {
+                'hook': {
+                    'type': 'App',
+                    'id': 11,
+                    'active': True,
+                    'events': ['pull_request'],
+                    'app_id': 42,
+                }
             }
-        }
+        )
         secret = 'secret'
         assert webhook.verify(headers, payload, secret, events=['*'], return_app_id=True) == 42
 
     def test_can_request_app_id_be_returned_on_non_ping_events(self):
         headers = {
-            'X-Hub-Signature': 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f',
+            'X-Hub-Signature': 'sha1=25af6174a0fcecc4d346680a72b7ce644b9a88e8',
             'X-GitHub-Event': 'push',
             'X-GitHub-Delivery': '72d3162f-cc78-11e3-81ab-4c9367dc0958',
             'User-Agent': 'GitHub-Hookshot/',
         }
-        payload = {}
+        payload = ''
         secret = 'secret'
         assert webhook.verify(headers, payload, secret, events=['*'], return_app_id=True)
