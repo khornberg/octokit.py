@@ -2,6 +2,7 @@ graft docs
 graft src
 graft ci
 graft tests
+graft scripts
 
 include .bumpversion.cfg
 include .coveragerc
@@ -16,7 +17,6 @@ include README.rst
 
 include tox.ini .travis.yml
 include requirements.txt
-include tag.sh
 include .pyup.yml
 
 global-exclude *.py[cod] __pycache__ *.so *.dylib
