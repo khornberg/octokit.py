@@ -48,9 +48,8 @@ deploy:
       branch: master
       condition: '$TOXENV = py36'
       condition: '$TRAVIS_TAG != $(python setup.py--version)'
-  - provider: pypi
-    user: $PYPIU
-    password: $PYPIP
+  - provider: script
+    script: scripts/pypi.sh
     on:
       branch: master
       condition: '$TRAVIS_TAG != $(python setup.py--version)'
