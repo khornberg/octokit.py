@@ -31,10 +31,10 @@ class Base(object):
     def _form_url(self, values, _url):
         data_values = values.copy()
         for name, value in values.items():
-            _url, subs = re.subn(f':{name}', str(value), _url)
+            _url, subs = re.subn(':{}'.format(name), str(value), _url)
             if subs != 0:
                 data_values.pop(name)
-        url = f'{self.base_url}{_url}'
+        url = '{}{}'.format(self.base_url, _url)
         return url, data_values
 
     def _get_data(self, kwargs, params):
@@ -84,10 +84,10 @@ class Base(object):
             'Authorization': 'Bearer {}'.format(self._app_auth_get_jwt(app_id, key)),
             'Accept': 'application/vnd.github.machine-man-preview+json',
         }
-        installation_url = f'{self.base_url}/app/installations'
+        installation_url = '{}/app/installations'.format(self.base_url)
         installations = requests.get(installation_url, headers=headers).json()
         installation_id = installations[0]['id']
-        installation_token_url = f'{self.base_url}/installations/{installation_id}/access_tokens'
+        installation_token_url = '{}/installations/{}/access_tokens'.format(self.base_url, installation_id)
         response = requests.post(installation_token_url, headers=headers).json()
         return response['token'], response['expires_at']
 
@@ -104,7 +104,7 @@ class Base(object):
             return {'auth': (self.username, self.password)}
         if getattr(self, 'auth', None) in ['token', 'app']:
             headers = requests_kwargs['headers']
-            headers.update({'Authorization': f'token {self.token}'})
+            headers.update({'Authorization': 'token {}'.format(self.token)})
             return {'headers': headers}
         return {}
 

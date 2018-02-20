@@ -15,6 +15,12 @@ matrix:
     - python: '3.6'
       env:
         - TOXENV=py36
+    - python: '3.5'
+      env:
+        - TOXENV=py35
+    - python: '3.4'
+      env:
+        - TOXENV=py34
 before_install:
   - python --version
   - uname -a
@@ -37,20 +43,21 @@ after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
 before_deploy:
+  - git config --local user.name "Kyle Hornberg"
+  - git config --local user.email "khornberg@users.noreply.github.com"
   - git tag $(python setup.py --version)
 deploy:
   - provider: releases
     api_key: $KEY
     file_glob: true
-    file: dist/octokit-*
+    file: dist/**
     skip_cleanup: true
     on:
       branch: master
       condition: '$TOXENV = py36'
       condition: '$TRAVIS_TAG != $(python setup.py--version)'
-  - provider: pypi
-    user: $PYPIU
-    password: $PYPIP
+  - provider: script
+    script: scripts/pypi.sh
     on:
       branch: master
       condition: '$TRAVIS_TAG != $(python setup.py--version)'

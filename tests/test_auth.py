@@ -1,4 +1,5 @@
 import os
+from collections import ChainMap
 from collections import namedtuple
 
 import pytest
@@ -50,7 +51,7 @@ class TestAuth(object):
     def test_token_auth_used_if_set(self, mocker):
         mocker.patch('requests.get')
         Octokit(auth='token', token='yak').authorization.get(id=100)
-        headers = {**Octokit().headers, 'Authorization': 'token yak'}
+        headers = dict(ChainMap(Octokit().headers, {'Authorization': 'token yak'}))
         requests.get.assert_called_once_with(
             'https://api.github.com/authorizations/100',
             params={},

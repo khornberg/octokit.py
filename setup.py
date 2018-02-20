@@ -21,7 +21,7 @@ def read(*names, **kwargs):
 
 setup(
     name='octokitpy',
-    version='0.4.3',
+    version='0.5.0',
     license='MIT license',
     description='Python client for GitHub API',
     long_description='%s\n%s' % (

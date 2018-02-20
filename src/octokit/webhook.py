@@ -38,7 +38,7 @@ def valid_headers(headers, events, verify_user_agent):
     return True
 
 
-def verify(headers, payload, secret, events=[], verify_user_agent=False, return_app_id=False):
+def verify(headers, payload, secret, events=None, verify_user_agent=False, return_app_id=False):
     if not valid_headers(headers, events, verify_user_agent):
         return False
     validity = valid_signature(headers, payload, secret)
