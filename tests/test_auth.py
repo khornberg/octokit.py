@@ -58,38 +58,39 @@ class TestAuth(object):
             headers=headers,
         )
 
-    def test_can_set_app_authentication(self, mocker):
+    def test_can_set_installation_authentication(self, mocker):
         Request = namedtuple('Request', ['json'])
         get = mocker.patch('requests.get')
-        get.return_value = Request(json=lambda: [{'id': 37}])
+        get.return_value = Request(json=lambda: [{'id': 13, 'app_id': 1}, {'id': 37, 'app_id': 42}])
         post = mocker.patch('requests.post')
         post.return_value = Request(json=lambda: {'token': 'v1.1f699f1069f60', 'expires_at': '2016-07-11T22:14:10Z'})
         with open(os.path.join(os.path.dirname(__file__), 'test.pem'), 'r') as f:
             private_key = f.read()
-        sut = Octokit(auth='app', app_id=42, private_key=private_key)
-        assert sut.auth == 'app'
+        sut = Octokit(auth='installation', app_id=42, private_key=private_key)
+        assert sut.auth == 'installation'
         assert sut.token == 'v1.1f699f1069f60'
         assert sut.expires_at == '2016-07-11T22:14:10Z'
 
-    def test_cannot_set_app_authentication_with_out_required_data(self):
+    def test_cannot_set_installation_authentication_with_out_required_data(self):
         with pytest.raises(KeyError):
-            Octokit(auth='app')
+            Octokit(auth='installation')
         with pytest.raises(AssertionError):
-            Octokit(auth='app', app_id='')
+            Octokit(auth='installation', app_id='')
         with pytest.raises(KeyError):
-            Octokit(auth='app', app_id=42)
+            Octokit(auth='installation', app_id=42)
         with pytest.raises(AssertionError):
-            Octokit(auth='app', app_id=42, private_key='')
+            Octokit(auth='installation', app_id=42, private_key='')
 
-    def test_app_token_is_used_if_set(self, mocker):
+    def test_installation_token_is_used_if_set(self, mocker):
         Request = namedtuple('Request', ['json'])
         get = mocker.patch('requests.get')
-        get.return_value = Request(json=lambda: [{'id': 37}])
+        get.return_value = Request(json=lambda: [{'id': 13, 'app_id': 1}, {'id': 37, 'app_id': 42}])
         post = mocker.patch('requests.post')
         post.return_value = Request(json=lambda: {'token': 'v1.1f699f1069f60', 'expires_at': '2016-07-11T22:14:10Z'})
         with open(os.path.join(os.path.dirname(__file__), 'test.pem'), 'r') as f:
             private_key = f.read()
-        sut = Octokit(auth='app', app_id=42, private_key=private_key)
+        sut = Octokit(auth='installation', app_id=42, private_key=private_key)
+        assert sut.installation_id == 37
         get = mocker.patch('requests.get')
         sut.authorization.get(id=100)
         headers = {
@@ -102,3 +103,23 @@ class TestAuth(object):
             params={},
             headers=headers,
         )
+
+    def test_cannot_set_app_authentication_with_out_required_data(self):
+        with pytest.raises(KeyError):
+            Octokit(auth='app')
+        with pytest.raises(AssertionError):
+            Octokit(auth='app', app_id='')
+        with pytest.raises(KeyError):
+            Octokit(auth='app', app_id=42)
+        with pytest.raises(AssertionError):
+            Octokit(auth='app', app_id=42, private_key='')
+
+    def test_can_set_app_authentication(self, mocker):
+        Request = namedtuple('Request', ['json'])
+        get = mocker.patch('requests.get')
+        get.return_value = Request(json=lambda: [{'id': 37}])
+        with open(os.path.join(os.path.dirname(__file__), 'test.pem'), 'r') as f:
+            private_key = f.read()
+        sut = Octokit(auth='app', app_id=42, private_key=private_key)
+        assert sut.auth == 'app'
+        assert sut.jwt is not None

@@ -55,6 +55,7 @@ class Base(object):
         authentication_schemes = {
             'basic': self._setup_basic_authentication,
             'token': self._setup_token_authentication,
+            'installation': self._setup_installation_authentication,
             'app': self._setup_app_authentication,
         }
         if kwargs.get('auth'):
@@ -72,10 +73,17 @@ class Base(object):
         self.token = kwargs['token']
         self.auth = kwargs['auth']
 
-    def _setup_app_authentication(self, kwargs):
+    def _setup_installation_authentication(self, kwargs):
         assert kwargs['app_id']
         assert kwargs['private_key']
         self.token, self.expires_at = self._app_auth_get_token(kwargs['app_id'], kwargs['private_key'])
+        self.auth = kwargs['auth']
+        self.headers['accept'] = 'application/vnd.github.machine-man-preview+json'
+
+    def _setup_app_authentication(self, kwargs):
+        assert kwargs['app_id']
+        assert kwargs['private_key']
+        self.jwt = self._app_auth_get_jwt(kwargs['app_id'], kwargs['private_key'])
         self.auth = kwargs['auth']
         self.headers['accept'] = 'application/vnd.github.machine-man-preview+json'
 
@@ -86,8 +94,8 @@ class Base(object):
         }
         installation_url = '{}/app/installations'.format(self.base_url)
         installations = requests.get(installation_url, headers=headers).json()
-        installation_id = installations[0]['id']
-        installation_token_url = '{}/installations/{}/access_tokens'.format(self.base_url, installation_id)
+        self.installation_id = [x.get('id') for x in installations if x.get('app_id') == app_id].pop()
+        installation_token_url = '{}/installations/{}/access_tokens'.format(self.base_url, self.installation_id)
         response = requests.post(installation_token_url, headers=headers).json()
         return response['token'], response['expires_at']
 
@@ -102,7 +110,11 @@ class Base(object):
     def _auth(self, requests_kwargs):
         if getattr(self, 'auth', None) == 'basic':
             return {'auth': (self.username, self.password)}
-        if getattr(self, 'auth', None) in ['token', 'app']:
+        if getattr(self, 'auth', None) in ['app']:
+            headers = requests_kwargs['headers']
+            headers.update({'Authorization': 'Bearer {}'.format(self.jwt)})
+            return {'headers': headers}
+        if getattr(self, 'auth', None) in ['token', 'installation']:
             headers = requests_kwargs['headers']
             headers.update({'Authorization': 'token {}'.format(self.token)})
             return {'headers': headers}
