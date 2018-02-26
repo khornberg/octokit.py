@@ -151,8 +151,21 @@ class Octokit(Base):
             url, data_kwargs = self._form_url(kwargs, definition['url'])
             requests_kwargs.update(self._data(data_kwargs, definition.get('params'), method))
             requests_kwargs.update(self._auth(requests_kwargs))
-            return getattr(requests, method)(url, **requests_kwargs)
+            _response = getattr(requests, method)(url, **requests_kwargs)
+            attributes = _response.json()
+            setattr(self, '_response', _response)
+            setattr(self, 'json', attributes)
+            setattr(self, 'response', self._convert_to_object(attributes))
+            return self
 
         _api_call.__name__ = name
         _api_call.__doc__ = definition['description']
         return _api_call
+
+    def _convert_to_object(self, item):
+        if isinstance(item, dict):
+            return type('ResponseData', (object, ), {k: self._convert_to_object(v) for k, v in item.items()})
+        if isinstance(item, list):
+            return list((self._convert_to_object(value) for index, value in enumerate(item)))
+        else:
+            return item
