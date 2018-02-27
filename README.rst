@@ -129,7 +129,7 @@ app::
 
     octokit = Octokit(auth='app', app_id=42, private_key=private_key)
 
-app::
+app installation::
 
     octokit = Octokit(auth='installation', app_id=42, private_key=private_key)
 

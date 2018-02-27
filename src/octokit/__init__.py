@@ -1,7 +1,7 @@
 import datetime
 import json
 import re
-from collections import ChainMap
+from collections import ChainMap, defaultdict
 
 import requests
 from jose import jwt
@@ -17,9 +17,10 @@ class Base(object):
         return dict(ChainMap(definition.get('headers', {}), self.headers))
 
     def _validate(self, kwargs, params):
+        cached_kwargs = dict(ChainMap(kwargs, self._attribute_cache['url']))
         required_params = [k for k, v in params.items() if v.get('required')]
         for p in required_params:
-            assert p in kwargs  # has all required
+            assert p in cached_kwargs  # has all required
         for kwarg, value in kwargs.items():
             param_value = params.get(kwarg)
             assert param_value  # is a valid param but not necessarily required
@@ -28,12 +29,14 @@ class Base(object):
             if kwarg in required_params:
                 assert value  # required param has a value
 
-    def _form_url(self, values, _url):
-        data_values = values.copy()
-        for name, value in values.items():
+    def _form_url(self, values, _url, params):
+        _values = dict(ChainMap(values, self._attribute_cache['url']))
+        filtered_kwargs = {k: v for k, v in _values.items() if params.get(k)}
+        data_values = filtered_kwargs.copy()
+        for name, value in filtered_kwargs.items():
             _url, subs = re.subn(':{}'.format(name), str(value), _url)
             if subs != 0:
-                data_values.pop(name)
+                self._attribute_cache['url'][name] = data_values.pop(name)
         url = '{}{}'.format(self.base_url, _url)
         return url, data_values
 
@@ -48,7 +51,7 @@ class Base(object):
         if method == 'get':
             return {'params': data}
         if method in ['post', 'patch', 'put', 'delete']:
-            return {'data': json.dumps(data)}
+            return {'data': json.dumps(data, sort_keys=True)}
         return {}
 
     def _setup_authentication(self, kwargs):
@@ -126,6 +129,7 @@ class Octokit(Base):
     def __init__(self, *args, **kwargs):
         self._create(utils.get_json_data('rest.json'))
         self._setup_authentication(kwargs)
+        self._attribute_cache = defaultdict(dict)
 
     def _create(self, definitions):
         for name, value in definitions.items():
@@ -148,7 +152,7 @@ class Octokit(Base):
             self._validate(kwargs, definition.get('params'))
             method = definition['method'].lower()
             requests_kwargs = {'headers': self._get_headers(definition)}
-            url, data_kwargs = self._form_url(kwargs, definition['url'])
+            url, data_kwargs = self._form_url(kwargs, definition['url'], definition.get('params'))
             requests_kwargs.update(self._data(data_kwargs, definition.get('params'), method))
             requests_kwargs.update(self._auth(requests_kwargs))
             _response = getattr(requests, method)(url, **requests_kwargs)
