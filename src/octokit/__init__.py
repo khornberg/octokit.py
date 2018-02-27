@@ -1,7 +1,8 @@
 import datetime
 import json
 import re
-from collections import ChainMap, defaultdict
+from collections import ChainMap
+from collections import defaultdict
 
 import requests
 from jose import jwt
