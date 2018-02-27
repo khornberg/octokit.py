@@ -113,13 +113,20 @@ class Base(object):
     def _auth(self, requests_kwargs):
         if getattr(self, 'auth', None) == 'basic':
             return {'auth': (self.username, self.password)}
-        if getattr(self, 'auth', None) in ['app']:
+        if getattr(self, 'auth', None) in ['app', 'token', 'installation']:
+            _headers = {
+                'app': {
+                    'Authorization': 'Bearer {}'.format(getattr(self, 'jwt', None))
+                },
+                'token': {
+                    'Authorization': 'token {}'.format(self.token)
+                },
+                'installation': {
+                    'Authorization': 'token {}'.format(self.token)
+                },
+            }
             headers = requests_kwargs['headers']
-            headers.update({'Authorization': 'Bearer {}'.format(self.jwt)})
-            return {'headers': headers}
-        if getattr(self, 'auth', None) in ['token', 'installation']:
-            headers = requests_kwargs['headers']
-            headers.update({'Authorization': 'token {}'.format(self.token)})
+            headers.update(_headers.get(getattr(self, 'auth', None)))
             return {'headers': headers}
         return {}
 
