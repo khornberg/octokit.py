@@ -50,9 +50,7 @@ class TestClientMethods(object):
         data = {'scopes': ['public_repo']}
         create = Octokit().authorization.create(**data)
         requests.post.assert_called_once_with(
-            'https://api.github.com/authorizations',
-            data=json.dumps(data),
-            headers=create.headers
+            'https://api.github.com/authorizations', data=json.dumps(data), headers=create.headers
         )
 
     def test_must_include_required_body_parameters(self):
@@ -101,9 +99,7 @@ class TestClientMethods(object):
         )
         issue2 = issue.issues.edit(**data)
         requests.patch.assert_called_with(
-            'https://api.github.com/repos/testUser/testRepo/issues/1',
-            data=json.dumps(data),
-            headers=headers
+            'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
         )
         issue2.pull_requests.create(head='branch', base='master', title='Title')
         requests.post.assert_called_with(
@@ -113,7 +109,10 @@ class TestClientMethods(object):
                 'head': 'branch',
                 'title': 'Title',
             }, sort_keys=True),
-            headers={'Content-Type': 'application/json', 'accept': 'application/vnd.github.machine-man-preview+json'}
+            headers={
+                'Content-Type': 'application/json',
+                'accept': 'application/vnd.github.machine-man-preview+json'
+            }
         )
 
     def test_can_override_previous_values(self, mocker):
@@ -133,7 +132,10 @@ class TestClientMethods(object):
                 'head': 'branch',
                 'title': 'Title',
             }, sort_keys=True),
-            headers={'Content-Type': 'application/json', 'accept': 'application/vnd.github.machine-man-preview+json'}
+            headers={
+                'Content-Type': 'application/json',
+                'accept': 'application/vnd.github.machine-man-preview+json'
+            }
         )
 
     def test_returned_object_is_self(self, mocker):
