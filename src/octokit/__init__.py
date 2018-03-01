@@ -164,7 +164,10 @@ class Octokit(Base):
             requests_kwargs.update(self._data(data_kwargs, definition.get('params'), method))
             requests_kwargs.update(self._auth(requests_kwargs))
             _response = getattr(requests, method)(url, **requests_kwargs)
-            attributes = _response.json()
+            try:
+                attributes = _response.json()
+            except ValueError:
+                attributes = _response.text
             setattr(self, '_response', _response)
             setattr(self, 'json', attributes)
             setattr(self, 'response', self._convert_to_object(attributes))

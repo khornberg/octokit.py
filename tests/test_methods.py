@@ -202,3 +202,10 @@ class TestClientMethods(object):
         patch.return_value = Request(json=lambda: data)
         sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
         assert sut.response[0].id == 208045946
+
+    def test_an_exception_with_json_is_replaced_by_the_raw_text(self, mocker):
+        patch = mocker.patch('requests.patch')
+        Request = namedtuple('Request', ['json'])
+        patch.return_value = Request(json=lambda: 'test')
+        sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
+        assert sut.json == 'test'
