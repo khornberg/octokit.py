@@ -2772,6 +2772,9 @@
     "createLabel": {
       "url": "/repos/:owner/:repo/labels",
       "method": "POST",
+      "headers": {
+        "accept": "application/vnd.github.symmetra-preview+json"
+      },
       "params": {
         "owner": {
           "type": "string",
@@ -2789,6 +2792,11 @@
           "type": "string",
           "required": true,
           "description": "6 character hex code, without a leading #."
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "A short description of the label."
         }
       },
       "description": "Create a label"
@@ -2796,6 +2804,9 @@
     "updateLabel": {
       "url": "/repos/:owner/:repo/labels/:oldname",
       "method": "PATCH",
+      "headers": {
+        "accept": "application/vnd.github.symmetra-preview+json"
+      },
       "params": {
         "owner": {
           "type": "string",
@@ -2819,6 +2830,11 @@
           "type": "string",
           "required": true,
           "description": "6 character hex code, without a leading #."
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "A short description of the label."
         }
       },
       "description": "Update a label"
