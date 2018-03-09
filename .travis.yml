@@ -43,6 +43,7 @@ after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
 before_deploy:
+  - rm ./cc-test-reporter
   - git config --local user.name "Kyle Hornberg"
   - git config --local user.email "khornberg@users.noreply.github.com"
   - git tag $(python setup.py --version)
