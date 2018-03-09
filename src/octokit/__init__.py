@@ -2,6 +2,7 @@ import datetime
 import json
 import re
 from collections import ChainMap
+from collections import defaultdict
 
 import requests
 from jose import jwt
@@ -17,9 +18,10 @@ class Base(object):
         return dict(ChainMap(definition.get('headers', {}), self.headers))
 
     def _validate(self, kwargs, params):
+        cached_kwargs = dict(ChainMap(kwargs, self._attribute_cache['url']))
         required_params = [k for k, v in params.items() if v.get('required')]
         for p in required_params:
-            assert p in kwargs  # has all required
+            assert p in cached_kwargs  # has all required
         for kwarg, value in kwargs.items():
             param_value = params.get(kwarg)
             assert param_value  # is a valid param but not necessarily required
@@ -28,12 +30,14 @@ class Base(object):
             if kwarg in required_params:
                 assert value  # required param has a value
 
-    def _form_url(self, values, _url):
-        data_values = values.copy()
-        for name, value in values.items():
+    def _form_url(self, values, _url, params):
+        _values = dict(ChainMap(values, self._attribute_cache['url']))
+        filtered_kwargs = {k: v for k, v in _values.items() if params.get(k)}
+        data_values = filtered_kwargs.copy()
+        for name, value in filtered_kwargs.items():
             _url, subs = re.subn(':{}'.format(name), str(value), _url)
             if subs != 0:
-                data_values.pop(name)
+                self._attribute_cache['url'][name] = data_values.pop(name)
         url = '{}{}'.format(self.base_url, _url)
         return url, data_values
 
@@ -48,13 +52,14 @@ class Base(object):
         if method == 'get':
             return {'params': data}
         if method in ['post', 'patch', 'put', 'delete']:
-            return {'data': json.dumps(data)}
+            return {'data': json.dumps(data, sort_keys=True)}
         return {}
 
     def _setup_authentication(self, kwargs):
         authentication_schemes = {
             'basic': self._setup_basic_authentication,
             'token': self._setup_token_authentication,
+            'installation': self._setup_installation_authentication,
             'app': self._setup_app_authentication,
         }
         if kwargs.get('auth'):
@@ -72,10 +77,17 @@ class Base(object):
         self.token = kwargs['token']
         self.auth = kwargs['auth']
 
-    def _setup_app_authentication(self, kwargs):
+    def _setup_installation_authentication(self, kwargs):
         assert kwargs['app_id']
         assert kwargs['private_key']
         self.token, self.expires_at = self._app_auth_get_token(kwargs['app_id'], kwargs['private_key'])
+        self.auth = kwargs['auth']
+        self.headers['accept'] = 'application/vnd.github.machine-man-preview+json'
+
+    def _setup_app_authentication(self, kwargs):
+        assert kwargs['app_id']
+        assert kwargs['private_key']
+        self.jwt = self._app_auth_get_jwt(kwargs['app_id'], kwargs['private_key'])
         self.auth = kwargs['auth']
         self.headers['accept'] = 'application/vnd.github.machine-man-preview+json'
 
@@ -86,8 +98,8 @@ class Base(object):
         }
         installation_url = '{}/app/installations'.format(self.base_url)
         installations = requests.get(installation_url, headers=headers).json()
-        installation_id = installations[0]['id']
-        installation_token_url = '{}/installations/{}/access_tokens'.format(self.base_url, installation_id)
+        self.installation_id = [x.get('id') for x in installations if x.get('app_id') == app_id].pop()
+        installation_token_url = '{}/installations/{}/access_tokens'.format(self.base_url, self.installation_id)
         response = requests.post(installation_token_url, headers=headers).json()
         return response['token'], response['expires_at']
 
@@ -102,9 +114,20 @@ class Base(object):
     def _auth(self, requests_kwargs):
         if getattr(self, 'auth', None) == 'basic':
             return {'auth': (self.username, self.password)}
-        if getattr(self, 'auth', None) in ['token', 'app']:
+        if getattr(self, 'auth', None) in ['app', 'token', 'installation']:
+            _headers = {
+                'app': {
+                    'Authorization': 'Bearer {}'.format(getattr(self, 'jwt', None))
+                },
+                'token': {
+                    'Authorization': 'token {}'.format(self.token)
+                },
+                'installation': {
+                    'Authorization': 'token {}'.format(self.token)
+                },
+            }
             headers = requests_kwargs['headers']
-            headers.update({'Authorization': 'token {}'.format(self.token)})
+            headers.update(_headers.get(getattr(self, 'auth', None)))
             return {'headers': headers}
         return {}
 
@@ -114,6 +137,7 @@ class Octokit(Base):
     def __init__(self, *args, **kwargs):
         self._create(utils.get_json_data('rest.json'))
         self._setup_authentication(kwargs)
+        self._attribute_cache = defaultdict(dict)
 
     def _create(self, definitions):
         for name, value in definitions.items():
@@ -136,11 +160,24 @@ class Octokit(Base):
             self._validate(kwargs, definition.get('params'))
             method = definition['method'].lower()
             requests_kwargs = {'headers': self._get_headers(definition)}
-            url, data_kwargs = self._form_url(kwargs, definition['url'])
+            url, data_kwargs = self._form_url(kwargs, definition['url'], definition.get('params'))
             requests_kwargs.update(self._data(data_kwargs, definition.get('params'), method))
             requests_kwargs.update(self._auth(requests_kwargs))
-            return getattr(requests, method)(url, **requests_kwargs)
+            _response = getattr(requests, method)(url, **requests_kwargs)
+            attributes = _response.json()
+            setattr(self, '_response', _response)
+            setattr(self, 'json', attributes)
+            setattr(self, 'response', self._convert_to_object(attributes))
+            return self
 
         _api_call.__name__ = name
         _api_call.__doc__ = definition['description']
         return _api_call
+
+    def _convert_to_object(self, item):
+        if isinstance(item, dict):
+            return type('ResponseData', (object, ), {k: self._convert_to_object(v) for k, v in item.items()})
+        if isinstance(item, list):
+            return list((self._convert_to_object(value) for index, value in enumerate(item)))
+        else:
+            return item

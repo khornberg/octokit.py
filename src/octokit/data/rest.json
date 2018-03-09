@@ -29,15 +29,18 @@
         },
         "client_id": {
           "type": "string",
-          "description": "The 20 character OAuth app client key for which to create the token."
+          "description":
+            "The 20 character OAuth app client key for which to create the token."
         },
         "client_secret": {
           "type": "string",
-          "description": "The 40 character OAuth app client secret for which to create the token."
+          "description":
+            "The 40 character OAuth app client secret for which to create the token."
         },
         "fingerprint": {
           "type": "string",
-          "description": "A unique string to distinguish an authorization from others created for the same client ID and user."
+          "description":
+            "A unique string to distinguish an authorization from others created for the same client ID and user."
         }
       },
       "description": "Create a new authorization."
@@ -72,7 +75,8 @@
         },
         "fingerprint": {
           "type": "string",
-          "description": "A unique string to distinguish an authorization from others created for the same client ID and user."
+          "description":
+            "A unique string to distinguish an authorization from others created for the same client ID and user."
         }
       },
       "description": "Update an existing authorization."
@@ -94,7 +98,8 @@
       "params": {
         "client_id": {
           "type": "string",
-          "description": "The 20 character OAuth app client key for which to create the token."
+          "description":
+            "The 20 character OAuth app client key for which to create the token."
         },
         "access_token": {
           "type": "string",
@@ -110,7 +115,8 @@
       "params": {
         "client_id": {
           "type": "string",
-          "description": "The 20 character OAuth app client key for which to create the token."
+          "description":
+            "The 20 character OAuth app client key for which to create the token."
         },
         "access_token": {
           "type": "string",
@@ -126,7 +132,8 @@
       "params": {
         "client_id": {
           "type": "string",
-          "description": "The 20 character OAuth app client key for which to create the token."
+          "description":
+            "The 20 character OAuth app client key for which to create the token."
         },
         "access_token": {
           "type": "string",
@@ -205,12 +212,14 @@
       "params": {
         "client_id": {
           "type": "string",
-          "description": "The 20 character OAuth app client key for which to create the token."
+          "description":
+            "The 20 character OAuth app client key for which to create the token."
         },
         "client_secret": {
           "type": "string",
           "required": true,
-          "description": "The 40 character OAuth app client secret associated with the client ID specified in the URL."
+          "description":
+            "The 40 character OAuth app client secret associated with the client ID specified in the URL."
         },
         "scopes": {
           "type": "string[]",
@@ -226,7 +235,8 @@
         },
         "fingerprint": {
           "type": "string",
-          "description": "A unique string to distinguish an authorization from others created for the same client ID and user."
+          "description":
+            "A unique string to distinguish an authorization from others created for the same client ID and user."
         }
       },
       "description": "Get or create an authorization for a specific app."
@@ -237,16 +247,19 @@
       "params": {
         "client_id": {
           "type": "string",
-          "description": "The 20 character OAuth app client key for which to create the token."
+          "description":
+            "The 20 character OAuth app client key for which to create the token."
         },
         "fingerprint": {
           "type": "string",
-          "description": "A unique string to distinguish an authorization from others created for the same client ID and user."
+          "description":
+            "A unique string to distinguish an authorization from others created for the same client ID and user."
         },
         "client_secret": {
           "type": "string",
           "required": true,
-          "description": "The 40 character OAuth app client secret associated with the client ID specified in the URL."
+          "description":
+            "The 40 character OAuth app client secret associated with the client ID specified in the URL."
         },
         "scopes": {
           "type": "string[]",
@@ -261,7 +274,8 @@
           "description": "A URL to remind you what app the OAuth token is for."
         }
       },
-      "description": "Get or create an authorization for a specific app and fingerprint."
+      "description":
+        "Get or create an authorization for a specific app and fingerprint."
     },
     "revokeGrant": {
       "url": "/applications/:client_id/grants/:access_token",
@@ -269,7 +283,8 @@
       "params": {
         "client_id": {
           "type": "string",
-          "description": "The 20 character OAuth app client key for which to create the token."
+          "description":
+            "The 20 character OAuth app client key for which to create the token."
         },
         "access_token": {
           "type": "string",
@@ -506,12 +521,14 @@
         "all": {
           "type": "boolean",
           "default": "false",
-          "description": "If true, show notifications marked as read. Default: false"
+          "description":
+            "If true, show notifications marked as read. Default: false"
         },
         "participating": {
           "type": "boolean",
           "default": "false",
-          "description": "If true, only shows notifications in which the user is directly participating or mentioned. Default: false"
+          "description":
+            "If true, only shows notifications in which the user is directly participating or mentioned. Default: false"
         },
         "since": {
           "type": "date",
@@ -519,10 +536,12 @@
         },
         "before": {
           "type": "string",
-          "description": "Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
+          "description":
+            "Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
         }
       },
-      "description": "Get all notifications for the current user, grouped by repository."
+      "description":
+        "Get all notifications for the current user, grouped by repository."
     },
     "getNotificationsForUser": {
       "url": "/repos/:owner/:repo/notifications",
@@ -539,12 +558,14 @@
         "all": {
           "type": "boolean",
           "default": "false",
-          "description": "If true, show notifications marked as read. Default: false"
+          "description":
+            "If true, show notifications marked as read. Default: false"
         },
         "participating": {
           "type": "boolean",
           "default": "false",
-          "description": "If true, only shows notifications in which the user is directly participating or mentioned. Default: false"
+          "description":
+            "If true, only shows notifications in which the user is directly participating or mentioned. Default: false"
         },
         "since": {
           "type": "date",
@@ -552,7 +573,8 @@
         },
         "before": {
           "type": "string",
-          "description": "Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
+          "description":
+            "Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ."
         }
       },
       "description": "Get all notifications for the given user."
@@ -564,7 +586,8 @@
         "last_read_at": {
           "type": "string",
           "default": "Time.now",
-          "description": "Describes the last point that notifications were checked. Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Default: Time.now"
+          "description":
+            "Describes the last point that notifications were checked. Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Default: Time.now"
         }
       },
       "description": "Mark notifications as read for authenticated user."
@@ -584,7 +607,8 @@
         "last_read_at": {
           "type": "string",
           "default": "Time.now",
-          "description": "Describes the last point that notifications were checked. Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Default: Time.now"
+          "description":
+            "Describes the last point that notifications were checked. Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Default: Time.now"
         }
       },
       "description": "Mark notifications in a repo as read."
@@ -620,7 +644,8 @@
           "required": true
         }
       },
-      "description": "Check to see if the current user is subscribed to a thread."
+      "description":
+        "Check to see if the current user is subscribed to a thread."
     },
     "setNotificationThreadSubscription": {
       "url": "/notifications/threads/:id/subscription",
@@ -632,14 +657,17 @@
         },
         "subscribed": {
           "type": "boolean",
-          "description": "Determines if notifications should be received from this thread"
+          "description":
+            "Determines if notifications should be received from this thread"
         },
         "ignored": {
           "type": "boolean",
-          "description": "Determines if all notifications should be blocked from this thread"
+          "description":
+            "Determines if all notifications should be blocked from this thread"
         }
       },
-      "description": "This lets you subscribe or unsubscribe from a conversation. Unsubscribing from a conversation mutes all future notifications (until you comment or get @mentioned once more)."
+      "description":
+        "This lets you subscribe or unsubscribe from a conversation. Unsubscribing from a conversation mutes all future notifications (until you comment or get @mentioned once more)."
     },
     "deleteNotificationThreadSubscription": {
       "url": "/notifications/threads/:id/subscription",
@@ -692,18 +720,12 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated"
-          ],
+          "enum": ["created", "updated"],
           "default": "created"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "page": {
@@ -727,18 +749,12 @@
       "params": {
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated"
-          ],
+          "enum": ["created", "updated"],
           "default": "created"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "page": {
@@ -865,7 +881,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List repositories being watched by the authenticated user."
+      "description":
+        "List repositories being watched by the authenticated user."
     },
     "getRepoSubscription": {
       "url": "/repos/:owner/:repo/subscription",
@@ -905,11 +922,13 @@
         },
         "subscribed": {
           "type": "boolean",
-          "description": "Determines if notifications should be received from this repository."
+          "description":
+            "Determines if notifications should be received from this repository."
         },
         "ignored": {
           "type": "boolean",
-          "description": "Determines if all notifications should be blocked from this repository."
+          "description":
+            "Determines if all notifications should be blocked from this repository."
         }
       },
       "description": "Set a Repository Subscription"
@@ -949,7 +968,8 @@
         "files": {
           "type": "json",
           "required": true,
-          "description": "Files that make up this gist. The key of which should be a required string filename and the value another required hash with parameters: 'content'"
+          "description":
+            "Files that make up this gist. The key of which should be a required string filename and the value another required hash with parameters: 'content'"
         },
         "description": {
           "type": "string"
@@ -975,7 +995,8 @@
         "files": {
           "type": "json",
           "required": true,
-          "description": "Files that make up this gist. The key of which should be a required string filename and the value another required hash with parameters: 'content'"
+          "description":
+            "Files that make up this gist. The key of which should be a required string filename and the value another required hash with parameters: 'content'"
         },
         "content": {
           "type": "string",
@@ -1074,7 +1095,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List the authenticated user's gists or if called anonymously, this will return all public gists"
+      "description":
+        "List the authenticated user's gists or if called anonymously, this will return all public gists"
     },
     "getPublic": {
       "url": "/gists/public",
@@ -1328,12 +1350,14 @@
         "tree": {
           "type": "string",
           "required": true,
-          "description": "String of the SHA of the tree object this commit points to"
+          "description":
+            "String of the SHA of the tree object this commit points to"
         },
         "parents": {
           "type": "string[]",
           "required": true,
-          "description": "Array of the SHAs of the commits that were the parents of this commit. If omitted or empty, the commit will be written as a root commit. For a single parent, an array of one SHA should be provided, for a merge commit, an array of more than one should be provided."
+          "description":
+            "Array of the SHAs of the commits that were the parents of this commit. If omitted or empty, the commit will be written as a root commit. For a single parent, an array of one SHA should be provided, for a merge commit, an array of more than one should be provided."
         },
         "author": {
           "type": "json"
@@ -1361,7 +1385,8 @@
           "required": true
         }
       },
-      "description": "Get a Commit Signature Verification. (In preview period. See README.)"
+      "description":
+        "Get a Commit Signature Verification. (In preview period. See README.)"
     },
     "getReference": {
       "url": "/repos/:owner/:repo/git/refs/:ref",
@@ -1379,7 +1404,8 @@
           "type": "string",
           "required": true,
           "allow-empty": true,
-          "description": "String of the name of the fully qualified reference (ie: heads/master). If it doesn’t have at least one slash, it will be rejected."
+          "description":
+            "String of the name of the fully qualified reference (ie: heads/master). If it doesn’t have at least one slash, it will be rejected."
         }
       },
       "description": "Get a Reference"
@@ -1447,7 +1473,8 @@
         "ref": {
           "type": "string",
           "required": true,
-          "description": "The name of the fully qualified reference (ie: refs/heads/master). If it doesn't start with 'refs' and have at least two slashes, it will be rejected. NOTE: After creating the reference, on calling (get|update|delete)Reference, drop the leading 'refs/' when providing the 'ref' param."
+          "description":
+            "The name of the fully qualified reference (ie: refs/heads/master). If it doesn't start with 'refs' and have at least two slashes, it will be rejected. NOTE: After creating the reference, on calling (get|update|delete)Reference, drop the leading 'refs/' when providing the 'ref' param."
         },
         "sha": {
           "type": "string",
@@ -1472,7 +1499,8 @@
           "type": "string",
           "required": true,
           "allow-empty": true,
-          "description": "String of the name of the fully qualified reference (ie: heads/master). If it doesn’t have at least one slash, it will be rejected."
+          "description":
+            "String of the name of the fully qualified reference (ie: heads/master). If it doesn’t have at least one slash, it will be rejected."
         },
         "sha": {
           "type": "string",
@@ -1481,7 +1509,8 @@
         "force": {
           "type": "boolean",
           "default": "false",
-          "description": "Boolean indicating whether to force the update or to make sure the update is a fast-forward update. The default is false, so leaving this out or setting it to false will make sure you’re not overwriting work."
+          "description":
+            "Boolean indicating whether to force the update or to make sure the update is a fast-forward update. The default is false, so leaving this out or setting it to false will make sure you’re not overwriting work."
         }
       },
       "description": "Update a Reference"
@@ -1502,7 +1531,8 @@
           "type": "string",
           "required": true,
           "allow-empty": true,
-          "description": "String of the name of the fully qualified reference (ie: heads/master). If it doesn’t have at least one slash, it will be rejected."
+          "description":
+            "String of the name of the fully qualified reference (ie: heads/master). If it doesn’t have at least one slash, it will be rejected."
         }
       },
       "description": "Delete a Reference"
@@ -1556,12 +1586,14 @@
         "type": {
           "type": "string",
           "required": true,
-          "description": "String of the type of the object we’re tagging. Normally this is a commit but it can also be a tree or a blob."
+          "description":
+            "String of the type of the object we’re tagging. Normally this is a commit but it can also be a tree or a blob."
         },
         "tagger": {
           "type": "json",
           "required": true,
-          "description": "JSON object that contains the following keys: `name` - String of the name of the author of the tag, `email` - String of the email of the author of the tag, `date` - Timestamp of when this object was tagged"
+          "description":
+            "JSON object that contains the following keys: `name` - String of the name of the author of the tag, `email` - String of the email of the author of the tag, `date` - Timestamp of when this object was tagged"
         }
       },
       "description": "Create a Tag Object"
@@ -1583,7 +1615,8 @@
           "required": true
         }
       },
-      "description": "Get a Tag Signature Verification. (In preview period. See README.)"
+      "description":
+        "Get a Tag Signature Verification. (In preview period. See README.)"
     },
     "getTree": {
       "url": "/repos/:owner/:repo/git/trees/:sha",
@@ -1622,11 +1655,13 @@
         "tree": {
           "type": "json",
           "required": true,
-          "description": "Array of Hash objects (of path, mode, type and sha) specifying a tree structure"
+          "description":
+            "Array of Hash objects (of path, mode, type and sha) specifying a tree structure"
         },
         "base_tree": {
           "type": "string",
-          "description": "String of the SHA1 of the tree you want to update with new data"
+          "description":
+            "String of the SHA1 of the tree you want to update with new data"
         }
       },
       "description": "Create a Tree"
@@ -1651,7 +1686,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List the app's installations. (In preview period. See README.)"
+      "description":
+        "List the app's installations. (In preview period. See README.)"
     },
     "createInstallationToken": {
       "url": "/installations/:installation_id/access_tokens",
@@ -1667,10 +1703,12 @@
         },
         "user_id": {
           "type": "string",
-          "description": "The id of the user for whom the app is acting on behalf of."
+          "description":
+            "The id of the user for whom the app is acting on behalf of."
         }
       },
-      "description": "Create a new installation token. (In preview period. See README.)"
+      "description":
+        "Create a new installation token. (In preview period. See README.)"
     },
     "getInstallationRepositories": {
       "url": "/installation/repositories",
@@ -1682,10 +1720,12 @@
       "params": {
         "user_id": {
           "type": "string",
-          "description": "The integer ID of a user, to filter results to repositories that are visible to both the installation and the given user."
+          "description":
+            "The integer ID of a user, to filter results to repositories that are visible to both the installation and the given user."
         }
       },
-      "description": "List repositories that are accessible to the authenticated installation. (In preview period. See README.)"
+      "description":
+        "List repositories that are accessible to the authenticated installation. (In preview period. See README.)"
     },
     "addRepoToInstallation": {
       "url": "/installations/:installation_id/repositories/:repository_id",
@@ -1704,7 +1744,8 @@
           "required": true
         }
       },
-      "description": "Add a single repository to an installation. (In preview period. See README.)"
+      "description":
+        "Add a single repository to an installation. (In preview period. See README.)"
     },
     "removeRepoFromInstallation": {
       "url": "/installations/:installation_id/repositories/:repository_id",
@@ -1723,7 +1764,8 @@
           "required": true
         }
       },
-      "description": "Remove a single repository from an installation. (In preview period. See README.)"
+      "description":
+        "Remove a single repository from an installation. (In preview period. See README.)"
     }
   },
   "apps": {
@@ -1731,7 +1773,8 @@
       "url": "/app",
       "method": "GET",
       "params": {},
-      "description": "Get the authenticated GitHub App. (In preview period. See README.)"
+      "description":
+        "Get the authenticated GitHub App. (In preview period. See README.)"
     },
     "getForSlug": {
       "url": "/apps/:app_slug",
@@ -1743,7 +1786,8 @@
         "app_slug": {
           "type": "string",
           "required": true,
-          "description": "The URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., https://github.com/settings/apps/:app_slug)."
+          "description":
+            "The URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., https://github.com/settings/apps/:app_slug)."
         }
       },
       "description": "Get a single GitHub App. (In preview period. See README.)"
@@ -1765,7 +1809,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List the app's installations. (In preview period. See README.)"
+      "description":
+        "List the app's installations. (In preview period. See README.)"
     },
     "getInstallation": {
       "url": "/app/installations/:installation_id",
@@ -1779,7 +1824,8 @@
           "required": true
         }
       },
-      "description": "Get a single installation. (In preview period. See README.)"
+      "description":
+        "Get a single installation. (In preview period. See README.)"
     },
     "createInstallationToken": {
       "url": "/installations/:installation_id/access_tokens",
@@ -1794,10 +1840,12 @@
         },
         "user_id": {
           "type": "string",
-          "description": "The id of the user for whom the app is acting on behalf of."
+          "description":
+            "The id of the user for whom the app is acting on behalf of."
         }
       },
-      "description": "Create a new installation token. (In preview period. See README.)"
+      "description":
+        "Create a new installation token. (In preview period. See README.)"
     },
     "getInstallationRepositories": {
       "url": "/installation/repositories",
@@ -1808,10 +1856,12 @@
       "params": {
         "user_id": {
           "type": "string",
-          "description": "The integer ID of a user, to filter results to repositories that are visible to both the installation and the given user."
+          "description":
+            "The integer ID of a user, to filter results to repositories that are visible to both the installation and the given user."
         }
       },
-      "description": "List repositories that are accessible to the authenticated installation. (In preview period. See README.)"
+      "description":
+        "List repositories that are accessible to the authenticated installation. (In preview period. See README.)"
     },
     "addRepoToInstallation": {
       "url": "/installations/:installation_id/repositories/:repository_id",
@@ -1829,7 +1879,8 @@
           "required": true
         }
       },
-      "description": "Add a single repository to an installation. (In preview period. See README.)"
+      "description":
+        "Add a single repository to an installation. (In preview period. See README.)"
     },
     "removeRepoFromInstallation": {
       "url": "/installations/:installation_id/repositories/:repository_id",
@@ -1847,7 +1898,8 @@
           "required": true
         }
       },
-      "description": "Remove a single repository from an installation. (In preview period. See README.)"
+      "description":
+        "Remove a single repository from an installation. (In preview period. See README.)"
     },
     "getMarketplaceListingPlans": {
       "url": "/marketplace_listing/plans",
@@ -1866,7 +1918,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all plans for your Marketplace listing. (In preview period. See README.)"
+      "description":
+        "List all plans for your Marketplace listing. (In preview period. See README.)"
     },
     "getMarketplaceListingStubbedPlans": {
       "url": "/marketplace_listing/stubbed/plans",
@@ -1885,7 +1938,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all stubbed plans for your Marketplace listing. (In preview period. See README.)"
+      "description":
+        "List all stubbed plans for your Marketplace listing. (In preview period. See README.)"
     },
     "getMarketplaceListingPlanAccounts": {
       "url": "/marketplace_listing/plans/:id/accounts",
@@ -1908,7 +1962,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all GitHub accounts (user or organization) on a specific plan. (In preview period. See README.)"
+      "description":
+        "List all GitHub accounts (user or organization) on a specific plan. (In preview period. See README.)"
     },
     "getMarketplaceListingStubbedPlanAccounts": {
       "url": "/marketplace_listing/stubbed/plans/:id/accounts",
@@ -1931,7 +1986,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all GitHub accounts (user or organization) on a specific stubbed plan. (In preview period. See README.)"
+      "description":
+        "List all GitHub accounts (user or organization) on a specific stubbed plan. (In preview period. See README.)"
     },
     "checkMarketplaceListingAccount": {
       "url": "/marketplace_listing/accounts/:id",
@@ -1945,7 +2001,8 @@
           "required": true
         }
       },
-      "description": "Check if a GitHub account is associated with any Marketplace listing. (In preview period. See README.)"
+      "description":
+        "Check if a GitHub account is associated with any Marketplace listing. (In preview period. See README.)"
     },
     "checkMarketplaceListingStubbedAccount": {
       "url": "/marketplace_listing/stubbed/accounts/:id",
@@ -1959,7 +2016,8 @@
           "required": true
         }
       },
-      "description": "Check if a stubbed GitHub account is associated with any Marketplace listing. (In preview period. See README.)"
+      "description":
+        "Check if a stubbed GitHub account is associated with any Marketplace listing. (In preview period. See README.)"
     }
   },
   "issues": {
@@ -2009,7 +2067,8 @@
         },
         "assignee": {
           "type": "string",
-          "description": "Login for the user that this issue should be assigned to."
+          "description":
+            "Login for the user that this issue should be assigned to."
         },
         "milestone": {
           "type": "number",
@@ -2017,11 +2076,13 @@
         },
         "labels": {
           "type": "string[]",
-          "description": "Array of strings - Labels to associate with this issue."
+          "description":
+            "Array of strings - Labels to associate with this issue."
         },
         "assignees": {
           "type": "string[]",
-          "description": "Logins for Users to assign to this issue. NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise."
+          "description":
+            "Logins for Users to assign to this issue. NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise."
         }
       },
       "description": "Create an issue"
@@ -2053,14 +2114,12 @@
         },
         "assignee": {
           "type": "string",
-          "description": "Login for the user that this issue should be assigned to."
+          "description":
+            "Login for the user that this issue should be assigned to."
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed"
-          ],
+          "enum": ["open", "closed"],
           "default": "open",
           "description": "open or closed"
         },
@@ -2070,11 +2129,13 @@
         },
         "labels": {
           "type": "string[]",
-          "description": "Array of strings - Labels to associate with this issue."
+          "description":
+            "Array of strings - Labels to associate with this issue."
         },
         "assignees": {
           "type": "string[]",
-          "description": "Logins for Users to assign to this issue. NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise."
+          "description":
+            "Logins for Users to assign to this issue. NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise."
         }
       },
       "description": "Edit an issue"
@@ -2115,7 +2176,8 @@
           "required": true
         }
       },
-      "description": "Users with push access can unlock an issue's conversation."
+      "description":
+        "Users with push access can unlock an issue's conversation."
     },
     "getAll": {
       "url": "/issues",
@@ -2126,43 +2188,27 @@
       "params": {
         "filter": {
           "type": "string",
-          "enum": [
-            "all",
-            "assigned",
-            "created",
-            "mentioned",
-            "subscribed"
-          ]
+          "enum": ["all", "assigned", "created", "mentioned", "subscribed"]
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open",
           "description": "open, closed, or all"
         },
         "labels": {
           "type": "string",
-          "description": "String list of comma separated Label names. Example: bug,ui,@high"
+          "description":
+            "String list of comma separated Label names. Example: bug,ui,@high"
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated",
-            "comments"
-          ],
+          "enum": ["created", "updated", "comments"],
           "default": "created"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "since": {
@@ -2179,7 +2225,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all issues across all the authenticated user's visible repositories including owned repositories, member repositories, and organization repositories"
+      "description":
+        "List all issues across all the authenticated user's visible repositories including owned repositories, member repositories, and organization repositories"
     },
     "getForUser": {
       "url": "/user/issues",
@@ -2190,43 +2237,27 @@
       "params": {
         "filter": {
           "type": "string",
-          "enum": [
-            "all",
-            "assigned",
-            "created",
-            "mentioned",
-            "subscribed"
-          ]
+          "enum": ["all", "assigned", "created", "mentioned", "subscribed"]
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open",
           "description": "open, closed, or all"
         },
         "labels": {
           "type": "string",
-          "description": "String list of comma separated Label names. Example: bug,ui,@high"
+          "description":
+            "String list of comma separated Label names. Example: bug,ui,@high"
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated",
-            "comments"
-          ],
+          "enum": ["created", "updated", "comments"],
           "default": "created"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "since": {
@@ -2243,7 +2274,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all issues across owned and member repositories for the authenticated user"
+      "description":
+        "List all issues across owned and member repositories for the authenticated user"
     },
     "getForOrg": {
       "url": "/orgs/:org/issues",
@@ -2258,43 +2290,27 @@
         },
         "filter": {
           "type": "string",
-          "enum": [
-            "all",
-            "assigned",
-            "created",
-            "mentioned",
-            "subscribed"
-          ]
+          "enum": ["all", "assigned", "created", "mentioned", "subscribed"]
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open",
           "description": "open, closed, or all"
         },
         "labels": {
           "type": "string",
-          "description": "String list of comma separated Label names. Example: bug,ui,@high"
+          "description":
+            "String list of comma separated Label names. Example: bug,ui,@high"
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated",
-            "comments"
-          ],
+          "enum": ["created", "updated", "comments"],
           "default": "created"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "since": {
@@ -2311,7 +2327,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all issues for a given organization for the authenticated user"
+      "description":
+        "List all issues for a given organization for the authenticated user"
     },
     "getForRepo": {
       "url": "/repos/:owner/:repo/issues",
@@ -2334,17 +2351,14 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open",
           "description": "open, closed, or all"
         },
         "assignee": {
           "type": "string",
-          "description": "String User login, `none` for Issues with no assigned User. `*` for Issues with any assigned User."
+          "description":
+            "String User login, `none` for Issues with no assigned User. `*` for Issues with any assigned User."
         },
         "creator": {
           "type": "string",
@@ -2356,23 +2370,17 @@
         },
         "labels": {
           "type": "string",
-          "description": "String list of comma separated Label names. Example: bug,ui,@high"
+          "description":
+            "String list of comma separated Label names. Example: bug,ui,@high"
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated",
-            "comments"
-          ],
+          "enum": ["created", "updated", "comments"],
           "default": "created"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "since": {
@@ -2421,7 +2429,8 @@
         "assignee": {
           "type": "string",
           "required": true,
-          "description": "Login for the user that this issue should be assigned to."
+          "description":
+            "Login for the user that this issue should be assigned to."
         }
       },
       "description": "Check assignee"
@@ -2445,7 +2454,8 @@
         "assignees": {
           "type": "string[]",
           "required": true,
-          "description": "Logins for the users that should be added to the issue."
+          "description":
+            "Logins for the users that should be added to the issue."
         }
       },
       "description": "Add assignees to an issue."
@@ -2525,18 +2535,12 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated"
-          ],
+          "enum": ["created", "updated"],
           "default": "created"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "since": {
@@ -2924,7 +2928,8 @@
           "type": "string[]",
           "required": true,
           "mapTo": "input",
-          "description": "Sending an empty array ([]) will remove all Labels from the Issue."
+          "description":
+            "Sending an empty array ([]) will remove all Labels from the Issue."
         }
       },
       "description": "Replace all labels for an issue"
@@ -2981,28 +2986,18 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open"
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "due_on",
-            "completeness"
-          ],
+          "enum": ["due_on", "completeness"],
           "default": "due_on",
           "description": "due_on, completeness, default: due_on"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "asc"
         },
         "page": {
@@ -3054,11 +3049,7 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open"
         },
         "description": {
@@ -3093,11 +3084,7 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open"
         },
         "description": {
@@ -3158,7 +3145,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List events for an issue. (In preview period. See README.)"
+      "description":
+        "List events for an issue. (In preview period. See README.)"
     }
   },
   "migrations": {
@@ -3176,17 +3164,20 @@
         "repositories": {
           "type": "string[]",
           "required": true,
-          "description": "A list of arrays indicating which repositories should be migrated."
+          "description":
+            "A list of arrays indicating which repositories should be migrated."
         },
         "lock_repositories": {
           "type": "boolean",
           "default": "false",
-          "description": "Indicates whether repositories should be locked (to prevent manipulation) while migrating data. Default: false."
+          "description":
+            "Indicates whether repositories should be locked (to prevent manipulation) while migrating data. Default: false."
         },
         "exclude_attachments": {
           "type": "boolean",
           "default": "false",
-          "description": "Indicates whether attachments should be excluded from the migration (to reduce migration archive file size). Default: false."
+          "description":
+            "Indicates whether attachments should be excluded from the migration (to reduce migration archive file size). Default: false."
         }
       },
       "description": "Start a migration. (In preview period. See README.)"
@@ -3212,7 +3203,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "Get a list of migrations. (In preview period. See README.)"
+      "description":
+        "Get a list of migrations. (In preview period. See README.)"
     },
     "getMigrationStatus": {
       "url": "/orgs/:org/migrations/:id",
@@ -3230,7 +3222,8 @@
           "required": true
         }
       },
-      "description": "Get the status of a migration. (In preview period. See README.)"
+      "description":
+        "Get the status of a migration. (In preview period. See README.)"
     },
     "getMigrationArchiveLink": {
       "url": "/orgs/:org/migrations/:id/archive",
@@ -3248,7 +3241,8 @@
           "required": true
         }
       },
-      "description": "Get the URL to a migration archive. (In preview period. See README.)"
+      "description":
+        "Get the URL to a migration archive. (In preview period. See README.)"
     },
     "deleteMigrationArchive": {
       "url": "/orgs/:org/migrations/:id/archive",
@@ -3266,7 +3260,8 @@
           "required": true
         }
       },
-      "description": "Delete a migration archive. (In preview period. See README.)"
+      "description":
+        "Delete a migration archive. (In preview period. See README.)"
     },
     "unlockRepoLockedForMigration": {
       "url": "/orgs/:org/migrations/:id/repos/:repo_name/lock",
@@ -3288,7 +3283,8 @@
           "required": true
         }
       },
-      "description": "Unlock a repository that was locked for migration. (In preview period. See README.)"
+      "description":
+        "Unlock a repository that was locked for migration. (In preview period. See README.)"
     },
     "startImport": {
       "url": "/repos/:owner/:repo/import",
@@ -3312,25 +3308,24 @@
         },
         "vcs": {
           "type": "string",
-          "enum": [
-            "subversion",
-            "git",
-            "mercurial",
-            "tfvc"
-          ],
-          "description": "The originating VCS type. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response."
+          "enum": ["subversion", "git", "mercurial", "tfvc"],
+          "description":
+            "The originating VCS type. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response."
         },
         "vcs_username": {
           "type": "string",
-          "description": "If authentication is required, the username to provide to vcs_url."
+          "description":
+            "If authentication is required, the username to provide to vcs_url."
         },
         "vcs_password": {
           "type": "string",
-          "description": "If authentication is required, the password to provide to vcs_url."
+          "description":
+            "If authentication is required, the password to provide to vcs_url."
         },
         "tfvc_project": {
           "type": "string",
-          "description": "For a tfvc import, the name of the project that is being imported."
+          "description":
+            "For a tfvc import, the name of the project that is being imported."
         }
       },
       "description": "Start an import. (In preview period. See README.)"
@@ -3370,11 +3365,13 @@
         },
         "vcs_username": {
           "type": "string",
-          "description": "The username to provide to the originating repository."
+          "description":
+            "The username to provide to the originating repository."
         },
         "vcs_password": {
           "type": "string",
-          "description": "The password to provide to the originating repository."
+          "description":
+            "The password to provide to the originating repository."
         }
       },
       "description": "Update existing import. (In preview period. See README.)"
@@ -3396,10 +3393,12 @@
         },
         "since": {
           "type": "string",
-          "description": "Only authors found after this id are returned. Provide the highest author ID you've seen so far. New authors may be added to the list at any point while the importer is performing the raw step."
+          "description":
+            "Only authors found after this id are returned. Provide the highest author ID you've seen so far. New authors may be added to the list at any point while the importer is performing the raw step."
         }
       },
-      "description": "Get import commit authors. (In preview period. See README.)"
+      "description":
+        "Get import commit authors. (In preview period. See README.)"
     },
     "mapImportCommitAuthor": {
       "url": "/repos/:owner/:repo/import/authors/:author_id",
@@ -3450,10 +3449,12 @@
         "use_lfs": {
           "type": "string",
           "required": true,
-          "description": "Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import)."
+          "description":
+            "Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import)."
         }
       },
-      "description": "Set import LFS preference. (In preview period. See README.)"
+      "description":
+        "Set import LFS preference. (In preview period. See README.)"
     },
     "getLargeImportFiles": {
       "url": "/:owner/:name/import/large_files",
@@ -3471,7 +3472,8 @@
           "required": true
         }
       },
-      "description": "List files larger than 100MB found during the import. (In preview period. See README.)"
+      "description":
+        "List files larger than 100MB found during the import. (In preview period. See README.)"
     },
     "cancelImport": {
       "url": "/repos/:owner/:repo/import",
@@ -3500,7 +3502,8 @@
         "accept": "application/vnd.github.scarlet-witch-preview+json"
       },
       "params": {},
-      "description": "List all codes of conduct. (In preview period. See README.)"
+      "description":
+        "List all codes of conduct. (In preview period. See README.)"
     },
     "getCodeOfConduct": {
       "url": "/codes_of_conduct/:key",
@@ -3533,7 +3536,8 @@
           "required": true
         }
       },
-      "description": "Get the contents of a repository's code of conduct. (In preview period. See README.)"
+      "description":
+        "Get the contents of a repository's code of conduct. (In preview period. See README.)"
     },
     "getEmojis": {
       "url": "/emojis",
@@ -3581,7 +3585,8 @@
           "description": "Ex: /licenses/mit"
         }
       },
-      "description": "Get an individual license. (In preview period. See README.)"
+      "description":
+        "Get an individual license. (In preview period. See README.)"
     },
     "getRepoLicense": {
       "url": "/repos/:owner/:repo/license",
@@ -3599,7 +3604,8 @@
           "required": true
         }
       },
-      "description": "Get the contents of a repository's license. (In preview period. See README.)"
+      "description":
+        "Get the contents of a repository's license. (In preview period. See README.)"
     },
     "renderMarkdown": {
       "url": "/markdown",
@@ -3612,16 +3618,15 @@
         },
         "mode": {
           "type": "string",
-          "enum": [
-            "markdown",
-            "gfm"
-          ],
+          "enum": ["markdown", "gfm"],
           "default": "markdown",
-          "description": "The rendering mode, `markdown` to render a document as plain Markdown, just like README files are rendered. `gfm` to render a document as user-content, e.g. like user comments or issues are rendered. In GFM mode, hard line breaks are always taken into account, and issue and user mentions are linked accordingly."
+          "description":
+            "The rendering mode, `markdown` to render a document as plain Markdown, just like README files are rendered. `gfm` to render a document as user-content, e.g. like user comments or issues are rendered. In GFM mode, hard line breaks are always taken into account, and issue and user mentions are linked accordingly."
         },
         "context": {
           "type": "string",
-          "description": "The repository context. Only taken into account when rendering as `gfm`"
+          "description":
+            "The repository context. Only taken into account when rendering as `gfm`"
         }
       },
       "description": "Render an arbitrary Markdown document"
@@ -3646,7 +3651,8 @@
       "url": "/meta",
       "method": "GET",
       "params": {},
-      "description": "This endpoint provides information about GitHub.com, the service. Or, if you access this endpoint on your organization's GitHub Enterprise installation, this endpoint provides information about that installation."
+      "description":
+        "This endpoint provides information about GitHub.com, the service. Or, if you access this endpoint on your organization's GitHub Enterprise installation, this endpoint provides information about that installation."
     },
     "getRateLimit": {
       "url": "/rate_limit",
@@ -3686,7 +3692,8 @@
         },
         "billing_email": {
           "type": "string",
-          "description": "Billing email address. This address is not publicized."
+          "description":
+            "Billing email address. This address is not publicized."
         },
         "company": {
           "type": "string",
@@ -3710,19 +3717,16 @@
         },
         "default_repository_permission": {
           "type": "string",
-          "enum": [
-            "read",
-            "write",
-            "admin",
-            "none"
-          ],
+          "enum": ["read", "write", "admin", "none"],
           "default": "read",
-          "description": "Default permission level members have for organization repositories."
+          "description":
+            "Default permission level members have for organization repositories."
         },
         "members_can_create_repositories": {
           "type": "boolean",
           "default": true,
-          "description": "Toggles ability of non-admin organization members to create repositories."
+          "description":
+            "Toggles ability of non-admin organization members to create repositories."
         }
       },
       "description": "Edit an organization"
@@ -3733,7 +3737,8 @@
       "params": {
         "since": {
           "type": "string",
-          "description": "The integer ID of the last Organization that you've seen."
+          "description":
+            "The integer ID of the last Organization that you've seen."
         },
         "page": {
           "type": "number",
@@ -3765,7 +3770,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List public organization memberships for the specified user."
+      "description":
+        "List public organization memberships for the specified user."
     },
     "getMembers": {
       "url": "/orgs/:org/members",
@@ -3777,20 +3783,13 @@
         },
         "filter": {
           "type": "string",
-          "enum": [
-            "all",
-            "2fa_disabled"
-          ],
+          "enum": ["all", "2fa_disabled"],
           "default": "all",
           "description": "Filter members returned in the list."
         },
         "role": {
           "type": "string",
-          "enum": [
-            "all",
-            "admin",
-            "member"
-          ],
+          "enum": ["all", "admin", "member"],
           "default": "all",
           "description": "Filter members returned by their role."
         },
@@ -3922,10 +3921,7 @@
         "role": {
           "type": "string",
           "required": true,
-          "enum": [
-            "admin",
-            "member"
-          ],
+          "enum": ["admin", "member"],
           "default": "member",
           "description": "The role to give the user in the organization."
         }
@@ -3968,10 +3964,7 @@
         },
         "filter": {
           "type": "string",
-          "enum": [
-            "all",
-            "2fa_disabled"
-          ],
+          "enum": ["all", "2fa_disabled"],
           "default": "all",
           "description": "Filter the list of outside collaborators."
         },
@@ -3985,7 +3978,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all users who are outside collaborators of an organization."
+      "description":
+        "List all users who are outside collaborators of an organization."
     },
     "removeOutsideCollaborator": {
       "url": "/orgs/:org/outside_collaborators/:username",
@@ -4075,23 +4069,22 @@
         },
         "maintainers": {
           "type": "string[]",
-          "description": "The logins of organization members to add as maintainers of the team."
+          "description":
+            "The logins of organization members to add as maintainers of the team."
         },
         "repo_names": {
           "type": "string[]",
-          "description": "The full name (e.g., \"organization-name/repository-name\") of repositories to add the team to."
+          "description":
+            "The full name (e.g., \"organization-name/repository-name\") of repositories to add the team to."
         },
         "privacy": {
           "type": "string",
-          "enum": [
-            "secret",
-            "closed"
-          ],
+          "enum": ["secret", "closed"],
           "default": "secret",
           "description": "The level of privacy this team should have."
         },
         "parent_team_id": {
-          "type": "string",
+          "type": "number",
           "description": "The ID of a team to set as the parent team."
         }
       },
@@ -4118,15 +4111,12 @@
         },
         "privacy": {
           "type": "string",
-          "enum": [
-            "secret",
-            "closed"
-          ],
+          "enum": ["secret", "closed"],
           "default": "secret",
           "description": "The level of privacy this team should have."
         },
         "parent_team_id": {
-          "type": "string",
+          "type": "number",
           "description": "The ID of a team to set as the parent team."
         }
       },
@@ -4159,11 +4149,7 @@
         },
         "role": {
           "type": "string",
-          "enum": [
-            "member",
-            "maintainer",
-            "all"
-          ],
+          "enum": ["member", "maintainer", "all"],
           "default": "all",
           "description": "Filters members returned by their role in the team."
         },
@@ -4237,10 +4223,7 @@
         },
         "role": {
           "type": "string",
-          "enum": [
-            "member",
-            "maintainer"
-          ],
+          "enum": ["member", "maintainer"],
           "default": "member",
           "description": "The role that this user should have in the team."
         }
@@ -4351,12 +4334,9 @@
         },
         "permission": {
           "type": "string",
-          "enum": [
-            "pull",
-            "push",
-            "admin"
-          ],
-          "description": "`pull` - team members can pull, but not push or administer this repository, `push` - team members can pull and push, but not administer this repository, `admin` - team members can pull, push and administer this repository."
+          "enum": ["pull", "push", "admin"],
+          "description":
+            "`pull` - team members can pull, but not push or administer this repository, `push` - team members can pull and push, but not administer this repository, `admin` - team members can pull, push and administer this repository."
         }
       },
       "description": "Add team repository"
@@ -4439,11 +4419,13 @@
         "events": {
           "type": "string[]",
           "default": "[\"push\"]",
-          "description": "Determines what events the hook is triggered for. Default: [\"push\"]."
+          "description":
+            "Determines what events the hook is triggered for. Default: [\"push\"]."
         },
         "active": {
           "type": "boolean",
-          "description": "Determines whether the hook is actually triggered on pushes."
+          "description":
+            "Determines whether the hook is actually triggered on pushes."
         }
       },
       "description": "Create a hook"
@@ -4468,11 +4450,13 @@
         "events": {
           "type": "string[]",
           "default": "[\"push\"]",
-          "description": "Determines what events the hook is triggered for. Default: [\"push\"]."
+          "description":
+            "Determines what events the hook is triggered for. Default: [\"push\"]."
         },
         "active": {
           "type": "boolean",
-          "description": "Determines whether the hook is actually triggered on pushes."
+          "description":
+            "Determines whether the hook is actually triggered on pushes."
         }
       },
       "description": "Edit a hook"
@@ -4546,7 +4530,8 @@
           "required": true
         }
       },
-      "description": "Check whether you've blocked a user. (In preview period. See README.)"
+      "description":
+        "Check whether you've blocked a user. (In preview period. See README.)"
     },
     "blockUser": {
       "url": "/orgs/:org/blocks/:username",
@@ -4603,15 +4588,12 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open"
         }
       },
-      "description": "List repository projects. (In preview period. See README.)"
+      "description":
+        "List repository projects. (In preview period. See README.)"
     },
     "getOrgProjects": {
       "url": "/orgs/:org/projects",
@@ -4626,15 +4608,12 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open"
         }
       },
-      "description": "List organization projects. (In preview period. See README.)"
+      "description":
+        "List organization projects. (In preview period. See README.)"
     },
     "getProject": {
       "url": "/projects/:id",
@@ -4673,7 +4652,8 @@
           "type": "string"
         }
       },
-      "description": "Create a repository project. (In preview period. See README.)"
+      "description":
+        "Create a repository project. (In preview period. See README.)"
     },
     "createOrgProject": {
       "url": "/orgs/:org/projects",
@@ -4694,7 +4674,8 @@
           "type": "string"
         }
       },
-      "description": "Create an organization project. (In preview period. See README.)"
+      "description":
+        "Create an organization project. (In preview period. See README.)"
     },
     "updateProject": {
       "url": "/projects/:id",
@@ -4716,11 +4697,7 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open"
         }
       },
@@ -4785,11 +4762,13 @@
         },
         "content_id": {
           "type": "string",
-          "description": "The id of the Issue or Pull Request to associate with this card."
+          "description":
+            "The id of the Issue or Pull Request to associate with this card."
         },
         "content_type": {
           "type": "string",
-          "description": "The type of content to associate with this card. Can be either 'Issue' or 'PullRequest'."
+          "description":
+            "The type of content to associate with this card. Can be either 'Issue' or 'PullRequest'."
         }
       },
       "description": "Create a project card. (In preview period. See README.)"
@@ -4841,7 +4820,8 @@
           "type": "string",
           "required": true,
           "validation": "^(top|bottom|after:\\d+)$",
-          "description": "Can be one of top, bottom, or after:<card-id>, where <card-id> is the id value of a card in the same project."
+          "description":
+            "Can be one of top, bottom, or after:<card-id>, where <card-id> is the id value of a card in the same project."
         },
         "column_id": {
           "type": "string",
@@ -4943,7 +4923,8 @@
           "type": "string",
           "required": true,
           "validation": "^(first|last|after:\\d+)$",
-          "description": "Can be one of first, last, or after:<column-id>, where <column-id> is the id value of a column in the same project."
+          "description":
+            "Can be one of first, last, or after:<column-id>, where <column-id> is the id value of a column in the same project."
         }
       },
       "description": "Move a project column. (In preview period. See README.)"
@@ -4984,12 +4965,28 @@
         "head": {
           "type": "string",
           "required": true,
-          "description": "The branch (or git ref) where your changes are implemented."
+          "description":
+            "The branch (or git ref) where your changes are implemented."
         },
         "base": {
           "type": "string",
           "required": true,
-          "description": "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
+          "description":
+            "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "The title of the pull request."
+        },
+        "body": {
+          "type": "string",
+          "description": "The contents of the pull request."
+        },
+        "maintainer_can_modify": {
+          "type": "boolean",
+          "description":
+            "Indicates whether maintainers can modify the pull request."
         }
       },
       "description": "Create a pull request"
@@ -5020,20 +5017,19 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed"
-          ],
+          "enum": ["open", "closed"],
           "description": "open or closed"
         },
         "base": {
           "type": "string",
-          "description": "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
+          "description":
+            "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
         },
         "maintainer_can_modify": {
           "type": "boolean",
           "default": "true",
-          "description": "Indicates whether maintainers can modify the pull request."
+          "description":
+            "Indicates whether maintainers can modify the pull request."
         }
       },
       "description": "Update a pull request"
@@ -5059,7 +5055,8 @@
         },
         "commit_title": {
           "type": "string",
-          "description": "Title for the automatic commit message. (In preview period. See README.)"
+          "description":
+            "Title for the automatic commit message. (In preview period. See README.)"
         },
         "commit_message": {
           "type": "string",
@@ -5071,13 +5068,10 @@
         },
         "merge_method": {
           "type": "string",
-          "enum": [
-            "merge",
-            "squash",
-            "rebase"
-          ],
+          "enum": ["merge", "squash", "rebase"],
           "default": "merge",
-          "description": "Merge method to use. Possible values are `merge`, `squash`, or `rebase`. (In preview period. See README.)"
+          "description":
+            "Merge method to use. Possible values are `merge`, `squash`, or `rebase`. (In preview period. See README.)"
         }
       },
       "description": "Merge a pull request (Merge Button)"
@@ -5096,16 +5090,13 @@
         },
         "state": {
           "type": "string",
-          "enum": [
-            "open",
-            "closed",
-            "all"
-          ],
+          "enum": ["open", "closed", "all"],
           "default": "open"
         },
         "head": {
           "type": "string",
-          "description": "Filter pulls by head user and branch name in the format of user:ref-name. Example: github:new-script-format."
+          "description":
+            "Filter pulls by head user and branch name in the format of user:ref-name. Example: github:new-script-format."
         },
         "base": {
           "type": "string",
@@ -5113,21 +5104,14 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated",
-            "popularity",
-            "long-running"
-          ],
+          "enum": ["created", "updated", "popularity", "long-running"],
           "default": "created",
-          "description": "Possible values are: `created`, `updated`, `popularity`, `long-running`, Default: `created`"
+          "description":
+            "Possible values are: `created`, `updated`, `popularity`, `long-running`, Default: `created`"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "page": {
@@ -5157,17 +5141,20 @@
         "issue": {
           "type": "number",
           "required": true,
-          "description": "The issue number in this repository to turn into a Pull Request."
+          "description":
+            "The issue number in this repository to turn into a Pull Request."
         },
         "head": {
           "type": "string",
           "required": true,
-          "description": "The branch (or git ref) where your changes are implemented."
+          "description":
+            "The branch (or git ref) where your changes are implemented."
         },
         "base": {
           "type": "string",
           "required": true,
-          "description": "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
+          "description":
+            "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
         }
       },
       "description": "Create a pull request from an existing issue"
@@ -5391,18 +5378,15 @@
         },
         "event": {
           "type": "string",
-          "enum": [
-            "APPROVE",
-            "REQUEST_CHANGES",
-            "COMMENT",
-            "PENDING"
-          ],
+          "enum": ["APPROVE", "REQUEST_CHANGES", "COMMENT", "PENDING"],
           "default": "PENDING",
-          "description": "The event to perform on the review upon submission, can be one of APPROVE, REQUEST_CHANGES, or COMMENT. If left blank, the review will be in the PENDING state."
+          "description":
+            "The event to perform on the review upon submission, can be one of APPROVE, REQUEST_CHANGES, or COMMENT. If left blank, the review will be in the PENDING state."
         },
         "comments": {
           "type": "string[]",
-          "description": "An array of draft review comment objects. Draft review comments must include a `path`, `position`, and `body`."
+          "description":
+            "An array of draft review comment objects. Draft review comments must include a `path`, `position`, and `body`."
         }
       },
       "description": "Create a pull request review."
@@ -5433,14 +5417,10 @@
         },
         "event": {
           "type": "string",
-          "enum": [
-            "APPROVE",
-            "REQUEST_CHANGES",
-            "COMMENT",
-            "PENDING"
-          ],
+          "enum": ["APPROVE", "REQUEST_CHANGES", "COMMENT", "PENDING"],
           "default": "PENDING",
-          "description": "The event to perform on the review upon submission, can be one of APPROVE, REQUEST_CHANGES, or COMMENT. If left blank, the review will be in the PENDING state."
+          "description":
+            "The event to perform on the review upon submission, can be one of APPROVE, REQUEST_CHANGES, or COMMENT. If left blank, the review will be in the PENDING state."
         }
       },
       "description": "Submit a pull request review."
@@ -5529,19 +5509,14 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated"
-          ],
+          "enum": ["created", "updated"],
           "default": "created",
-          "description": "Possible values are: `created`, `updated`, Default: `created`"
+          "description":
+            "Possible values are: `created`, `updated`, Default: `created`"
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "since": {
@@ -5603,6 +5578,18 @@
         },
         "body": {
           "type": "string",
+          "required": true
+        },
+        "commit_id": {
+          "type": "string",
+          "required": true
+        },
+        "path": {
+          "type": "string",
+          "required": true
+        },
+        "position": {
+          "type": "number",
           "required": true
         }
       },
@@ -5815,18 +5802,12 @@
         },
         "content": {
           "type": "string",
-          "enum": [
-            "+1",
-            "-1",
-            "laugh",
-            "confused",
-            "heart",
-            "hooray"
-          ],
+          "enum": ["+1", "-1", "laugh", "confused", "heart", "hooray"],
           "description": "Indicates which type of reaction to return."
         }
       },
-      "description": "List reactions for a commit comment. (In preview period. See README.)"
+      "description":
+        "List reactions for a commit comment. (In preview period. See README.)"
     },
     "createForCommitComment": {
       "url": "/repos/:owner/:repo/comments/:id/reactions",
@@ -5850,18 +5831,12 @@
         "content": {
           "type": "string",
           "required": true,
-          "enum": [
-            "+1",
-            "-1",
-            "laugh",
-            "confused",
-            "heart",
-            "hooray"
-          ],
+          "enum": ["+1", "-1", "laugh", "confused", "heart", "hooray"],
           "description": "The reaction type."
         }
       },
-      "description": "Create reaction for a commit comment. (In preview period. See README.)"
+      "description":
+        "Create reaction for a commit comment. (In preview period. See README.)"
     },
     "getForIssue": {
       "url": "/repos/:owner/:repo/issues/:number/reactions",
@@ -5884,18 +5859,12 @@
         },
         "content": {
           "type": "string",
-          "enum": [
-            "+1",
-            "-1",
-            "laugh",
-            "confused",
-            "heart",
-            "hooray"
-          ],
+          "enum": ["+1", "-1", "laugh", "confused", "heart", "hooray"],
           "description": "Indicates which type of reaction to return."
         }
       },
-      "description": "List reactions for an issue. (In preview period. See README.)"
+      "description":
+        "List reactions for an issue. (In preview period. See README.)"
     },
     "createForIssue": {
       "url": "/repos/:owner/:repo/issues/:number/reactions",
@@ -5919,18 +5888,12 @@
         "content": {
           "type": "string",
           "required": true,
-          "enum": [
-            "+1",
-            "-1",
-            "laugh",
-            "confused",
-            "heart",
-            "hooray"
-          ],
+          "enum": ["+1", "-1", "laugh", "confused", "heart", "hooray"],
           "description": "The reaction type."
         }
       },
-      "description": "Create reaction for an issue. (In preview period. See README.)"
+      "description":
+        "Create reaction for an issue. (In preview period. See README.)"
     },
     "getForIssueComment": {
       "url": "/repos/:owner/:repo/issues/comments/:id/reactions",
@@ -5953,18 +5916,12 @@
         },
         "content": {
           "type": "string",
-          "enum": [
-            "+1",
-            "-1",
-            "laugh",
-            "confused",
-            "heart",
-            "hooray"
-          ],
+          "enum": ["+1", "-1", "laugh", "confused", "heart", "hooray"],
           "description": "Indicates which type of reaction to return."
         }
       },
-      "description": "List reactions for an issue comment. (In preview period. See README.)"
+      "description":
+        "List reactions for an issue comment. (In preview period. See README.)"
     },
     "createForIssueComment": {
       "url": "/repos/:owner/:repo/issues/comments/:id/reactions",
@@ -5988,18 +5945,12 @@
         "content": {
           "type": "string",
           "required": true,
-          "enum": [
-            "+1",
-            "-1",
-            "laugh",
-            "confused",
-            "heart",
-            "hooray"
-          ],
+          "enum": ["+1", "-1", "laugh", "confused", "heart", "hooray"],
           "description": "The reaction type."
         }
       },
-      "description": "Create reaction for an issue comment. (In preview period. See README.)"
+      "description":
+        "Create reaction for an issue comment. (In preview period. See README.)"
     },
     "getForPullRequestReviewComment": {
       "url": "/repos/:owner/:repo/pulls/comments/:id/reactions",
@@ -6022,18 +5973,12 @@
         },
         "content": {
           "type": "string",
-          "enum": [
-            "+1",
-            "-1",
-            "laugh",
-            "confused",
-            "heart",
-            "hooray"
-          ],
+          "enum": ["+1", "-1", "laugh", "confused", "heart", "hooray"],
           "description": "Indicates which type of reaction to return."
         }
       },
-      "description": "List reactions for a pull request review comment. (In preview period. See README.)"
+      "description":
+        "List reactions for a pull request review comment. (In preview period. See README.)"
     },
     "createForPullRequestReviewComment": {
       "url": "/repos/:owner/:repo/pulls/comments/:id/reactions",
@@ -6057,18 +6002,12 @@
         "content": {
           "type": "string",
           "required": true,
-          "enum": [
-            "+1",
-            "-1",
-            "laugh",
-            "confused",
-            "heart",
-            "hooray"
-          ],
+          "enum": ["+1", "-1", "laugh", "confused", "heart", "hooray"],
           "description": "The reaction type."
         }
       },
-      "description": "Create reaction for a pull request review comment. (In preview period. See README.)"
+      "description":
+        "Create reaction for a pull request review comment. (In preview period. See README.)"
     }
   },
   "repos": {
@@ -6089,54 +6028,65 @@
         "private": {
           "type": "boolean",
           "default": "false",
-          "description": "True to create a private repository, false to create a public one. Creating private repositories requires a paid GitHub account. Default is false."
+          "description":
+            "True to create a private repository, false to create a public one. Creating private repositories requires a paid GitHub account. Default is false."
         },
         "has_issues": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable issues for this repository, false to disable them. Default is true."
+          "description":
+            "True to enable issues for this repository, false to disable them. Default is true."
         },
         "has_projects": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable projects for this repository, false to disable them. Default is true."
+          "description":
+            "True to enable projects for this repository, false to disable them. Default is true."
         },
         "has_wiki": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable the wiki for this repository, false to disable it. Default is true."
+          "description":
+            "True to enable the wiki for this repository, false to disable it. Default is true."
         },
         "team_id": {
           "type": "number",
-          "description": "The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization."
+          "description":
+            "The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization."
         },
         "auto_init": {
           "type": "boolean",
           "default": "false",
-          "description": "True to create an initial commit with empty README. Default is false"
+          "description":
+            "True to create an initial commit with empty README. Default is false"
         },
         "gitignore_template": {
           "type": "string",
-          "description": "Desired language or platform .gitignore template to apply. Ignored if auto_init parameter is not provided."
+          "description":
+            "Desired language or platform .gitignore template to apply. Ignored if auto_init parameter is not provided."
         },
         "license_template": {
           "type": "string",
-          "description": "Desired LICENSE template to apply. Use the name of the template without the extension. For example, \"mit\" or \"mozilla\"."
+          "description":
+            "Desired LICENSE template to apply. Use the name of the template without the extension. For example, \"mit\" or \"mozilla\"."
         },
         "allow_squash_merge": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow squash-merging pull requests, or false to prevent squash-merging. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow squash-merging pull requests, or false to prevent squash-merging. Default: true. (In preview period. See README.)"
         },
         "allow_merge_commit": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow merging pull requests with a merge commit, or false to prevent merging pull requests with merge commits. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow merging pull requests with a merge commit, or false to prevent merging pull requests with merge commits. Default: true. (In preview period. See README.)"
         },
         "allow_rebase_merge": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow rebase-merging pull requests, or false to prevent rebase-merging. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow rebase-merging pull requests, or false to prevent rebase-merging. Default: true. (In preview period. See README.)"
         }
       },
       "description": "Create a new repository for the authenticated user."
@@ -6187,22 +6137,26 @@
         "private": {
           "type": "boolean",
           "default": "false",
-          "description": "True to create a private repository, false to create a public one. Creating private repositories requires a paid GitHub account. Default is false."
+          "description":
+            "True to create a private repository, false to create a public one. Creating private repositories requires a paid GitHub account. Default is false."
         },
         "has_issues": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable issues for this repository, false to disable them. Default is true."
+          "description":
+            "True to enable issues for this repository, false to disable them. Default is true."
         },
         "has_projects": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable projects for this repository, false to disable them. Default is true."
+          "description":
+            "True to enable projects for this repository, false to disable them. Default is true."
         },
         "has_wiki": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable the wiki for this repository, false to disable it. Default is true."
+          "description":
+            "True to enable the wiki for this repository, false to disable it. Default is true."
         },
         "default_branch": {
           "type": "string",
@@ -6211,17 +6165,20 @@
         "allow_squash_merge": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow squash-merging pull requests, or false to prevent squash-merging. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow squash-merging pull requests, or false to prevent squash-merging. Default: true. (In preview period. See README.)"
         },
         "allow_merge_commit": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow merging pull requests with a merge commit, or false to prevent merging pull requests with merge commits. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow merging pull requests with a merge commit, or false to prevent merging pull requests with merge commits. Default: true. (In preview period. See README.)"
         },
         "allow_rebase_merge": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow rebase-merging pull requests, or false to prevent rebase-merging. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow rebase-merging pull requests, or false to prevent rebase-merging. Default: true. (In preview period. See README.)"
         }
       },
       "description": "Update a repo."
@@ -6258,7 +6215,8 @@
         },
         "organization": {
           "type": "string",
-          "description": "Optional parameter to specify the organization name if forking into an organization."
+          "description":
+            "Optional parameter to specify the organization name if forking into an organization."
         }
       },
       "description": "Create a fork."
@@ -6278,16 +6236,19 @@
         "base": {
           "type": "string",
           "required": true,
-          "description": "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
+          "description":
+            "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
         },
         "head": {
           "type": "string",
           "required": true,
-          "description": "The branch (or git ref) where your changes are implemented."
+          "description":
+            "The branch (or git ref) where your changes are implemented."
         },
         "commit_message": {
           "type": "string",
-          "description": "Commit message to use for the merge commit. If omitted, a default message will be used."
+          "description":
+            "Commit message to use for the merge commit. If omitted, a default message will be used."
         }
       },
       "description": "Perform a merge."
@@ -6298,48 +6259,34 @@
       "params": {
         "visibility": {
           "type": "string",
-          "enum": [
-            "all",
-            "public",
-            "private"
-          ],
+          "enum": ["all", "public", "private"],
           "default": "all",
-          "description": "Can be one of `all`, `public`, or `private`. Default: `all`."
+          "description":
+            "Can be one of `all`, `public`, or `private`. Default: `all`."
         },
         "affiliation": {
           "type": "string",
           "default": "owner,collaborator,organization_member",
-          "description": "Comma-separated list of values. Can include: `owner`, `collaborator`, `organization_member`."
+          "description":
+            "Comma-separated list of values. Can include: `owner`, `collaborator`, `organization_member`."
         },
         "type": {
           "type": "string",
-          "enum": [
-            "all",
-            "owner",
-            "public",
-            "private",
-            "member"
-          ],
+          "enum": ["all", "owner", "public", "private", "member"],
           "default": "all",
-          "description": "Possible values: `all`, `owner`, `public`, `private`, `member`. Default: `all`."
+          "description":
+            "Possible values: `all`, `owner`, `public`, `private`, `member`. Default: `all`."
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated",
-            "pushed",
-            "full_name"
-          ],
+          "enum": ["created", "updated", "pushed", "full_name"],
           "default": "full_name",
-          "description": "Possible values: `created`, `updated`, `pushed`, `full_name`. Default: `full_name`."
+          "description":
+            "Possible values: `created`, `updated`, `pushed`, `full_name`. Default: `full_name`."
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "page": {
@@ -6364,31 +6311,21 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "all",
-            "owner",
-            "member"
-          ],
+          "enum": ["all", "owner", "member"],
           "default": "owner",
-          "description": "Possible values: `all`, `owner`, `member`. Default: `owner`."
+          "description":
+            "Possible values: `all`, `owner`, `member`. Default: `owner`."
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "created",
-            "updated",
-            "pushed",
-            "full_name"
-          ],
+          "enum": ["created", "updated", "pushed", "full_name"],
           "default": "full_name",
-          "description": "Possible values: `created`, `updated`, `pushed`, `full_name`. Default: `full_name`."
+          "description":
+            "Possible values: `created`, `updated`, `pushed`, `full_name`. Default: `full_name`."
         },
         "direction": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc"
         },
         "page": {
@@ -6413,16 +6350,10 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "all",
-            "public",
-            "private",
-            "forks",
-            "sources",
-            "member"
-          ],
+          "enum": ["all", "public", "private", "forks", "sources", "member"],
           "default": "all",
-          "description": "Possible values: `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`."
+          "description":
+            "Possible values: `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`."
         },
         "page": {
           "type": "number",
@@ -6442,7 +6373,8 @@
       "params": {
         "since": {
           "type": "string",
-          "description": "The integer ID of the last Repository that you've seen."
+          "description":
+            "The integer ID of the last Repository that you've seen."
         },
         "page": {
           "type": "number",
@@ -6477,54 +6409,65 @@
         "private": {
           "type": "boolean",
           "default": "false",
-          "description": "True to create a private repository, false to create a public one. Creating private repositories requires a paid GitHub account. Default is false."
+          "description":
+            "True to create a private repository, false to create a public one. Creating private repositories requires a paid GitHub account. Default is false."
         },
         "has_issues": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable issues for this repository, false to disable them. Default is true."
+          "description":
+            "True to enable issues for this repository, false to disable them. Default is true."
         },
         "has_projects": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable projects for this repository, false to disable them. Default is true."
+          "description":
+            "True to enable projects for this repository, false to disable them. Default is true."
         },
         "has_wiki": {
           "type": "boolean",
           "default": "true",
-          "description": "True to enable the wiki for this repository, false to disable it. Default is true."
+          "description":
+            "True to enable the wiki for this repository, false to disable it. Default is true."
         },
         "team_id": {
           "type": "number",
-          "description": "The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization."
+          "description":
+            "The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization."
         },
         "auto_init": {
           "type": "boolean",
           "default": "false",
-          "description": "True to create an initial commit with empty README. Default is false"
+          "description":
+            "True to create an initial commit with empty README. Default is false"
         },
         "gitignore_template": {
           "type": "string",
-          "description": "Desired language or platform .gitignore template to apply. Ignored if auto_init parameter is not provided."
+          "description":
+            "Desired language or platform .gitignore template to apply. Ignored if auto_init parameter is not provided."
         },
         "license_template": {
           "type": "string",
-          "description": "Desired LICENSE template to apply. Use the name of the template without the extension. For example, \"mit\" or \"mozilla\"."
+          "description":
+            "Desired LICENSE template to apply. Use the name of the template without the extension. For example, \"mit\" or \"mozilla\"."
         },
         "allow_squash_merge": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow squash-merging pull requests, or false to prevent squash-merging. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow squash-merging pull requests, or false to prevent squash-merging. Default: true. (In preview period. See README.)"
         },
         "allow_merge_commit": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow merging pull requests with a merge commit, or false to prevent merging pull requests with merge commits. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow merging pull requests with a merge commit, or false to prevent merging pull requests with merge commits. Default: true. (In preview period. See README.)"
         },
         "allow_rebase_merge": {
           "type": "boolean",
           "default": "true",
-          "description": "Either true to allow rebase-merging pull requests, or false to prevent rebase-merging. Default: true. (In preview period. See README.)"
+          "description":
+            "Either true to allow rebase-merging pull requests, or false to prevent rebase-merging. Default: true. (In preview period. See README.)"
         }
       },
       "description": "Create a new repository for an organization."
@@ -6566,7 +6509,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List all topics for a repository. (In preview period. See README.)"
+      "description":
+        "List all topics for a repository. (In preview period. See README.)"
     },
     "replaceTopics": {
       "url": "/repos/:owner/:repo/topics",
@@ -6586,10 +6530,12 @@
         "names": {
           "type": "string[]",
           "required": true,
-          "description": "An array of topics to add to the repository. Pass one or more topics to replace the set of existing topics. Send an empty array ([]) to clear all topics from the repository."
+          "description":
+            "An array of topics to add to the repository. Pass one or more topics to replace the set of existing topics. Send an empty array ([]) to clear all topics from the repository."
         }
       },
-      "description": "Replace all topics for a repository. (In preview period. See README.)"
+      "description":
+        "Replace all topics for a repository. (In preview period. See README.)"
     },
     "getContributors": {
       "url": "/repos/:owner/:repo/contributors",
@@ -6605,7 +6551,8 @@
         },
         "anon": {
           "type": "boolean",
-          "description": "Set to 1 or true to include anonymous contributors in results."
+          "description":
+            "Set to 1 or true to include anonymous contributors in results."
         },
         "page": {
           "type": "number",
@@ -6795,30 +6742,35 @@
           "type": "json",
           "required": true,
           "allow-null": true,
-          "description": "JSON object that contains the following keys: `include_admins` - Enforce required status checks for repository administrators, `strict` - Require branches to be up to date before merging, `contexts` - The list of status checks to require in order to merge into this branch. This object can have the value of `null` for disabled."
+          "description":
+            "JSON object that contains the following keys: `include_admins` - Enforce required status checks for repository administrators, `strict` - Require branches to be up to date before merging, `contexts` - The list of status checks to require in order to merge into this branch. This object can have the value of `null` for disabled."
         },
         "required_pull_request_reviews": {
           "type": "json",
           "required": true,
           "allow-null": true,
-          "description": "JSON object that contains the following keys: `include_admins` - Enforce required status checks for repository administrators."
+          "description":
+            "JSON object that contains the following keys: `include_admins` - Enforce required status checks for repository administrators."
         },
         "dismissal_restrictions": {
           "type": "json",
           "allow-null": true,
-          "description": "JSON object that contains the following keys: `users` - The list of user logins with dismissal access, `teams` - The list of team slugs with dismissal access. This object can have the value of `null` for disabled."
+          "description":
+            "JSON object that contains the following keys: `users` - The list of user logins with dismissal access, `teams` - The list of team slugs with dismissal access. This object can have the value of `null` for disabled."
         },
         "restrictions": {
           "type": "json",
           "required": true,
           "allow-null": true,
-          "description": "JSON object that contains the following keys: `users` - The list of user logins with push access, `teams` - The list of team slugs with push access. This object can have the value of `null` for disabled."
+          "description":
+            "JSON object that contains the following keys: `users` - The list of user logins with push access, `teams` - The list of team slugs with push access. This object can have the value of `null` for disabled."
         },
         "enforce_admins": {
           "type": "boolean",
           "required": true,
           "allow-null": false,
-          "description": "Enforces required status checks for repository administrators."
+          "description":
+            "Enforces required status checks for repository administrators."
         },
         "page": {
           "type": "number",
@@ -6852,7 +6804,8 @@
       "description": "Remove branch protection."
     },
     "getProtectedBranchRequiredStatusChecks": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_status_checks",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_status_checks",
       "method": "GET",
       "params": {
         "owner": {
@@ -6880,7 +6833,8 @@
       "description": "Get required status checks of protected branch."
     },
     "updateProtectedBranchRequiredStatusChecks": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_status_checks",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_status_checks",
       "method": "PATCH",
       "params": {
         "owner": {
@@ -6901,13 +6855,15 @@
         },
         "contexts": {
           "type": "string[]",
-          "description": "The list of status checks to require in order to merge into this branch."
+          "description":
+            "The list of status checks to require in order to merge into this branch."
         }
       },
       "description": "Update required status checks of protected branch."
     },
     "removeProtectedBranchRequiredStatusChecks": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_status_checks",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_status_checks",
       "method": "DELETE",
       "params": {
         "owner": {
@@ -6926,7 +6882,8 @@
       "description": "Remove required status checks of protected branch."
     },
     "getProtectedBranchRequiredStatusChecksContexts": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts",
       "method": "GET",
       "params": {
         "owner": {
@@ -6954,7 +6911,8 @@
       "description": "List required status checks contexts of protected branch."
     },
     "replaceProtectedBranchRequiredStatusChecksContexts": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts",
       "method": "PUT",
       "params": {
         "owner": {
@@ -6973,13 +6931,16 @@
           "type": "string[]",
           "required": true,
           "mapTo": "input",
-          "description": "An array of protected branch required status checks contexts (e.g. continuous-integration/jenkins)."
+          "description":
+            "An array of protected branch required status checks contexts (e.g. continuous-integration/jenkins)."
         }
       },
-      "description": "Replace required status checks contexts of protected branch."
+      "description":
+        "Replace required status checks contexts of protected branch."
     },
     "addProtectedBranchRequiredStatusChecksContexts": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts",
       "method": "POST",
       "params": {
         "owner": {
@@ -6998,13 +6959,15 @@
           "type": "string[]",
           "required": true,
           "mapTo": "input",
-          "description": "An array of protected branch required status checks contexts (e.g. continuous-integration/jenkins)."
+          "description":
+            "An array of protected branch required status checks contexts (e.g. continuous-integration/jenkins)."
         }
       },
       "description": "Add required status checks contexts of protected branch."
     },
     "removeProtectedBranchRequiredStatusChecksContexts": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts",
       "method": "DELETE",
       "params": {
         "owner": {
@@ -7023,13 +6986,16 @@
           "type": "string[]",
           "required": true,
           "mapTo": "input",
-          "description": "An array of protected branch required status checks contexts (e.g. continuous-integration/jenkins)."
+          "description":
+            "An array of protected branch required status checks contexts (e.g. continuous-integration/jenkins)."
         }
       },
-      "description": "Remove required status checks contexts of protected branch."
+      "description":
+        "Remove required status checks contexts of protected branch."
     },
     "getProtectedBranchPullRequestReviewEnforcement": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews",
       "method": "GET",
       "params": {
         "owner": {
@@ -7057,7 +7023,8 @@
       "description": "Get pull request review enforcement of protected branch."
     },
     "updateProtectedBranchPullRequestReviewEnforcement": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews",
       "method": "PATCH",
       "params": {
         "owner": {
@@ -7075,21 +7042,25 @@
         "dismissal_restrictions": {
           "type": "json",
           "allow-null": true,
-          "description": "JSON object that contains the following keys: `users` - The list of user logins with dismissal access, `teams` - The list of team slugs with dismissal access. This object can have the value of `null` for disabled."
+          "description":
+            "JSON object that contains the following keys: `users` - The list of user logins with dismissal access, `teams` - The list of team slugs with dismissal access. This object can have the value of `null` for disabled."
         },
         "dismiss_stale_reviews": {
           "type": "boolean",
-          "description": "Dismiss approved reviews automatically when a new commit is pushed."
+          "description":
+            "Dismiss approved reviews automatically when a new commit is pushed."
         },
         "require_code_owner_reviews": {
           "type": "boolean",
           "description": "Blocks merge until code owners have reviewed."
         }
       },
-      "description": "Update pull request review enforcement of protected branch."
+      "description":
+        "Update pull request review enforcement of protected branch."
     },
     "removeProtectedBranchPullRequestReviewEnforcement": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews",
       "method": "DELETE",
       "params": {
         "owner": {
@@ -7105,7 +7076,8 @@
           "required": true
         }
       },
-      "description": "Remove pull request review enforcement of protected branch."
+      "description":
+        "Remove pull request review enforcement of protected branch."
     },
     "getProtectedBranchAdminEnforcement": {
       "url": "/repos/:owner/:repo/branches/:branch/protection/enforce_admins",
@@ -7230,7 +7202,8 @@
       "description": "Remove restrictions of protected branch."
     },
     "getProtectedBranchTeamRestrictions": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams",
       "method": "GET",
       "params": {
         "owner": {
@@ -7258,7 +7231,8 @@
       "description": "List team restrictions of protected branch."
     },
     "replaceProtectedBranchTeamRestrictions": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams",
       "method": "PUT",
       "params": {
         "owner": {
@@ -7283,7 +7257,8 @@
       "description": "Replace team restrictions of protected branch."
     },
     "addProtectedBranchTeamRestrictions": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams",
       "method": "POST",
       "params": {
         "owner": {
@@ -7308,7 +7283,8 @@
       "description": "Add team restrictions of protected branch."
     },
     "removeProtectedBranchTeamRestrictions": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams",
       "method": "DELETE",
       "params": {
         "owner": {
@@ -7333,7 +7309,8 @@
       "description": "Remove team restrictions of protected branch."
     },
     "getProtectedBranchUserRestrictions": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/restrictions/users",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/restrictions/users",
       "method": "GET",
       "params": {
         "owner": {
@@ -7361,7 +7338,8 @@
       "description": "List user restrictions of protected branch."
     },
     "replaceProtectedBranchUserRestrictions": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/restrictions/users",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/restrictions/users",
       "method": "PUT",
       "params": {
         "owner": {
@@ -7386,7 +7364,8 @@
       "description": "Replace user restrictions of protected branch."
     },
     "addProtectedBranchUserRestrictions": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/restrictions/users",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/restrictions/users",
       "method": "POST",
       "params": {
         "owner": {
@@ -7411,7 +7390,8 @@
       "description": "Add user restrictions of protected branch."
     },
     "removeProtectedBranchUserRestrictions": {
-      "url": "/repos/:owner/:repo/branches/:branch/protection/restrictions/users",
+      "url":
+        "/repos/:owner/:repo/branches/:branch/protection/restrictions/users",
       "method": "DELETE",
       "params": {
         "owner": {
@@ -7449,11 +7429,7 @@
         },
         "affiliation": {
           "type": "string",
-          "enum": [
-            "outside",
-            "all",
-            "direct"
-          ],
+          "enum": ["outside", "all", "direct"],
           "default": "all",
           "description": "Filter collaborators returned by their affiliation."
         },
@@ -7525,13 +7501,10 @@
         },
         "permission": {
           "type": "string",
-          "enum": [
-            "pull",
-            "push",
-            "admin"
-          ],
+          "enum": ["pull", "push", "admin"],
           "default": "push",
-          "description": "`pull` - can pull, but not push to or administer this repository, `push` - can pull and push, but not administer this repository, `admin` - can pull, push and administer this repository."
+          "description":
+            "`pull` - can pull, but not push to or administer this repository, `push` - can pull and push, but not administer this repository, `admin` - can pull, push and administer this repository."
         }
       },
       "description": "Add user as a collaborator"
@@ -7735,11 +7708,13 @@
         },
         "path": {
           "type": "string",
-          "description": "Only commits containing this file path will be returned."
+          "description":
+            "Only commits containing this file path will be returned."
         },
         "author": {
           "type": "string",
-          "description": "GitHub login or email address by which to filter by commit author."
+          "description":
+            "GitHub login or email address by which to filter by commit author."
         },
         "since": {
           "type": "date",
@@ -7799,7 +7774,8 @@
           "type": "string",
           "required": true,
           "allow-empty": true,
-          "description": "String of the name of the fully qualified reference (ie: heads/master). If it doesn’t have at least one slash, it will be rejected."
+          "description":
+            "String of the name of the fully qualified reference (ie: heads/master). If it doesn’t have at least one slash, it will be rejected."
         }
       },
       "description": "Get the SHA-1 of a commit reference."
@@ -7819,12 +7795,14 @@
         "base": {
           "type": "string",
           "required": true,
-          "description": "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
+          "description":
+            "The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo."
         },
         "head": {
           "type": "string",
           "required": true,
-          "description": "The branch (or git ref) where your changes are implemented."
+          "description":
+            "The branch (or git ref) where your changes are implemented."
         }
       },
       "description": "Compare two commits."
@@ -7843,7 +7821,8 @@
         },
         "ref": {
           "type": "string",
-          "description": "The name of the commit/branch/tag. Default: the repository’s default branch (usually master)"
+          "description":
+            "The name of the commit/branch/tag. Default: the repository’s default branch (usually master)"
         }
       },
       "description": "Get the README for the given repository."
@@ -7868,7 +7847,8 @@
         },
         "ref": {
           "type": "string",
-          "description": "The String name of the Commit/Branch/Tag. Defaults to master."
+          "description":
+            "The String name of the Commit/Branch/Tag. Defaults to master."
         }
       },
       "description": "Get the contents of a file or directory in a repository."
@@ -7902,7 +7882,8 @@
         },
         "branch": {
           "type": "string",
-          "description": "The branch name. If not provided, uses the repository’s default branch (usually master)."
+          "description":
+            "The branch name. If not provided, uses the repository’s default branch (usually master)."
         },
         "committer": {
           "type": "json"
@@ -7947,7 +7928,8 @@
         },
         "branch": {
           "type": "string",
-          "description": "The branch name. If not provided, uses the repository’s default branch (usually master)."
+          "description":
+            "The branch name. If not provided, uses the repository’s default branch (usually master)."
         },
         "committer": {
           "type": "json"
@@ -7987,7 +7969,8 @@
         },
         "branch": {
           "type": "string",
-          "description": "The branch name. If not provided, uses the repository’s default branch (usually master)."
+          "description":
+            "The branch name. If not provided, uses the repository’s default branch (usually master)."
         },
         "committer": {
           "type": "json"
@@ -8013,16 +7996,14 @@
         "archive_format": {
           "type": "string",
           "required": true,
-          "enum": [
-            "tarball",
-            "zipball"
-          ],
+          "enum": ["tarball", "zipball"],
           "default": "tarball",
           "description": "Either tarball or zipball, Deafult: tarball."
         },
         "ref": {
           "type": "string",
-          "description": "A valid Git reference. Default: the repository’s default branch (usually master)."
+          "description":
+            "A valid Git reference. Default: the repository’s default branch (usually master)."
         }
       },
       "description": "Get archive link."
@@ -8092,7 +8073,8 @@
         },
         "read_only": {
           "type": "boolean",
-          "description": "If true, the key will only be able to read repository contents. Otherwise, the key will be able to read and write."
+          "description":
+            "If true, the key will only be able to read repository contents. Otherwise, the key will be able to read and write."
         }
       },
       "description": "Add a new deploy key."
@@ -8134,22 +8116,26 @@
         "sha": {
           "type": "string",
           "default": "none",
-          "description": "The short or long sha that was recorded at creation time. Default: none."
+          "description":
+            "The short or long sha that was recorded at creation time. Default: none."
         },
         "ref": {
           "type": "string",
           "default": "none",
-          "description": "The name of the ref. This can be a branch, tag, or sha. Default: none."
+          "description":
+            "The name of the ref. This can be a branch, tag, or sha. Default: none."
         },
         "task": {
           "type": "string",
           "default": "none",
-          "description": "The name of the task for the deployment. e.g. deploy or deploy:migrations. Default: none."
+          "description":
+            "The name of the task for the deployment. e.g. deploy or deploy:migrations. Default: none."
         },
         "environment": {
           "type": "string",
           "default": "none",
-          "description": "The name of the environment that was deployed to. e.g. staging or production. Default: none."
+          "description":
+            "The name of the environment that was deployed to. e.g. staging or production. Default: none."
         },
         "page": {
           "type": "number",
@@ -8206,26 +8192,31 @@
         "task": {
           "type": "string",
           "default": "deploy",
-          "description": "The named task to execute. e.g. deploy or deploy:migrations. Default: deploy"
+          "description":
+            "The named task to execute. e.g. deploy or deploy:migrations. Default: deploy"
         },
         "auto_merge": {
           "type": "boolean",
           "default": "true",
-          "description": "Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: true"
+          "description":
+            "Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: true"
         },
         "required_contexts": {
           "type": "string[]",
-          "description": "Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts."
+          "description":
+            "Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts."
         },
         "payload": {
           "type": "string",
           "default": "\"\"",
-          "description": "Optional JSON payload with extra information about the deployment. Default: \"\""
+          "description":
+            "Optional JSON payload with extra information about the deployment. Default: \"\""
         },
         "environment": {
           "type": "string",
           "default": "none",
-          "description": "The name of the environment that was deployed to. e.g. staging or production. Default: none."
+          "description":
+            "The name of the environment that was deployed to. e.g. staging or production. Default: none."
         },
         "description": {
           "type": "string",
@@ -8235,11 +8226,13 @@
         "transient_environment": {
           "type": "boolean",
           "default": false,
-          "description": "Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: false. (In preview period. See README.)"
+          "description":
+            "Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: false. (In preview period. See README.)"
         },
         "production_environment": {
           "type": "boolean",
-          "description": "Specifies if the given environment is a one that end-users directly interact with. Default: true when environment is `production` and false otherwise. (In preview period. See README.)"
+          "description":
+            "Specifies if the given environment is a one that end-users directly interact with. Default: true when environment is `production` and false otherwise. (In preview period. See README.)"
         }
       },
       "description": "Create a deployment. (In preview period. See README.)"
@@ -8264,7 +8257,8 @@
           "required": true
         }
       },
-      "description": "List deployment statuses. (In preview period. See README.)"
+      "description":
+        "List deployment statuses. (In preview period. See README.)"
     },
     "getDeploymentStatus": {
       "url": "/repos/:owner/:repo/deployments/:id/statuses/:status_id",
@@ -8289,7 +8283,8 @@
           "description": "The Deployment Status ID."
         }
       },
-      "description": "List deployment statuses. (In preview period. See README.)"
+      "description":
+        "List deployment statuses. (In preview period. See README.)"
     },
     "createDeploymentStatus": {
       "url": "/repos/:owner/:repo/deployments/:id/statuses",
@@ -8312,17 +8307,20 @@
         },
         "state": {
           "type": "string",
-          "description": "The state of the status. Can be one of pending, success, error, or failure."
+          "description":
+            "The state of the status. Can be one of pending, success, error, or failure."
         },
         "target_url": {
           "type": "string",
           "default": "\"\"",
-          "description": "The target URL to associate with this status. This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: \"\""
+          "description":
+            "The target URL to associate with this status. This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: \"\""
         },
         "log_url": {
           "type": "string",
           "default": "\"\"",
-          "description": "Functionally equivalent to target_url. Default: \"\". (In preview period. See README.)"
+          "description":
+            "Functionally equivalent to target_url. Default: \"\". (In preview period. See README.)"
         },
         "description": {
           "type": "string",
@@ -8332,15 +8330,18 @@
         "environment_url": {
           "type": "string",
           "default": "\"\"",
-          "description": "URL for accessing the deployment environment. Default: \"\". (In preview period. See README.)"
+          "description":
+            "URL for accessing the deployment environment. Default: \"\". (In preview period. See README.)"
         },
         "auto_inactive": {
           "type": "boolean",
           "default": true,
-          "description": "When true the new `inactive` status is added to all other non-transient, non-production environment deployments with the same repository and environment name as the created status's deployment. Default: true. (In preview period. See README.)"
+          "description":
+            "When true the new `inactive` status is added to all other non-transient, non-production environment deployments with the same repository and environment name as the created status's deployment. Default: true. (In preview period. See README.)"
         }
       },
-      "description": "Create a deployment status. (In preview period. See README.)"
+      "description":
+        "Create a deployment status. (In preview period. See README.)"
     },
     "getDownloads": {
       "url": "/repos/:owner/:repo/downloads",
@@ -8418,13 +8419,10 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "newest",
-            "oldest",
-            "stargazers"
-          ],
+          "enum": ["newest", "oldest", "stargazers"],
           "default": "newest",
-          "description": "Possible values: `newest`, `oldest`, `stargazers`, default: `newest`."
+          "description":
+            "Possible values: `newest`, `oldest`, `stargazers`, default: `newest`."
         },
         "page": {
           "type": "number",
@@ -8490,12 +8488,9 @@
         },
         "permissions": {
           "type": "string",
-          "enum": [
-            "read",
-            "write",
-            "admin"
-          ],
-          "description": "The permissions that the associated user will have on the repository."
+          "enum": ["read", "write", "admin"],
+          "description":
+            "The permissions that the associated user will have on the repository."
         }
       },
       "description": "Update a repository invitation."
@@ -8525,7 +8520,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "Get information about a Pages site. (In preview period. See README.)"
+      "description":
+        "Get information about a Pages site. (In preview period. See README.)"
     },
     "requestPageBuild": {
       "url": "/repos/:owner/:repo/pages/builds",
@@ -8610,7 +8606,8 @@
           "required": true
         }
       },
-      "description": "Get a specific Pages build. (In preview period. See README.)"
+      "description":
+        "Get a specific Pages build. (In preview period. See README.)"
     },
     "getReleases": {
       "url": "/repos/:owner/:repo/releases",
@@ -8709,7 +8706,8 @@
         },
         "target_commitish": {
           "type": "string",
-          "description": "Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually master)."
+          "description":
+            "Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually master)."
         },
         "name": {
           "type": "string"
@@ -8720,12 +8718,14 @@
         "draft": {
           "type": "boolean",
           "default": "false",
-          "description": "true to create a draft (unpublished) release, false to create a published one. Default: false"
+          "description":
+            "true to create a draft (unpublished) release, false to create a published one. Default: false"
         },
         "prerelease": {
           "type": "boolean",
           "default": "false",
-          "description": "true to identify the release as a prerelease. false to identify the release as a full release. Default: false"
+          "description":
+            "true to identify the release as a prerelease. false to identify the release as a full release. Default: false"
         }
       },
       "description": "Create a release."
@@ -8753,7 +8753,8 @@
         },
         "target_commitish": {
           "type": "string",
-          "description": "Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually master)."
+          "description":
+            "Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually master)."
         },
         "name": {
           "type": "string"
@@ -8764,12 +8765,14 @@
         "draft": {
           "type": "boolean",
           "default": "false",
-          "description": "true to create a draft (unpublished) release, false to create a published one. Default: false"
+          "description":
+            "true to create a draft (unpublished) release, false to create a published one. Default: false"
         },
         "prerelease": {
           "type": "boolean",
           "default": "false",
-          "description": "true to identify the release as a prerelease. false to identify the release as a full release. Default: false"
+          "description":
+            "true to identify the release as a prerelease. false to identify the release as a full release. Default: false"
         }
       },
       "description": "Edit a release."
@@ -8819,7 +8822,8 @@
         "url": {
           "type": "string",
           "required": true,
-          "description": "This endpoint makes use of a Hypermedia relation (https://developer.github.com/v3/#hypermedia) to determine which URL to access. This endpoint is provided by a URI template in the release's API response (https://developer.github.com/v3/repos/releases/#get-a-single-release). You need to use an HTTP client which supports SNI (https://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this endpoint."
+          "description":
+            "This endpoint makes use of a Hypermedia relation (https://developer.github.com/v3/#hypermedia) to determine which URL to access. This endpoint is provided by a URI template in the release's API response (https://developer.github.com/v3/repos/releases/#get-a-single-release). You need to use an HTTP client which supports SNI (https://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this endpoint."
         },
         "file": {
           "type": "string | object",
@@ -8831,7 +8835,8 @@
           "type": "string",
           "required": true,
           "mapTo": "headers.content-type",
-          "description": "The content type of the asset. This should be set in the Header. Example: 'application/zip'. For a list of acceptable types, refer this list of media types (https://www.iana.org/assignments/media-types/media-types.xhtml)"
+          "description":
+            "The content type of the asset. This should be set in the Header. Example: 'application/zip'. For a list of acceptable types, refer this list of media types (https://www.iana.org/assignments/media-types/media-types.xhtml)"
         },
         "contentLength": {
           "type": "number",
@@ -8842,11 +8847,13 @@
         "name": {
           "type": "string",
           "required": true,
-          "description": "The file name of the asset. This should be set in a URI query parameter."
+          "description":
+            "The file name of the asset. This should be set in a URI query parameter."
         },
         "label": {
           "type": "string",
-          "description": "An alternate short description of the asset. Used in place of the filename. This should be set in a URI query parameter."
+          "description":
+            "An alternate short description of the asset. Used in place of the filename. This should be set in a URI query parameter."
         }
       },
       "description": "Upload a release asset."
@@ -8892,7 +8899,8 @@
         },
         "label": {
           "type": "string",
-          "description": "An alternate short description of the asset. Used in place of the filename."
+          "description":
+            "An alternate short description of the asset. Used in place of the filename."
         }
       },
       "description": "Edit a release asset."
@@ -8929,7 +8937,8 @@
           "required": true
         }
       },
-      "description": "Get contributors list with additions, deletions, and commit counts."
+      "description":
+        "Get contributors list with additions, deletions, and commit counts."
     },
     "getStatsCommitActivity": {
       "url": "/repos/:owner/:repo/stats/commit_activity",
@@ -8974,7 +8983,8 @@
           "required": true
         }
       },
-      "description": "Get the weekly commit count for the repository owner and everyone else."
+      "description":
+        "Get the weekly commit count for the repository owner and everyone else."
     },
     "getStatsPunchCard": {
       "url": "/repos/:owner/:repo/stats/punch_card",
@@ -9010,17 +9020,14 @@
         "state": {
           "type": "string",
           "required": true,
-          "enum": [
-            "pending",
-            "success",
-            "error",
-            "failure"
-          ],
-          "description": "State of the status - can be one of pending, success, error, or failure."
+          "enum": ["pending", "success", "error", "failure"],
+          "description":
+            "State of the status - can be one of pending, success, error, or failure."
         },
         "target_url": {
           "type": "string",
-          "description": "Target url to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the ‘source’ of the Status."
+          "description":
+            "Target url to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the ‘source’ of the Status."
         },
         "description": {
           "type": "string",
@@ -9028,7 +9035,8 @@
         },
         "context": {
           "type": "string",
-          "description": "A string label to differentiate this status from the status of other systems."
+          "description":
+            "A string label to differentiate this status from the status of other systems."
         }
       },
       "description": "Create a status."
@@ -9048,7 +9056,8 @@
         "ref": {
           "type": "string",
           "required": true,
-          "description": "Ref to list the statuses from. It can be a SHA, a branch name, or a tag name."
+          "description":
+            "Ref to list the statuses from. It can be a SHA, a branch name, or a tag name."
         },
         "page": {
           "type": "number",
@@ -9077,7 +9086,8 @@
         "ref": {
           "type": "string",
           "required": true,
-          "description": "Ref to fetch the status for. It can be a SHA, a branch name, or a tag name."
+          "description":
+            "Ref to fetch the status for. It can be a SHA, a branch name, or a tag name."
         },
         "page": {
           "type": "number",
@@ -9161,7 +9171,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "Get the total number of views and breakdown per day or week for the last 14 days."
+      "description":
+        "Get the total number of views and breakdown per day or week for the last 14 days."
     },
     "getClones": {
       "url": "/repos/:owner/:repo/traffic/clones",
@@ -9185,7 +9196,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "Get the total number of clones and breakdown per day or week for the last 14 days."
+      "description":
+        "Get the total number of clones and breakdown per day or week for the last 14 days."
     },
     "getHooks": {
       "url": "/repos/:owner/:repo/hooks",
@@ -9249,16 +9261,19 @@
         "config": {
           "type": "json",
           "required": true,
-          "description": "A Hash containing key/value pairs to provide settings for this hook. These settings vary between the services and are defined in the github-services repo. Booleans are stored internally as `1` for true, and `0` for false. Any JSON true/false values will be converted automatically."
+          "description":
+            "A Hash containing key/value pairs to provide settings for this hook. These settings vary between the services and are defined in the github-services repo. Booleans are stored internally as `1` for true, and `0` for false. Any JSON true/false values will be converted automatically."
         },
         "events": {
           "type": "string[]",
           "default": "[\"push\"]",
-          "description": "Determines what events the hook is triggered for. Default: `['push']`."
+          "description":
+            "Determines what events the hook is triggered for. Default: `['push']`."
         },
         "active": {
           "type": "boolean",
-          "description": "Determines whether the hook is actually triggered on pushes."
+          "description":
+            "Determines whether the hook is actually triggered on pushes."
         }
       },
       "description": "Create a hook."
@@ -9286,24 +9301,29 @@
         "config": {
           "type": "json",
           "required": true,
-          "description": "A Hash containing key/value pairs to provide settings for this hook. Modifying this will replace the entire config object. These settings vary between the services and are defined in the github-services repo. Booleans are stored internally as `1` for true, and `0` for false. Any JSON true/false values will be converted automatically."
+          "description":
+            "A Hash containing key/value pairs to provide settings for this hook. Modifying this will replace the entire config object. These settings vary between the services and are defined in the github-services repo. Booleans are stored internally as `1` for true, and `0` for false. Any JSON true/false values will be converted automatically."
         },
         "events": {
           "type": "string[]",
           "default": "[\"push\"]",
-          "description": "Determines what events the hook is triggered for. This replaces the entire array of events. Default: `['push']`."
+          "description":
+            "Determines what events the hook is triggered for. This replaces the entire array of events. Default: `['push']`."
         },
         "add_events": {
           "type": "string[]",
-          "description": "Determines a list of events to be added to the list of events that the Hook triggers for."
+          "description":
+            "Determines a list of events to be added to the list of events that the Hook triggers for."
         },
         "remove_events": {
           "type": "string[]",
-          "description": "Determines a list of events to be removed from the list of events that the Hook triggers for."
+          "description":
+            "Determines a list of events to be removed from the list of events that the Hook triggers for."
         },
         "active": {
           "type": "boolean",
-          "description": "Determines whether the hook is actually triggered on pushes."
+          "description":
+            "Determines whether the hook is actually triggered on pushes."
         }
       },
       "description": "Edit a hook."
@@ -9381,19 +9401,12 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "stars",
-            "forks",
-            "updated"
-          ],
+          "enum": ["stars", "forks", "updated"],
           "description": "stars, forks, or updated"
         },
         "order": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc",
           "description": "asc or desc"
         },
@@ -9420,17 +9433,13 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "indexed"
-          ],
-          "description": "The sort field. Can only be indexed, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match."
+          "enum": ["indexed"],
+          "description":
+            "The sort field. Can only be indexed, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match."
         },
         "order": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc",
           "description": "asc or desc"
         },
@@ -9460,18 +9469,13 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "author-date",
-            "committer-date"
-          ],
-          "description": "The sort field. Can be author-date or committer-date. Default: best match."
+          "enum": ["author-date", "committer-date"],
+          "description":
+            "The sort field. Can be author-date or committer-date. Default: best match."
         },
         "order": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc",
           "description": "asc or desc"
         },
@@ -9498,19 +9502,13 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "comments",
-            "created",
-            "updated"
-          ],
-          "description": "The sort field. Can be comments, created, or updated. Default: results are sorted by best match."
+          "enum": ["comments", "created", "updated"],
+          "description":
+            "The sort field. Can be comments, created, or updated. Default: results are sorted by best match."
         },
         "order": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc",
           "description": "asc or desc"
         },
@@ -9537,19 +9535,13 @@
         },
         "sort": {
           "type": "string",
-          "enum": [
-            "followers",
-            "repositories",
-            "joined"
-          ],
-          "description": "The sort field. Can be followers, repositories, or joined. Default: results are sorted by best match."
+          "enum": ["followers", "repositories", "joined"],
+          "description":
+            "The sort field. Can be followers, repositories, or joined. Default: results are sorted by best match."
         },
         "order": {
           "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
+          "enum": ["asc", "desc"],
           "default": "desc",
           "description": "asc or desc"
         },
@@ -9685,7 +9677,8 @@
           "description": "Numerical ID of the user."
         }
       },
-      "description": "Get a single user by GitHub ID. This method uses numerical user ID. Use users.getForUser method if you need to get a user by username."
+      "description":
+        "Get a single user by GitHub ID. This method uses numerical user ID. Use users.getForUser method if you need to get a user by username."
     },
     "getAll": {
       "url": "/users",
@@ -9720,11 +9713,9 @@
       "params": {
         "state": {
           "type": "string",
-          "enum": [
-            "active",
-            "pending"
-          ],
-          "description": "Indicates the state of the memberships to return. Can be either active or pending. If not specified, both active and pending memberships are returned."
+          "enum": ["active", "pending"],
+          "description":
+            "Indicates the state of the memberships to return. Can be either active or pending. If not specified, both active and pending memberships are returned."
         }
       },
       "description": "List your organization memberships"
@@ -9751,10 +9742,9 @@
         "state": {
           "type": "string",
           "required": true,
-          "enum": [
-            "active"
-          ],
-          "description": "The state that the membership should be in. Only \"active\" will be accepted."
+          "enum": ["active"],
+          "description":
+            "The state that the membership should be in. Only \"active\" will be accepted."
         }
       },
       "description": "Edit your organization membership."
@@ -9818,7 +9808,8 @@
           "type": "string[]",
           "required": true,
           "mapTo": "input",
-          "description": "You can post a single email address or an array of addresses."
+          "description":
+            "You can post a single email address or an array of addresses."
         }
       },
       "description": "Add email address(es)."
@@ -9831,7 +9822,8 @@
           "type": "string[]",
           "required": true,
           "mapTo": "input",
-          "description": "You can post a single email address or an array of addresses."
+          "description":
+            "You can post a single email address or an array of addresses."
         }
       },
       "description": "Delete email address(es)."
@@ -10056,7 +10048,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "Lists the GPG keys for a user. This information is accessible by anyone. (In preview period. See README.)"
+      "description":
+        "Lists the GPG keys for a user. This information is accessible by anyone. (In preview period. See README.)"
     },
     "getGpgKeys": {
       "url": "/user/gpg_keys",
@@ -10141,7 +10134,8 @@
           "required": true
         }
       },
-      "description": "Check whether you've blocked a user. (In preview period. See README.)"
+      "description":
+        "Check whether you've blocked a user. (In preview period. See README.)"
     },
     "blockUser": {
       "url": "/user/blocks/:username",
@@ -10236,7 +10230,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "List repositories accessible to the user for an installation. (In preview period. See README.)"
+      "description":
+        "List repositories accessible to the user for an installation. (In preview period. See README.)"
     },
     "addRepoToInstallation": {
       "url": "/user/installations/:installation_id/repositories/:repository_id",
@@ -10254,7 +10249,8 @@
           "required": true
         }
       },
-      "description": "Add a single repository to an installation. (In preview period. See README.)"
+      "description":
+        "Add a single repository to an installation. (In preview period. See README.)"
     },
     "removeRepoFromInstallation": {
       "url": "/user/installations/:installation_id/repositories/:repository_id",
@@ -10272,7 +10268,8 @@
           "required": true
         }
       },
-      "description": "Remove a single repository from an installation. (In preview period. See README.)"
+      "description":
+        "Remove a single repository from an installation. (In preview period. See README.)"
     },
     "getMarketplacePurchases": {
       "url": "/user/marketplace_purchases",
@@ -10291,7 +10288,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "Get a user's Marketplace purchases. (In preview period. See README.)"
+      "description":
+        "Get a user's Marketplace purchases. (In preview period. See README.)"
     },
     "getMarketplaceStubbedPurchases": {
       "url": "/user/marketplace_purchases/stubbed",
@@ -10310,7 +10308,8 @@
           "description": "A custom page size up to 100. Default is 30."
         }
       },
-      "description": "Get a user's stubbed Marketplace purchases. (In preview period. See README.)"
+      "description":
+        "Get a user's stubbed Marketplace purchases. (In preview period. See README.)"
     }
   },
   "enterprise": {
@@ -10334,7 +10333,8 @@
             "repos",
             "all"
           ],
-          "description": "Possible values: issues, hooks, milestones, orgs, comments, pages, users, gists, pulls, repos, all."
+          "description":
+            "Possible values: issues, hooks, milestones, orgs, comments, pages, users, gists, pulls, repos, all."
         }
       },
       "description": "Get statistics."
@@ -10411,7 +10411,8 @@
           "required": true
         }
       },
-      "description": "Get a single pre-receive environment. (In preview period. See README.)"
+      "description":
+        "Get a single pre-receive environment. (In preview period. See README.)"
     },
     "getPreReceiveEnvironments": {
       "url": "/admin/pre_receive_environments",
@@ -10420,7 +10421,8 @@
         "accept": "application/vnd.github.eye-scream-preview"
       },
       "params": {},
-      "description": "List pre-receive environments. (In preview period. See README.)"
+      "description":
+        "List pre-receive environments. (In preview period. See README.)"
     },
     "createPreReceiveEnvironment": {
       "url": "/admin/pre_receive_environments",
@@ -10437,10 +10439,12 @@
         "image_url": {
           "type": "string",
           "required": true,
-          "description": "URL from which to download a tarball of this environment."
+          "description":
+            "URL from which to download a tarball of this environment."
         }
       },
-      "description": "Create a pre-receive environment. (In preview period. See README.)"
+      "description":
+        "Create a pre-receive environment. (In preview period. See README.)"
     },
     "editPreReceiveEnvironment": {
       "url": "/admin/pre_receive_environments/:id",
@@ -10458,10 +10462,12 @@
         "image_url": {
           "type": "string",
           "required": true,
-          "description": "URL from which to download a tarball of this environment."
+          "description":
+            "URL from which to download a tarball of this environment."
         }
       },
-      "description": "Create a pre-receive environment. (In preview period. See README.)"
+      "description":
+        "Create a pre-receive environment. (In preview period. See README.)"
     },
     "deletePreReceiveEnvironment": {
       "url": "/admin/pre_receive_environments/:id",
@@ -10472,7 +10478,8 @@
           "required": true
         }
       },
-      "description": "Delete a pre-receive environment. (In preview period. See README.)"
+      "description":
+        "Delete a pre-receive environment. (In preview period. See README.)"
     },
     "getPreReceiveEnvironmentDownloadStatus": {
       "url": "/admin/pre-receive-environments/:id/downloads/latest",
@@ -10486,7 +10493,8 @@
           "required": true
         }
       },
-      "description": "Get a pre-receive environment's download status. (In preview period. See README.)"
+      "description":
+        "Get a pre-receive environment's download status. (In preview period. See README.)"
     },
     "triggerPreReceiveEnvironmentDownload": {
       "url": "/admin/pre_receive_environments/:id/downloads",
@@ -10500,7 +10508,8 @@
           "required": true
         }
       },
-      "description": "Trigger a pre-receive environment download. (In preview period. See README.)"
+      "description":
+        "Trigger a pre-receive environment download. (In preview period. See README.)"
     },
     "getPreReceiveHook": {
       "url": "/admin/pre-receive-hooks/:id",
@@ -10514,7 +10523,8 @@
           "required": true
         }
       },
-      "description": "Get a single pre-receive hook. (In preview period. See README.)"
+      "description":
+        "Get a single pre-receive hook. (In preview period. See README.)"
     },
     "getPreReceiveHooks": {
       "url": "/admin/pre-receive-hooks",
@@ -10550,20 +10560,24 @@
         "environment": {
           "type": "json",
           "required": true,
-          "description": "The pre-receive environment where the script is executed."
+          "description":
+            "The pre-receive environment where the script is executed."
         },
         "enforcement": {
           "type": "string",
           "default": "disabled",
-          "description": "The state of enforcement for this hook. default: disabled"
+          "description":
+            "The state of enforcement for this hook. default: disabled"
         },
         "allow_downstream_configuration": {
           "type": "boolean",
           "default": "false",
-          "description": "Whether enforcement can be overridden at the org or repo level. default: false"
+          "description":
+            "Whether enforcement can be overridden at the org or repo level. default: false"
         }
       },
-      "description": "Create a pre-receive hook. (In preview period. See README.)"
+      "description":
+        "Create a pre-receive hook. (In preview period. See README.)"
     },
     "editPreReceiveHook": {
       "url": "/admin/pre_receive_hooks/:id",
@@ -10591,7 +10605,8 @@
           "required": true
         }
       },
-      "description": "Delete a pre-receive hook. (In preview period. See README.)"
+      "description":
+        "Delete a pre-receive hook. (In preview period. See README.)"
     },
     "queueIndexingJob": {
       "url": "/staff/indexing_jobs",
@@ -10617,7 +10632,8 @@
         "admin": {
           "type": "string",
           "required": true,
-          "description": "The login of the user who will manage this organization."
+          "description":
+            "The login of the user who will manage this organization."
         },
         "profile_name": {
           "type": "string",
