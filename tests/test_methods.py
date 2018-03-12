@@ -144,15 +144,17 @@ class TestClientMethods(object):
             }
         )
 
-    def test_returned_object_is_self(self, mocker):
+    def test_returned_object_is_not_self_but_a_copy_of_self(self, mocker):
         mocker.patch('requests.patch')
         headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
         data = {'state': 'open'}
-        sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
+        octokit = Octokit()
+        sut = octokit.issues.edit(owner='testUser', repo='testRepo', number=1)
         requests.patch.assert_called_once_with(
             'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
         )
         assert sut.__class__.__name__ == 'Octokit'
+        assert sut != octokit
 
     def test_returned_object_has_requests_response_object(self, mocker):
         patch = mocker.patch('requests.patch')

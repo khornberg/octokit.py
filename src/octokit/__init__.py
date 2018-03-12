@@ -1,3 +1,4 @@
+import copy
 import datetime
 import json
 import re
@@ -180,10 +181,11 @@ class Octokit(Base):
                 attributes = _response.json()
             except ValueError:
                 attributes = _response.text
-            setattr(self, '_response', _response)
-            setattr(self, 'json', attributes)
-            setattr(self, 'response', self._convert_to_object(attributes))
-            return self
+            new_self = copy.deepcopy(self)
+            setattr(new_self, '_response', _response)
+            setattr(new_self, 'json', attributes)
+            setattr(new_self, 'response', new_self._convert_to_object(attributes))
+            return new_self
 
         _api_call.__name__ = name
         _api_call.__doc__ = definition['description']
