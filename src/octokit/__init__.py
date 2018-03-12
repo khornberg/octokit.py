@@ -35,9 +35,7 @@ class Base(object):
             message = '{} is not a valid parameter for {}'.format(param_value, kwarg)
             raise errors.OctokitParameterError(message)
         if param_value.get('enum') and value not in param_value.get('enum'):  # is a valid option of the enum
-            message = '{} is not a valid option for {}; must be one of {}'.format(
-                value, kwarg, param_value.get('enum')
-            )
+            message = '{} is not a valid option for {}; must be one of {}'.format(value, kwarg, param_value.get('enum'))
             raise errors.OctokitParameterError(message)
         if kwarg in required_params and not value:  # required param has a value
             message = '{} must have a value'.format(kwarg)
