@@ -7,8 +7,8 @@ from collections import defaultdict
 
 import requests
 from jose import jwt
-from octokit import utils
 from octokit import errors
+from octokit import utils
 
 
 class Base(object):
