@@ -66,7 +66,7 @@ class TestAuth(object):
         post.return_value = Request(json=lambda: {'token': 'v1.1f699f1069f60', 'expires_at': '2016-07-11T22:14:10Z'})
         with open(os.path.join(os.path.dirname(__file__), 'test.pem'), 'r') as f:
             private_key = f.read()
-        sut = Octokit(auth='installation', app_id=42, private_key=private_key)
+        sut = Octokit(auth='installation', app_id='42', private_key=private_key)
         assert sut.auth == 'installation'
         assert sut.token == 'v1.1f699f1069f60'
         assert sut.expires_at == '2016-07-11T22:14:10Z'
@@ -77,9 +77,9 @@ class TestAuth(object):
         with pytest.raises(AssertionError):
             Octokit(auth='installation', app_id='')
         with pytest.raises(KeyError):
-            Octokit(auth='installation', app_id=42)
+            Octokit(auth='installation', app_id='42')
         with pytest.raises(AssertionError):
-            Octokit(auth='installation', app_id=42, private_key='')
+            Octokit(auth='installation', app_id='42', private_key='')
 
     def test_installation_token_is_used_if_set(self, mocker):
         Request = namedtuple('Request', ['json'])
@@ -89,7 +89,7 @@ class TestAuth(object):
         post.return_value = Request(json=lambda: {'token': 'v1.1f699f1069f60', 'expires_at': '2016-07-11T22:14:10Z'})
         with open(os.path.join(os.path.dirname(__file__), 'test.pem'), 'r') as f:
             private_key = f.read()
-        sut = Octokit(auth='installation', app_id=42, private_key=private_key)
+        sut = Octokit(auth='installation', app_id='42', private_key=private_key)
         assert sut.installation_id == 37
         get = mocker.patch('requests.get')
         sut.authorization.get(id=100)
