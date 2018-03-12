@@ -47,6 +47,7 @@ before_deploy:
   - git config --local user.name "Kyle Hornberg"
   - git config --local user.email "khornberg@users.noreply.github.com"
   - git tag $(python setup.py --version)
+  - echo git tag -l
   - pip install twine
 deploy:
   - provider: releases

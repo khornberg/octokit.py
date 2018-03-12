@@ -4,6 +4,7 @@ from collections import namedtuple
 import pytest
 import requests
 from octokit import Octokit
+from octokit import errors
 
 
 class TestClientMethods(object):
@@ -29,14 +30,17 @@ class TestClientMethods(object):
         assert requests.get.call_count == 1
 
     def test_has_required_method_parameters(self):
-        with pytest.raises(AssertionError):
+        with pytest.raises(errors.OctokitParameterError) as e1:
             Octokit().authorization.get()
-        with pytest.raises(AssertionError):
+        assert 'id is a required parameter' == str(e1.value)
+        with pytest.raises(errors.OctokitParameterError) as e2:
             Octokit().authorization.get(id=None)
+        assert 'id must have a value' == str(e2.value)
 
     def test_only_allows_valid_method_parameters(self):
-        with pytest.raises(AssertionError):
+        with pytest.raises(errors.OctokitParameterError) as e:
             Octokit().authorization.get_grants(notvalid=1)
+        assert 'None is not a valid parameter for notvalid' == str(e.value)
 
     def test_validate_method_parameters(self, mocker):
         mocker.patch('requests.get')
@@ -55,8 +59,9 @@ class TestClientMethods(object):
 
     def test_must_include_required_body_parameters(self):
         data = {'gist_id': 'abc123'}
-        with pytest.raises(AssertionError):
+        with pytest.raises(errors.OctokitParameterError) as e:
             Octokit().authorization.create(**data)
+        assert 'None is not a valid parameter for gist_id' == str(e.value)
 
     def test_use_default_parameter_values(self, mocker):
         mocker.patch('requests.patch')
@@ -77,8 +82,9 @@ class TestClientMethods(object):
         )
 
     def test_validate_enum_values(self):
-        with pytest.raises(AssertionError):
+        with pytest.raises(errors.OctokitParameterError) as e:
             Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, state='closeddddd')
+        assert 'closeddddd is not a valid option for state; must be one of [\'open\', \'closed\']' == str(e.value)
 
     def test_non_default_params_not_in_the_url_for_get_requests_go_in_the_query_string(self, mocker):
         mocker.patch('requests.get')
@@ -138,15 +144,17 @@ class TestClientMethods(object):
             }
         )
 
-    def test_returned_object_is_self(self, mocker):
+    def test_returned_object_is_not_self_but_a_copy_of_self(self, mocker):
         mocker.patch('requests.patch')
         headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
         data = {'state': 'open'}
-        sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
+        octokit = Octokit()
+        sut = octokit.issues.edit(owner='testUser', repo='testRepo', number=1)
         requests.patch.assert_called_once_with(
             'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
         )
         assert sut.__class__.__name__ == 'Octokit'
+        assert sut != octokit
 
     def test_returned_object_has_requests_response_object(self, mocker):
         patch = mocker.patch('requests.patch')
