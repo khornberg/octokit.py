@@ -127,11 +127,11 @@ token::
 
 app::
 
-    octokit = Octokit(auth='app', app_id=42, private_key=private_key)
+    octokit = Octokit(auth='app', app_id='42', private_key=private_key)
 
 app installation::
 
-    octokit = Octokit(auth='installation', app_id=42, private_key=private_key)
+    octokit = Octokit(auth='installation', app_id='42', private_key=private_key)
 
 For applications provide the application id either from the ping webhook or the application's page on GitHub.
 The :code:`private_key` is a string of your private key provided for the application.
