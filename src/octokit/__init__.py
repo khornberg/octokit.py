@@ -7,6 +7,7 @@ from collections import defaultdict
 import requests
 from jose import jwt
 from octokit import utils
+from octokit import errors
 
 
 class Base(object):
@@ -21,14 +22,25 @@ class Base(object):
         cached_kwargs = dict(ChainMap(kwargs, self._attribute_cache['url']))
         required_params = [k for k, v in params.items() if v.get('required')]
         for p in required_params:
-            assert p in cached_kwargs  # has all required
+            if p not in cached_kwargs:  # has all required
+                message = '{} is a required parameter'.format(p)
+                raise errors.OctokitParameterError(message)
         for kwarg, value in kwargs.items():
             param_value = params.get(kwarg)
-            assert param_value  # is a valid param but not necessarily required
-            if param_value.get('enum'):
-                assert value in param_value.get('enum')  # is a valid option of the enum
-            if kwarg in required_params:
-                assert value  # required param has a value
+            self._validate_params(param_value, kwarg, value, required_params)
+
+    def _validate_params(self, param_value, kwarg, value, required_params):
+        if not param_value:  # is a valid param but not necessarily required
+            message = '{} is not a valid parameter for {}'.format(param_value, kwarg)
+            raise errors.OctokitParameterError(message)
+        if param_value.get('enum') and value not in param_value.get('enum'):  # is a valid option of the enum
+            message = '{} is not a valid option for {}; must be one of {}'.format(
+                value, kwarg, param_value.get('enum')
+            )
+            raise errors.OctokitParameterError(message)
+        if kwarg in required_params and not value:  # required param has a value
+            message = '{} must have a value'.format(kwarg)
+            raise errors.OctokitParameterError(message)
 
     def _form_url(self, values, _url, params):
         _values = dict(ChainMap(values, self._attribute_cache['url']))

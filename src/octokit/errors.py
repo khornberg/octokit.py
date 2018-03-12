@@ -1,0 +1,2 @@
+class OctokitParameterError(Exception):
+    pass
