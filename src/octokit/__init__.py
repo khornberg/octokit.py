@@ -131,10 +131,10 @@ class Base(object):
                     'Authorization': 'Bearer {}'.format(getattr(self, 'jwt', None))
                 },
                 'token': {
-                    'Authorization': 'token {}'.format(self.token)
+                    'Authorization': 'token {}'.format(getattr(self, 'token', None))
                 },
                 'installation': {
-                    'Authorization': 'token {}'.format(self.token)
+                    'Authorization': 'token {}'.format(getattr(self, 'token', None))
                 },
             }
             headers = requests_kwargs['headers']
