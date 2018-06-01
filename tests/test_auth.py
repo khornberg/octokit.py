@@ -123,3 +123,12 @@ class TestAuth(object):
         sut = Octokit(auth='app', app_id=42, private_key=private_key)
         assert sut.auth == 'app'
         assert sut.jwt is not None
+
+    def test_can_get_with_app_authentication(self, mocker):
+        Request = namedtuple('Request', ['json'])
+        get = mocker.patch('requests.get')
+        get.return_value = Request(json=lambda: [{'id': 37}])
+        with open(os.path.join(os.path.dirname(__file__), 'test.pem'), 'r') as f:
+            private_key = f.read()
+        sut = Octokit(auth='app', app_id=42, private_key=private_key)
+        assert sut.apps.get()
