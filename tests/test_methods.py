@@ -86,6 +86,15 @@ class TestClientMethods(object):
             Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, state='closeddddd')
         assert 'closeddddd is not a valid option for state; must be one of [\'open\', \'closed\']' == str(e.value)
 
+    def test_validate_boolean_values(self, mocker):
+        mocker.patch('requests.post')
+        Octokit().repos.create_deployment(owner='testUser', repo='testRepo', ref='abc123')
+        data = '{"auto_merge": true, "description": "\\"\\"", "environment": "none", "payload": "\\"\\"", "ref": "abc123", "task": "deploy"}'  # noqa E501
+        headers = {'Content-Type': 'application/json', 'accept': 'application/vnd.github.ant-man-preview+json'}
+        requests.post.assert_called_once_with(
+            'https://api.github.com/repos/testUser/testRepo/deployments', data=data, headers=headers
+        )
+
     def test_non_default_params_not_in_the_url_for_get_requests_go_in_the_query_string(self, mocker):
         mocker.patch('requests.get')
         params = {'page': 2, 'per_page': '30'}
