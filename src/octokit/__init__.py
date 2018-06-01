@@ -55,8 +55,15 @@ class Base(object):
     def _get_data(self, kwargs, params):
         for param, value in params.items():
             if value.get('default') and not kwargs.get(param):
-                kwargs[param] = value.get('default')
+                kwargs[param] = self._get_parameter_for_type(value)
         return kwargs
+
+    def _get_parameter_for_type(self, param):
+        if param.get('type') == 'boolean' and param.get('default') == 'true':
+            return True
+        if param.get('type') == 'boolean' and param.get('default') == 'false':
+            return False
+        return param.get('default')
 
     def _data(self, data_kwargs, params, method):
         data = self._get_data(data_kwargs, params)
