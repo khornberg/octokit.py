@@ -1854,6 +1854,15 @@
         "accept": "application/vnd.github.machine-man-preview"
       },
       "params": {
+        "page": {
+          "type": "number",
+          "description": "Page number of the results to fetch."
+        },
+        "per_page": {
+          "type": "number",
+          "default": "30",
+          "description": "A custom page size up to 100. Default is 30."
+        },
         "user_id": {
           "type": "string",
           "description":
