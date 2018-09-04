@@ -1,7 +1,9 @@
 class MockHeaders(object):
 
     def __init__(self, requested_page):
-        Link = 'Links <https://api.github.com/installation/repositories?page={}>; rel="next", <https://api.github.com/installation/repositories?page=4>; rel="last"'.format(min(requested_page + 1, 4))  # noqa E501
+        Link = 'Links <https://api.github.com/installation/repositories?page={}>; rel="next", <https://api.github.com/installation/repositories?page=4>; rel="last"'.format(  # noqa E501
+            min(requested_page + 1, 4)
+        )
         self.headers = {'Link': Link}
 
 
