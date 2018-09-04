@@ -57,8 +57,8 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-      condition: '$TOXENV = py36'
       condition: '$TRAVIS_TAG != $(python ./setup.py--version)'
+      condition: '$TOXENV = py36'
   - provider: script
     script: scripts/pypi.sh
     on:
