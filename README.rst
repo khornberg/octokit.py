@@ -8,7 +8,7 @@ Overview
     :stub-columns: 1
 
     * - tests
-      - | |travis| |pyup|
+      - | |travis|
         | |codeclimate| |codeclimate-tests|
     * - package
       - | |version| |wheel|
@@ -23,10 +23,6 @@ Overview
 .. |travis| image:: https://travis-ci.org/khornberg/octokit.py.svg?branch=master
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/khornberg/octokit.py
-
-.. |pyup| image:: https://pyup.io/repos/github/khornberg/octokit.py/shield.svg
-     :target: https://pyup.io/repos/github/khornberg/octokit.py/
-     :alt: Updates
 
 .. |codeclimate| image:: https://codeclimate.com/github/khornberg/octokit.py/badges/gpa.svg
    :target: https://codeclimate.com/github/khornberg/octokit.py

@@ -10,6 +10,8 @@ from jose import jwt
 from octokit import errors
 from octokit import utils
 
+page_regex = re.compile(r'[\?\&]page=(\d+)[_&=\w\d]*>; rel="(\w+)"')
+
 
 class Base(object):
 
@@ -203,3 +205,26 @@ class Octokit(Base):
             return list((self._convert_to_object(value) for index, value in enumerate(item)))
         else:
             return item
+
+    def set_pages(self, obj, previous_page_requested=None):
+        response_headers = obj._response.headers
+        links = response_headers.get('Link', None)
+        if links:
+            matches = re.findall(page_regex, links)
+            if matches:
+                for page, kind in matches:
+                    setattr(obj, '{}_page'.format(kind), int(page))
+                setattr(obj, 'pages', getattr(obj, 'last_page', previous_page_requested))
+                setattr(obj, 'has_pages', True)
+                setattr(obj, 'current_page', previous_page_requested or getattr(obj, 'next_page') - 1)
+                setattr(obj, 'is_last_page', obj.pages == obj.current_page)
+            else:
+                setattr(obj, 'has_pages', False)
+        return obj
+
+    def paginate(self, obj, page=1, **kwargs):
+        response = self.set_pages(obj(page=page, **kwargs))
+        yield response.json
+        while not response.is_last_page:
+            response = self.set_pages(obj(page=response.next_page, **kwargs), response.next_page)
+            yield response.json
