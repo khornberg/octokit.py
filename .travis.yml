@@ -46,8 +46,8 @@ before_deploy:
   - rm ./cc-test-reporter
   - git config --local user.name "Kyle Hornberg"
   - git config --local user.email "khornberg@users.noreply.github.com"
-  - git tag $(python setup.py --version)
-  - echo git tag -l
+  - git tag $(python ./setup.py --version)
+  - echo $(git tag -l)
   - pip install twine
 deploy:
   - provider: releases
@@ -58,12 +58,12 @@ deploy:
     on:
       branch: master
       condition: '$TOXENV = py36'
-      condition: '$TRAVIS_TAG != $(python setup.py--version)'
+      condition: '$TRAVIS_TAG != $(python ./setup.py--version)'
   - provider: script
     script: scripts/pypi.sh
     on:
       branch: master
-      condition: '$TRAVIS_TAG != $(python setup.py--version)'
+      condition: '$TRAVIS_TAG != $(python ./setup.py--version)'
       condition: '$TOXENV = py36'
 notifications:
   email:
