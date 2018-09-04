@@ -18,5 +18,6 @@ include README.rst
 include tox.ini .travis.yml
 include requirements.txt
 include .pyup.yml
+include *.json
 
 global-exclude *.py[cod] __pycache__ *.so *.dylib
