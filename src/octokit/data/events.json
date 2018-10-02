@@ -1,6 +1,7 @@
 [
   "*",
   "error",
+
   "commit_comment",
   "commit_comment.created",
   "create",
