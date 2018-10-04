@@ -15,11 +15,13 @@ page_regex = re.compile(r'[\?\&]page=(\d+)[_&=\w\d]*>; rel="(\w+)"')
 
 class Base(object):
 
-    headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
     base_url = 'https://api.github.com'
 
-    def _get_headers(self, definition):
-        return dict(ChainMap(definition.get('headers', {}), self.headers))
+    def __init__(self):
+        self.headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
+
+    def _get_headers(self, method_headers):
+        return dict(ChainMap(method_headers, self.headers))
 
     def _validate(self, kwargs, params):
         cached_kwargs = dict(ChainMap(kwargs, self._attribute_cache['url']))
@@ -155,7 +157,8 @@ class Base(object):
 class Octokit(Base):
 
     def __init__(self, *args, **kwargs):
-        self._create(utils.get_json_data('rest.json'))
+        super().__init__()
+        self._create(utils.get_json_data('index.json'))
         self._setup_authentication(kwargs)
         self._attribute_cache = defaultdict(dict)
 
@@ -167,9 +170,9 @@ class Octokit(Base):
 
     def _create_client(self, name, methods):
         class_attributes = {}
-        for _name, method in methods.items():
-            method_name = utils.snake_case(str(_name))
-            class_attributes.update({method_name: self._create_method(method_name, method)})
+        for method in methods:
+            for method_name in [utils.snake_case(str(method['name'])), utils.snake_case(str(method['idName']))]:
+                class_attributes.update({method_name: self._create_method(method_name, method)})
         bases = [object]
         cls = type(name, tuple(bases), class_attributes)
         return cls
@@ -177,11 +180,13 @@ class Octokit(Base):
     def _create_method(self, name, definition):
 
         def _api_call(*args, **kwargs):
-            self._validate(kwargs, definition.get('params'))
+            method_headers = kwargs.pop('headers') if kwargs.get('headers') else {}
+            parameter_map = utils.parameter_transform(definition.get('params'))
+            self._validate(kwargs, parameter_map)
             method = definition['method'].lower()
-            requests_kwargs = {'headers': self._get_headers(definition)}
-            url, data_kwargs = self._form_url(kwargs, definition['url'], definition.get('params'))
-            requests_kwargs.update(self._data(data_kwargs, definition.get('params'), method))
+            requests_kwargs = {'headers': self._get_headers(method_headers)}
+            url, data_kwargs = self._form_url(kwargs, definition['path'], parameter_map)
+            requests_kwargs.update(self._data(data_kwargs, parameter_map, method))
             requests_kwargs.update(self._auth(requests_kwargs))
             _response = getattr(requests, method)(url, **requests_kwargs)
             try:

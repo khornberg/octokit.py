@@ -18,67 +18,70 @@ class TestClientMethods(object):
             assert all(method.islower() for method in cls)
 
     def test_method_has_doc_string(self):
-        assert Octokit().authorization.get.__doc__ == 'Get a single authorization.'
+        assert Octokit().oauth_authorizations.list_grants.__doc__ == """You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://developer.github.com/v3/oauth_authorizations/#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `[\"repo\", \"user\"]`."""  # noqa E501
 
     def test_method_has_name_string(self):
-        assert Octokit().authorization.get.__name__ == 'get'
+        assert Octokit().oauth_authorizations.list_grants.__name__ == 'list_grants'
+
+    def test_method_is_accessible_also_by_snake_case_name(self):
+        assert Octokit().oauth_authorizations.list_your_grants.__name__ == 'list_your_grants'
 
     def test_method_calls_requests(self, mocker):
         mocker.patch('requests.get')
-        Octokit().authorization.get(id=1)
+        Octokit().oauth_authorizations.get_authorization(authorization_id=1)
         assert requests.get.called
         assert requests.get.call_count == 1
 
     def test_has_required_method_parameters(self):
         with pytest.raises(errors.OctokitParameterError) as e1:
-            Octokit().authorization.get()
-        assert 'id is a required parameter' == str(e1.value)
+            Octokit().oauth_authorizations.get_authorization()
+        assert 'authorization_id is a required parameter' == str(e1.value)
         with pytest.raises(errors.OctokitParameterError) as e2:
-            Octokit().authorization.get(id=None)
-        assert 'id must have a value' == str(e2.value)
+            Octokit().oauth_authorizations.get_authorization(authorization_id=None)
+        assert 'authorization_id must have a value' == str(e2.value)
 
     def test_only_allows_valid_method_parameters(self):
         with pytest.raises(errors.OctokitParameterError) as e:
-            Octokit().authorization.get_grants(notvalid=1)
+            Octokit().oauth_authorizations.list_grants(notvalid=1)
         assert 'None is not a valid parameter for notvalid' == str(e.value)
 
     def test_validate_method_parameters(self, mocker):
         mocker.patch('requests.get')
-        Octokit().authorization.get(id=100)
+        Octokit().oauth_authorizations.get_authorization(authorization_id=100)
         requests.get.assert_called_once_with(
             'https://api.github.com/authorizations/100', params={}, headers=Octokit().headers
         )
 
     def test_request_has_body_parameters(self, mocker):
         mocker.patch('requests.post')
-        data = {'scopes': ['public_repo']}
-        create = Octokit().authorization.create(**data)
+        data = {'note': 'remind me', 'scopes': ['public_repo']}
+        create = Octokit().oauth_authorizations.create_authorization(**data)
         requests.post.assert_called_once_with(
-            'https://api.github.com/authorizations', data=json.dumps(data), headers=create.headers
+            'https://api.github.com/authorizations', data=json.dumps(data, sort_keys=True), headers=create.headers
         )
 
     def test_must_include_required_body_parameters(self):
-        data = {'gist_id': 'abc123'}
+        data = {'gist_id': 'abc123', 'note': 'remind me'}
         with pytest.raises(errors.OctokitParameterError) as e:
-            Octokit().authorization.create(**data)
+            Octokit().oauth_authorizations.create_authorization(**data)
         assert 'None is not a valid parameter for gist_id' == str(e.value)
 
     def test_use_default_parameter_values(self, mocker):
-        mocker.patch('requests.patch')
-        headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
-        data = {'state': 'open'}
-        Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
-        requests.patch.assert_called_once_with(
-            'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
+        mocker.patch('requests.get')
+        headers = {'Content-Type': 'application/json', 'accept': 'application/vnd.github.v3+json'}
+        data = {'sort': 'created'}
+        Octokit().issues.list_comments_for_repo(owner='testUser', repo='testRepo')
+        requests.get.assert_called_once_with(
+            'https://api.github.com/repos/testUser/testRepo/issues/comments', params=data, headers=headers
         )
 
     def test_use_passed_value_instead_of_default_parameter_values(self, mocker):
-        mocker.patch('requests.patch')
-        headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
-        data = {'state': 'closed'}
-        Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, **data)
-        requests.patch.assert_called_once_with(
-            'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
+        mocker.patch('requests.get')
+        headers = {'Content-Type': 'application/json', 'accept': 'application/vnd.github.v3+json'}
+        data = {'sort': 'updated'}
+        Octokit().issues.list_comments_for_repo(owner='testUser', repo='testRepo', **data)
+        requests.get.assert_called_once_with(
+            'https://api.github.com/repos/testUser/testRepo/issues/comments', params=data, headers=headers
         )
 
     def test_validate_enum_values(self):
@@ -89,24 +92,24 @@ class TestClientMethods(object):
     def test_validate_boolean_values(self, mocker):
         mocker.patch('requests.post')
         Octokit().repos.create_deployment(owner='testUser', repo='testRepo', ref='abc123')
-        data = '{"auto_merge": true, "description": "\\"\\"", "environment": "none", "payload": "\\"\\"", "ref": "abc123", "task": "deploy"}'  # noqa E501
-        headers = {'Content-Type': 'application/json', 'accept': 'application/vnd.github.ant-man-preview+json'}
+        data = '{"auto_merge": true, "description": "\\"\\"", "environment": "production", "payload": "\\"\\"", "production_environment": "`true` when `environment` is `production` and `false` otherwise", "ref": "abc123", "task": "deploy"}'  # noqa E501
+        headers = {'Content-Type': 'application/json', 'accept': 'application/vnd.github.v3+json'}
         requests.post.assert_called_once_with(
             'https://api.github.com/repos/testUser/testRepo/deployments', data=data, headers=headers
         )
 
     def test_non_default_params_not_in_the_url_for_get_requests_go_in_the_query_string(self, mocker):
         mocker.patch('requests.get')
-        params = {'page': 2, 'per_page': '30'}
-        Octokit().authorization.get_grant(id=404, page=2)
+        params = {'page': 2, 'per_page': 30}
+        Octokit().oauth_authorizations.list_grants(page=2)
         requests.get.assert_called_once_with(
-            'https://api.github.com/applications/grants/404', params=params, headers=Octokit().headers
+            'https://api.github.com/applications/grants', params=params, headers=Octokit().headers
         )
 
     def test_use_previous_values_if_available(self, mocker):
         mocker.patch('requests.patch')
         mocker.patch('requests.post')
-        headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
+        headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
         data = {'state': 'closed'}
         issue = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, **data)
         requests.patch.assert_called_with(
@@ -116,7 +119,7 @@ class TestClientMethods(object):
         requests.patch.assert_called_with(
             'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
         )
-        issue2.pull_requests.create(head='branch', base='master', title='Title')
+        issue2.pulls.create(head='branch', base='master', title='Title')
         requests.post.assert_called_with(
             'https://api.github.com/repos/testUser/testRepo/pulls',
             data=json.dumps({
@@ -126,20 +129,20 @@ class TestClientMethods(object):
             }, sort_keys=True),
             headers={
                 'Content-Type': 'application/json',
-                'accept': 'application/vnd.github.machine-man-preview+json'
+                'accept': 'application/vnd.github.v3+json'
             }
         )
 
     def test_can_override_previous_values(self, mocker):
         mocker.patch('requests.patch')
         mocker.patch('requests.post')
-        headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
+        headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
         data = {'state': 'closed'}
         issue = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, **data)
         requests.patch.assert_called_with(
             'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
         )
-        issue.pull_requests.create(owner='user', head='branch', base='master', title='Title')
+        issue.pulls.create(owner='user', head='branch', base='master', title='Title')
         requests.post.assert_called_with(
             'https://api.github.com/repos/user/testRepo/pulls',
             data=json.dumps({
@@ -149,18 +152,17 @@ class TestClientMethods(object):
             }, sort_keys=True),
             headers={
                 'Content-Type': 'application/json',
-                'accept': 'application/vnd.github.machine-man-preview+json'
+                'accept': 'application/vnd.github.v3+json'
             }
         )
 
     def test_returned_object_is_not_self_but_a_copy_of_self(self, mocker):
         mocker.patch('requests.patch')
-        headers = {'accept': 'application/vnd.github.squirrel-girl-preview', 'Content-Type': 'application/json'}
-        data = {'state': 'open'}
+        headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
         octokit = Octokit()
         sut = octokit.issues.edit(owner='testUser', repo='testRepo', number=1)
         requests.patch.assert_called_once_with(
-            'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
+            'https://api.github.com/repos/testUser/testRepo/issues/1', data='{}', headers=headers
         )
         assert sut.__class__.__name__ == 'Octokit'
         assert sut != octokit
@@ -226,3 +228,15 @@ class TestClientMethods(object):
         patch.return_value = Request(json=lambda: 'test')
         sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
         assert sut.json == 'test'
+
+    def test_can_pass_in_optional_headers(self, mocker):
+        mocker.patch('requests.get')
+        headers = {'accept': 'application/vnd.github.ant-man-preview+json', 'Content-Type': 'application/json'}
+        Octokit().oauth_authorizations.get_authorization(
+            authorization_id=100, headers={
+                'accept': 'application/vnd.github.ant-man-preview+json'
+            }
+        )
+        requests.get.assert_called_once_with(
+            'https://api.github.com/authorizations/100', params={}, headers=headers
+        )
