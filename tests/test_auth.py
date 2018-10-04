@@ -29,7 +29,9 @@ class TestAuth(object):
 
     def test_basic_auth_used_if_set(self, mocker):
         mocker.patch('requests.get')
-        Octokit(auth='basic', username='myuser', password='mypassword').authorization.get(id=100)
+        Octokit(
+            auth='basic', username='myuser', password='mypassword'
+        ).oauth_authorizations.get_authorization(authorization_id=100)
         requests.get.assert_called_once_with(
             'https://api.github.com/authorizations/100',
             params={},
@@ -50,7 +52,7 @@ class TestAuth(object):
 
     def test_token_auth_used_if_set(self, mocker):
         mocker.patch('requests.get')
-        Octokit(auth='token', token='yak').authorization.get(id=100)
+        Octokit(auth='token', token='yak').oauth_authorizations.get_authorization(authorization_id=100)
         headers = dict(ChainMap(Octokit().headers, {'Authorization': 'token yak'}))
         requests.get.assert_called_once_with(
             'https://api.github.com/authorizations/100',
@@ -92,7 +94,7 @@ class TestAuth(object):
         sut = Octokit(auth='installation', app_id='42', private_key=private_key)
         assert sut.installation_id == 37
         get = mocker.patch('requests.get')
-        sut.authorization.get(id=100)
+        sut.oauth_authorizations.get_authorization(authorization_id=100)
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'token v1.1f699f1069f60',
@@ -131,4 +133,19 @@ class TestAuth(object):
         with open(os.path.join(os.path.dirname(__file__), 'test.pem'), 'r') as f:
             private_key = f.read()
         sut = Octokit(auth='app', app_id=42, private_key=private_key)
-        assert sut.apps.get()
+        assert sut.apps.get_authenticated()
+
+    def test_can_make_unauthenticated_call(self, mocker):
+        mocker.patch('requests.get')
+        Octokit().users.list_followers_for_user(username='octokit')
+        requests.get.assert_called_once_with(
+            'https://api.github.com/users/octokit/followers',
+            headers={
+                'Content-Type': 'application/json',
+                'accept': 'application/vnd.github.v3+json'
+            },
+            params={
+                'page': 1,
+                'per_page': 30
+            }
+        )

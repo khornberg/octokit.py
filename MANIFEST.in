@@ -19,5 +19,6 @@ include tox.ini .travis.yml
 include requirements.txt
 include .pyup.yml
 include *.json
+include *.sh
 
 global-exclude *.py[cod] __pycache__ *.so *.dylib
