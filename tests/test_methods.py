@@ -13,9 +13,9 @@ class TestClientMethods(object):
         for client in Octokit().__dict__:
             try:
                 cls = getattr(Octokit(), client).__dict__
+                assert all(method.islower() for method in cls)
             except AttributeError:
                 pass  # ignore non-class attributes
-            assert all(method.islower() for method in cls)
 
     def test_method_has_doc_string(self):
         assert Octokit(
