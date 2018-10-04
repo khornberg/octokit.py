@@ -18,7 +18,8 @@ class TestClientMethods(object):
             assert all(method.islower() for method in cls)
 
     def test_method_has_doc_string(self):
-        assert Octokit().oauth_authorizations.list_grants.__doc__ == """You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://developer.github.com/v3/oauth_authorizations/#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `[\"repo\", \"user\"]`."""  # noqa E501
+        assert Octokit(
+        ).oauth_authorizations.list_grants.__doc__ == """You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://developer.github.com/v3/oauth_authorizations/#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `[\"repo\", \"user\"]`."""  # noqa E501
 
     def test_method_has_name_string(self):
         assert Octokit().oauth_authorizations.list_grants.__name__ == 'list_grants'
@@ -233,10 +234,6 @@ class TestClientMethods(object):
         mocker.patch('requests.get')
         headers = {'accept': 'application/vnd.github.ant-man-preview+json', 'Content-Type': 'application/json'}
         Octokit().oauth_authorizations.get_authorization(
-            authorization_id=100, headers={
-                'accept': 'application/vnd.github.ant-man-preview+json'
-            }
+            authorization_id=100, headers={'accept': 'application/vnd.github.ant-man-preview+json'}
         )
-        requests.get.assert_called_once_with(
-            'https://api.github.com/authorizations/100', params={}, headers=headers
-        )
+        requests.get.assert_called_once_with('https://api.github.com/authorizations/100', params={}, headers=headers)

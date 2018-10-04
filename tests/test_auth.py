@@ -137,12 +137,13 @@ class TestAuth(object):
 
     def test_can_make_unauthenticated_call(self, mocker):
         mocker.patch('requests.get')
-        o = Octokit()
-        o.users.list_followers_for_user(username='octokit')
+        Octokit().users.list_followers_for_user(username='octokit')
         requests.get.assert_called_once_with(
             'https://api.github.com/users/octokit/followers',
-            headers={'Content-Type': 'application/json',
-                     'accept': 'application/vnd.github.v3+json'},
+            headers={
+                'Content-Type': 'application/json',
+                'accept': 'application/vnd.github.v3+json'
+            },
             params={
                 'page': 1,
                 'per_page': 30
