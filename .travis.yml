@@ -45,7 +45,7 @@ after_failure:
 before_deploy:
   - git config --local user.name "Kyle Hornberg"
   - git config --local user.email "khornberg@users.noreply.github.com"
-  - git tag $(python ./setup.py --version)
+  - if [ ! -f .git/refs/tags/$(python ./setup.py --version) ]; then git tag $(python ./setup.py --version); fi
   - echo $(git tag -l)
   - pip install twine
 deploy:
