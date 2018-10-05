@@ -237,3 +237,27 @@ class TestClientMethods(object):
             authorization_id=100, headers={'accept': 'application/vnd.github.ant-man-preview+json'}
         )
         requests.get.assert_called_once_with('https://api.github.com/authorizations/100', params={}, headers=headers)
+
+    def test_dictionary_keys_are_validated(self, mocker):
+        mocker.patch('requests.put')
+        headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
+        data = {
+            "required_status_checks": {
+                "strict": True,
+                "contexts": [],
+            },
+            "required_pull_request_reviews": {
+                "dismiss_stale_reviews": True
+            },
+            "enforce_admins": True,
+            "restrictions": {
+                "users": [],
+                "teams": [],
+            }
+        }
+        Octokit().repos.update_branch_protection(owner='user', repo='repo', branch='branch', **data)
+        requests.put.assert_called_with(
+            'https://api.github.com/repos/user/repo/branches/branch/protection',
+            data=json.dumps(data, sort_keys=True),
+            headers=headers
+        )
