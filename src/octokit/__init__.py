@@ -26,13 +26,19 @@ class Base(object):
     def _validate(self, kwargs, params):
         cached_kwargs = dict(ChainMap(kwargs, self._attribute_cache['url']))
         required_params = [k for k, v in params.items() if v.get('required')]
-        for p in required_params:
-            if p not in cached_kwargs:  # has all required
-                message = '{} is a required parameter'.format(p)
-                raise errors.OctokitParameterError(message)
+        self._validate_required_params(required_params, cached_kwargs)
         for kwarg, value in kwargs.items():
             param_value = params.get(kwarg)
             self._validate_params(param_value, kwarg, value, required_params)
+
+    def _validate_required_params(self, required_params, cached_kwargs):
+        for p in required_params:
+            if '.' in p:
+                utils.walk_path(cached_kwargs, p.split('.'))
+                continue
+            if p not in cached_kwargs:  # has all required
+                message = '{} is a required parameter'.format(p)
+                raise errors.OctokitParameterError(message)
 
     def _validate_params(self, param_value, kwarg, value, required_params):
         if not param_value:  # is a valid param but not necessarily required

@@ -15,3 +15,10 @@ def get_json_data(filename):
 
 def parameter_transform(params):
     return {param['name']: param for param in params}
+
+
+def walk_path(obj, path):
+    if len(path) == 1:
+        assert obj or obj[path[0]]
+    else:
+        walk_path(obj[path[0]], path[1:])
