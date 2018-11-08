@@ -1,2 +1,2 @@
 python-jose==3.0.1
-requests==2.19.1
+requests==2.20.1
