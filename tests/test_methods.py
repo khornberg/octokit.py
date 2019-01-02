@@ -18,8 +18,7 @@ class TestClientMethods(object):
                 pass  # ignore non-class attributes
 
     def test_method_has_doc_string(self):
-        assert Octokit(
-        ).oauth_authorizations.list_grants.__doc__ == """You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://developer.github.com/v3/oauth_authorizations/#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `[\"repo\", \"user\"]`."""  # noqa E501
+        assert Octokit().oauth_authorizations.list_grants.__doc__ == self.doc_string
 
     def test_method_has_name_string(self):
         assert Octokit().oauth_authorizations.list_grants.__name__ == 'list_grants'
@@ -261,3 +260,7 @@ class TestClientMethods(object):
             data=json.dumps(data, sort_keys=True),
             headers=headers
         )
+
+    @property
+    def doc_string(self):
+        return """You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://developer.github.com/v3/oauth_authorizations/#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `[\"repo\", \"user\"]`."""  # noqa E501
