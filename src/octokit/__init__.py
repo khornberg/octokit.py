@@ -134,7 +134,7 @@ class Base(object):
     def _app_auth_get_jwt(self, app_id, key):
         payload = {
             'iat': int(datetime.datetime.timestamp(datetime.datetime.now())),
-            'exp': int(datetime.datetime.timestamp(datetime.datetime.now())) + (10 * 60),
+            'exp': int(datetime.datetime.timestamp(datetime.datetime.now())) + (9 * 60),
             'iss': app_id,
         }
         return jwt.encode(payload, key, algorithm='RS256')
