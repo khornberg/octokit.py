@@ -57,7 +57,7 @@ Python client for GitHub API
 Installation
 ============
 
-**requires python 3.4+**
+**requires python 3.5+**
 
 Yes that is opinionated. Python 2 is near the end of the life and this is a new project.
 
