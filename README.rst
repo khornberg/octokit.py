@@ -34,19 +34,19 @@ Overview
 
 .. |version| image:: https://img.shields.io/pypi/v/octokitpy.svg
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/octokitpy
+    :target: https://pypi.org/project/octokitpy/
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/octokitpy.svg
     :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/octokitpy
+    :target: https://pypi.org/project/octokitpy/
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/octokitpy.svg
     :alt: Supported versions
-    :target: https://pypi.python.org/pypi/octokitpy
+    :target: https://pypi.org/project/octokitpy/
 
 .. |supported-implementations| image:: https://img.shields.io/pypi/implementation/octokitpy.svg
     :alt: Supported implementations
-    :target: https://pypi.python.org/pypi/octokitpy
+    :target: https://pypi.org/project/octokitpy/
 
 
 .. end-badges
@@ -154,7 +154,7 @@ GitHub APIs
 Data
 ----
 
-The :code:`octokit` client based on the available `rest data <https://github.com/octokit/rest.js/blob/master/lib/routes.json>`_ and `webhook data <https://github.com/octokit/webhooks.js/blob/master/lib/webhook-names.json>`_
+The :code:`octokit` client based on the available `route data <https://github.com/khornberg/octokitpy-routes>`_ and `webhook data <https://github.com/octokit/webhooks.js/blob/master/lib/webhook-names.json>`_
 
 ::
 
