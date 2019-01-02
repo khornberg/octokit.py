@@ -47,3 +47,12 @@ class TestOctokit(object):
         assert next(p) == {'page': 2, 'kwargs': {'param': 'value'}}
         assert next(p) == {'page': 3, 'kwargs': {'param': 'value'}}
         assert next(p) == {'page': 4, 'kwargs': {'param': 'value'}}
+
+    def test_can_speficy_the_route_specifications_used(self):
+        from octokit import Octokit
+        octokit = Octokit(routes='ghe-2.15')
+        assert '/enterprise/2.15' in octokit.issues.create.__doc__
+        octokit = Octokit()
+        assert '/developer.github.com' in octokit.issues.create.__doc__
+        octokit = Octokit(routes='api.github.com')
+        assert '/developer.github.com' in octokit.issues.create.__doc__
