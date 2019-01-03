@@ -9,6 +9,7 @@ import requests
 from jose import jwt
 from octokit import errors
 from octokit import utils
+from routes import specifications
 
 page_regex = re.compile(r'[\?\&]page=(\d+)[_&=\w\d]*>; rel="(\w+)"')
 
@@ -164,7 +165,7 @@ class Octokit(Base):
 
     def __init__(self, *args, **kwargs):
         super().__init__()
-        self._create(utils.get_json_data('index.json'))
+        self._create(specifications[kwargs.get('routes', 'api.github.com')])
         self._setup_authentication(kwargs)
         self._attribute_cache = defaultdict(dict)
 

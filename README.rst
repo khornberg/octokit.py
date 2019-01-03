@@ -57,7 +57,7 @@ Python client for GitHub API
 Installation
 ============
 
-**requires python 3.4+**
+**requires python 3.5+**
 
 Yes that is opinionated. Python 2 is near the end of the life and this is a new project.
 
@@ -133,6 +133,11 @@ For applications provide the application id either from the ping webhook or the 
 The :code:`private_key` is a string of your private key provided for the application.
 The :code:`app` scheme will use the application id and private key to get a token for the first installation id of the application.
 
+API Schema/Routes/Specifications
+--------------------------------
+
+One can instantiate the ``Octokit`` with ``routes=specification`` where the ``specification`` is one of ``api.github.com``, ``ghe-2.15``, etc.
+
 TODOs
 ===========
 
@@ -158,7 +163,7 @@ The :code:`octokit` client based on the available `route data <https://github.co
 
 ::
 
-    [ ] Periodically, check if ``routes.json`` has changed and if so fetch and open a PR for it to be merged
+    [x] Periodically, check if ``routes.json`` has changed and if so fetch and open a PR for it to be merged
 
     [ ] Periodically, check if ``webhook-names.json`` has changed and if so fetch and open a PR for it to be merged
 
@@ -193,7 +198,7 @@ Best Practices
 
     [ ] handles rate limiting
 
-    [ ] pagination
+    [x] pagination
 
 Documentation
 -------------
@@ -207,7 +212,7 @@ Deployment
 
 ::
 
-    [ ] Deploy wheels
+    [x] Deploy wheels
     [ ] Make GitHub releases work
 
 
