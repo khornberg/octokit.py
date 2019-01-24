@@ -19,6 +19,16 @@ def parameter_transform(params):
 
 def walk_path(obj, path):
     if len(path) == 1:
-        assert obj or obj[path[0]]
+        assert path[0] in obj
     else:
         walk_path(obj[path[0]], path[1:])
+
+
+def verify_path(obj, path):
+    if not obj and len(path) == 1:
+        return True
+    if len(path) <= 2:
+        return path[0] in obj
+    if path[0] in obj:
+        verify_path(obj[path[0]], path[1:])
+    return False

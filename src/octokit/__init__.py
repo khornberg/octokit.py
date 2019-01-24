@@ -24,22 +24,35 @@ class Base(object):
     def _get_headers(self, method_headers):
         return dict(ChainMap(method_headers, self.headers))
 
+    def _get_required_params(self, params, cached_kwargs):
+        all_required = [k for k, v in params.items() if v.get('required')]
+        required_params = []
+        for p in all_required:
+            param = p.replace('[]', '')
+            if utils.verify_path(cached_kwargs, param.split('.')):
+                required_params.append(param)
+        return required_params
+
     def _validate(self, kwargs, params):
         cached_kwargs = dict(ChainMap(kwargs, self._attribute_cache['url']))
-        required_params = [k for k, v in params.items() if v.get('required')]
+        required_params = self._get_required_params(params, cached_kwargs)
         self._validate_required_params(required_params, cached_kwargs)
         for kwarg, value in kwargs.items():
             param_value = params.get(kwarg)
             self._validate_params(param_value, kwarg, value, required_params)
 
+    def _raise_required_parameter(self, param):
+        message = '{} is a required parameter'.format(param)
+        raise errors.OctokitParameterError(message)
+
     def _validate_required_params(self, required_params, cached_kwargs):
         for p in required_params:
-            if '.' in p:
+            try:
                 utils.walk_path(cached_kwargs, p.split('.'))
-                continue
-            if p not in cached_kwargs:  # has all required
-                message = '{} is a required parameter'.format(p)
-                raise errors.OctokitParameterError(message)
+            except KeyError:
+                self._raise_required_parameter(p)
+            except AssertionError:
+                self._raise_required_parameter(p)
 
     def _validate_params(self, param_value, kwarg, value, required_params):
         if not param_value:  # is a valid param but not necessarily required
