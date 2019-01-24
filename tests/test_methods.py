@@ -68,13 +68,7 @@ class TestClientMethods(object):
 
     def test_must_include_required_dictionary_sub_parameters_when_used(self, mocker):
         mocker.patch('requests.get')
-        data = {
-            'owner': 'owner',
-            'repo': 'repo',
-            'name': 'name',
-            'head_sha': 'master',
-            'output': {}
-        }
+        data = {'owner': 'owner', 'repo': 'repo', 'name': 'name', 'head_sha': 'master', 'output': {}}
         with pytest.raises(errors.OctokitParameterError) as e:
             Octokit().checks.create(**data)
         assert 'output.title is a required parameter' == str(e.value)
@@ -87,13 +81,7 @@ class TestClientMethods(object):
 
     def test_must_include_required_list_sub_parameters_when_used(self, mocker):
         mocker.patch('requests.get')
-        data = {
-            'owner': 'owner',
-            'repo': 'repo',
-            'name': 'name',
-            'head_sha': 'master',
-            'actions': []
-        }
+        data = {'owner': 'owner', 'repo': 'repo', 'name': 'name', 'head_sha': 'master', 'actions': []}
         with pytest.raises(errors.OctokitParameterError) as e:
             Octokit().checks.create(**data)
         assert 'actions.label is a required parameter' == str(e.value)
@@ -271,9 +259,7 @@ class TestClientMethods(object):
         mocker.patch('requests.get')
         headers = {'accept': 'application/vnd.github.ant-man-preview+json', 'Content-Type': 'application/json'}
         Octokit().oauth_authorizations.get_authorization(
-            authorization_id=100, headers={
-                'accept': 'application/vnd.github.ant-man-preview+json'
-            }
+            authorization_id=100, headers={'accept': 'application/vnd.github.ant-man-preview+json'}
         )
         requests.get.assert_called_once_with('https://api.github.com/authorizations/100', params={}, headers=headers)
 
