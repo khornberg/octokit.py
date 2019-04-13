@@ -1,7 +1,7 @@
 workflow "Test" {
   on = "push"
   resolves = [
-    "Report", "Lint", "Test 3.7""
+    "Report", "Lint", "Test 3.7"
   ]
 }
 
