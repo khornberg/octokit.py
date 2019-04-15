@@ -21,4 +21,4 @@ include .pyup.yml
 include *.json
 include *.sh
 
-global-exclude *.py[cod] __pycache__ *.so *.dylib
+global-exclude *.py[cod] __pycache__ *.so *.dylib .github .github/*
