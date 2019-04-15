@@ -233,7 +233,9 @@ class TestClientMethods(object):
         mocker.patch('requests.get')
         headers = {'accept': 'application/vnd.github.ant-man-preview+json', 'Content-Type': 'application/json'}
         Octokit().oauth_authorizations.get_authorization(
-            authorization_id=100, headers={'accept': 'application/vnd.github.ant-man-preview+json'}
+            authorization_id=100, headers={
+                'accept': 'application/vnd.github.ant-man-preview+json'
+            }
         )
         requests.get.assert_called_once_with('https://api.github.com/authorizations/100', params={}, headers=headers)
 
