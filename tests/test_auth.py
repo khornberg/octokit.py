@@ -142,7 +142,7 @@ class TestAuth(object):
             'https://api.github.com/users/octokit/followers',
             headers={
                 'Content-Type': 'application/json',
-                'accept': 'application/vnd.github.v3+json'
+                'accept': 'application/vnd.github.v3+json',
             },
             params={
                 'page': 1,
