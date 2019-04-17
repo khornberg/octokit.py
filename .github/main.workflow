@@ -13,6 +13,7 @@ action "Master Branch Filter" {
 action "Package" {
   uses = "khornberg/python-actions/setup-py/3.7@master"
   args = "bdist_wheel sdist"
+  needs = ["Master Branch Filter"]
 }
 
 action "PyPi Twine Upload" {
