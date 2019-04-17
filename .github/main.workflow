@@ -1,8 +1,8 @@
 workflow "Publish to PyPi" {
-  on = "pull_request"
   resolves = [
     "PyPi Twine Upload",
   ]
+  on = "push"
 }
 
 action "Master Branch Filter" {
@@ -37,7 +37,9 @@ workflow "Test" {
     "Lint",
     "Docs",
   ]
-  on = "push"
+  on = "pull_request"
+
+  # PR workflow
 
   # PR workflow
 }
