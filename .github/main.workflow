@@ -10,16 +10,9 @@ action "Master Branch Filter" {
   args = "branch master"
 }
 
-action "Merged" {
-  uses = "actions/bin/filter@master"
-  args = "merged true"
-  needs = ["Master Branch Filter"]
-}
-
 action "Package" {
   uses = "khornberg/python-actions/setup-py/3.7@master"
   args = "bdist_wheel sdist"
-  needs = ["Merged"]
 }
 
 action "PyPi Twine Upload" {
