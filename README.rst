@@ -213,7 +213,7 @@ Deployment
 ::
 
     [x] Deploy wheels
-    [ ] Make GitHub releases work
+    [x] Make GitHub releases work
 
 
 **Check box guide**
