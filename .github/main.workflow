@@ -32,10 +32,14 @@ action "PyPi Twine Upload" {
 # PR workflow
 
 workflow "Test" {
-  on = "pull_request"
   resolves = [
-    "Report", "Lint", "Docs"
+    "Report",
+    "Lint",
+    "Docs",
   ]
+  on = "push"
+
+  # PR workflow
 }
 
 action "Branch Filter" {
@@ -92,4 +96,3 @@ action "Report" {
   needs = ["Test 3.6"]
   secrets = ["CC_TEST_REPORTER_ID"]
 }
-
