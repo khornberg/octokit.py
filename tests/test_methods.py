@@ -66,6 +66,32 @@ class TestClientMethods(object):
             Octokit().oauth_authorizations.create_authorization(**data)
         assert 'None is not a valid parameter for gist_id' == str(e.value)
 
+    def test_must_include_required_dictionary_sub_parameters_when_used(self, mocker):
+        mocker.patch('requests.get')
+        data = {'owner': 'owner', 'repo': 'repo', 'name': 'name', 'head_sha': 'master', 'output': {}}
+        with pytest.raises(errors.OctokitParameterError) as e:
+            Octokit().checks.create(**data)
+        assert 'output.title is a required parameter' == str(e.value)
+        data.update({'output': {'title': 'blah'}})
+        with pytest.raises(errors.OctokitParameterError) as e:
+            Octokit().checks.create(**data)
+        assert 'output.summary is a required parameter' == str(e.value)
+        data.update({'output': {'title': 'blah', 'summary': 'that'}})
+        Octokit().checks.create(**data)
+
+    def test_must_include_required_list_sub_parameters_when_used(self, mocker):
+        mocker.patch('requests.get')
+        data = {'owner': 'owner', 'repo': 'repo', 'name': 'name', 'head_sha': 'master', 'actions': []}
+        with pytest.raises(errors.OctokitParameterError) as e:
+            Octokit().checks.create(**data)
+        assert 'actions.label is a required parameter' == str(e.value)
+        data.update({'actions': {'label': 'blah'}})
+        with pytest.raises(errors.OctokitParameterError) as e:
+            Octokit().checks.create(**data)
+        assert 'actions.description is a required parameter' == str(e.value)
+        data.update({'actions': {'label': 'blah', 'description': 'x', 'identifier': 'a'}})
+        Octokit().checks.create(**data)
+
     def test_use_default_parameter_values(self, mocker):
         mocker.patch('requests.get')
         headers = {'Content-Type': 'application/json', 'accept': 'application/vnd.github.v3+json'}
