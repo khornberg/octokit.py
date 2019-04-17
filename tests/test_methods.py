@@ -112,7 +112,7 @@ class TestClientMethods(object):
 
     def test_validate_enum_values(self):
         with pytest.raises(errors.OctokitParameterError) as e:
-            Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, state='closeddddd')
+            Octokit().issues.update(owner='testUser', repo='testRepo', number=1, state='closeddddd')
         assert 'closeddddd is not a valid option for state; must be one of [\'open\', \'closed\']' == str(e.value)
 
     def test_validate_boolean_values(self, mocker):
@@ -137,11 +137,11 @@ class TestClientMethods(object):
         mocker.patch('requests.post')
         headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
         data = {'state': 'closed'}
-        issue = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, **data)
+        issue = Octokit().issues.update(owner='testUser', repo='testRepo', issue_number=1, **data)
         requests.patch.assert_called_with(
             'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
         )
-        issue2 = issue.issues.edit(**data)
+        issue2 = issue.issues.update(**data)
         requests.patch.assert_called_with(
             'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
         )
@@ -164,7 +164,7 @@ class TestClientMethods(object):
         mocker.patch('requests.post')
         headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
         data = {'state': 'closed'}
-        issue = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1, **data)
+        issue = Octokit().issues.update(owner='testUser', repo='testRepo', issue_number=1, **data)
         requests.patch.assert_called_with(
             'https://api.github.com/repos/testUser/testRepo/issues/1', data=json.dumps(data), headers=headers
         )
@@ -186,7 +186,7 @@ class TestClientMethods(object):
         mocker.patch('requests.patch')
         headers = {'accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json'}
         octokit = Octokit()
-        sut = octokit.issues.edit(owner='testUser', repo='testRepo', number=1)
+        sut = octokit.issues.update(owner='testUser', repo='testRepo', issue_number=1)
         requests.patch.assert_called_once_with(
             'https://api.github.com/repos/testUser/testRepo/issues/1', data='{}', headers=headers
         )
@@ -197,15 +197,18 @@ class TestClientMethods(object):
         patch = mocker.patch('requests.patch')
         Response = namedtuple('Response', ['json'])
         patch.return_value = Response(json=lambda: {})
-        sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
+        sut = Octokit().issues.update(owner='testUser', repo='testRepo', issue_number=1)
         assert sut._response.__class__.__name__ == 'Response'
 
     def test_returned_object_has_json_attribute(self, mocker):
         patch = mocker.patch('requests.patch')
         Request = namedtuple('Request', ['json'])
         patch.return_value = Request(json=lambda: data)
-        data = {'documentation_url': 'https://developer.github.com/v3', 'message': 'Not Found'}
-        sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
+        data = {
+            'documentation_url': 'https://developer.github.com/v3/issues/#get-a-single-issue',
+            'message': 'Not Found'
+        }
+        sut = Octokit().issues.get(owner='testUser', repo='testRepo', issue_number=1)
         assert sut.json == data
 
     def test_returned_object_has_response_attributes(self, mocker):
@@ -227,7 +230,7 @@ class TestClientMethods(object):
         }
         Request = namedtuple('Request', ['json'])
         patch.return_value = Request(json=lambda: data)
-        sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
+        sut = Octokit().issues.update(owner='testUser', repo='testRepo', issue_number=1)
         assert sut.response.id == 1
         assert sut.response.number == 1347
         assert sut.response.state == 'open'
@@ -245,14 +248,14 @@ class TestClientMethods(object):
         }]
         Request = namedtuple('Request', ['json'])
         patch.return_value = Request(json=lambda: data)
-        sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
+        sut = Octokit().issues.update(owner='testUser', repo='testRepo', issue_number=1)
         assert sut.response[0].id == 208045946
 
     def test_an_exception_with_json_is_replaced_by_the_raw_text(self, mocker):
         patch = mocker.patch('requests.patch')
         Request = namedtuple('Request', ['json'])
         patch.return_value = Request(json=lambda: 'test')
-        sut = Octokit().issues.edit(owner='testUser', repo='testRepo', number=1)
+        sut = Octokit().issues.update(owner='testUser', repo='testRepo', issue_number=1)
         assert sut.json == 'test'
 
     def test_can_pass_in_optional_headers(self, mocker):
