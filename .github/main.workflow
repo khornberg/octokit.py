@@ -1,19 +1,25 @@
 workflow "Publish to PyPi" {
-  on = "push"
+  on = "pull_request"
   resolves = [
     "PyPi Twine Upload",
   ]
 }
 
-action "Master Workflow" {
+action "Master Branch Filter" {
   uses = "actions/bin/filter@master"
   args = "branch master"
+}
+
+action "Merged" {
+  uses = "actions/bin/filter@master"
+  args = "merged true"
+  needs = ["Master Branch Filter"]
 }
 
 action "Package" {
   uses = "khornberg/python-actions/setup-py/3.7@master"
   args = "bdist_wheel sdist"
-  needs = ["Master Workflow"]
+  needs = ["Merged"]
 }
 
 action "PyPi Twine Upload" {
@@ -26,15 +32,21 @@ action "PyPi Twine Upload" {
 # PR workflow
 
 workflow "Test" {
-  on = "push"
+  on = "pull_request"
   resolves = [
     "Report", "Lint", "Docs"
   ]
 }
 
-action "Filter" {
+action "Branch Filter" {
   uses = "actions/bin/filter@master"
   args = "not branch master"
+}
+
+action "Filter" {
+  uses = "actions/bin/filter@master"
+  args = "action 'opened|synchronize'"
+  needs = ["Branch Filter"]
 }
 
 action "Curl" {
