@@ -1,3 +1,3 @@
 python-jose==3.0.1
 requests==2.21.0
-octokitpy-routes==0.0.5
+octokitpy-routes>=0.2.1,<0.3
