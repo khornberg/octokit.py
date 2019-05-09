@@ -8,7 +8,6 @@ Overview
     :stub-columns: 1
 
     * - tests
-      - | |travis|
         | |codeclimate| |codeclimate-tests|
     * - package
       - | |version| |wheel|
@@ -19,10 +18,6 @@ Overview
 .. |docs| image:: http://octokitpy.readthedocs.io/en/latest/?badge=latest
     :target: https://readthedocs.org/projects/octokitpy
     :alt: Documentation Status
-
-.. |travis| image:: https://travis-ci.org/khornberg/octokit.py.svg?branch=master
-    :alt: Travis-CI Build Status
-    :target: https://travis-ci.org/khornberg/octokit.py
 
 .. |codeclimate| image:: https://codeclimate.com/github/khornberg/octokit.py/badges/gpa.svg
    :target: https://codeclimate.com/github/khornberg/octokit.py
@@ -58,8 +53,6 @@ Installation
 ============
 
 **requires python 3.5+**
-
-Yes that is opinionated. Python 2 is near the end of the life and this is a new project.
 
 *Note octokit and octokit.py were already taken in the cheese shop*
 
