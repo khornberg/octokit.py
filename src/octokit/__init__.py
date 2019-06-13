@@ -11,7 +11,7 @@ from octokit import errors
 from octokit import utils
 from routes import specifications
 
-page_regex = re.compile(r'[\?\&]page=(\d+)[_&=\w\d]*>; rel="(\w+)"')
+page_regex = re.compile(r'[\?\&]page=(\d+)[_&=%+\w\d]*>; rel="(\w+)"')
 
 
 class Base(object):
@@ -250,6 +250,7 @@ class Octokit(Base):
     def paginate(self, obj, page=1, **kwargs):
         response = self.set_pages(obj(page=page, **kwargs))
         yield response.json
-        while not response.is_last_page:
-            response = self.set_pages(obj(page=response.next_page, **kwargs), response.next_page)
-            yield response.json
+        if hasattr(response, 'is_last_page'):
+            while not response.is_last_page:
+                response = self.set_pages(obj(page=response.next_page, **kwargs), response.next_page)
+                yield response.json
