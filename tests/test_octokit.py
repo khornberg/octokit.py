@@ -1,21 +1,28 @@
+import pytest
+
+
 class MockHeaders(object):
 
-    def __init__(self, requested_page):
-        Link = 'Links <https://api.github.com/installation/repositories?page={}another=%2Cwith+a+space>; rel="next", <https://api.github.com/installation/repositories?page=4>; rel="last"'.format(  # noqa E501
+    def __init__(self, requested_page, **kwargs):
+        link = 'Links <https://api.github.com/installation/repositories?page={}another=%2Cwith+a+space>; rel="next", <https://api.github.com/installation/repositories?page=4>; rel="last"'.format(  # noqa E501
             min(requested_page + 1, 4)
         )
-        self.headers = {'Link': Link}
+        self.headers = {'Link': kwargs.get('link', link)}
 
 
 class MockObject(object):
 
     def __init__(self, page, kwargs):
-        self._response = MockHeaders(page)
+        self._response = MockHeaders(page, **kwargs)
         self.json = {'page': page, 'kwargs': kwargs}
 
 
 def MockResponse(page=None, **kwargs):
-    print('mr', page, kwargs)
+    return MockObject(page, kwargs)
+
+
+def MockResponseWithoutLinks(page=None, **kwargs):
+    kwargs['link'] = ''
     return MockObject(page, kwargs)
 
 
@@ -45,6 +52,14 @@ class TestOctokit(object):
         assert next(p) == {'page': 2, 'kwargs': {'param': 'value'}}
         assert next(p) == {'page': 3, 'kwargs': {'param': 'value'}}
         assert next(p) == {'page': 4, 'kwargs': {'param': 'value'}}
+
+    def test_pagination_does_break_when_iterating_over_a_single_page(self):
+        from octokit import Octokit
+        sut_obj = MockResponseWithoutLinks
+        p = Octokit().paginate(sut_obj, param='value')
+        assert next(p) == {'page': 1, 'kwargs': {'param': 'value', 'link': ''}}
+        with pytest.raises(StopIteration):
+            assert next(p)
 
     def test_can_speficy_the_route_specifications_used(self):
         from octokit import Octokit
