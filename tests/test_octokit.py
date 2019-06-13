@@ -1,7 +1,7 @@
 class MockHeaders(object):
 
     def __init__(self, requested_page):
-        Link = 'Links <https://api.github.com/installation/repositories?page={}>; rel="next", <https://api.github.com/installation/repositories?page=4>; rel="last"'.format(  # noqa E501
+        Link = 'Links <https://api.github.com/installation/repositories?page={}another=%2Cwith+a+space>; rel="next", <https://api.github.com/installation/repositories?page=4>; rel="last"'.format(  # noqa E501
             min(requested_page + 1, 4)
         )
         self.headers = {'Link': Link}
@@ -12,8 +12,6 @@ class MockObject(object):
     def __init__(self, page, kwargs):
         self._response = MockHeaders(page)
         self.json = {'page': page, 'kwargs': kwargs}
-        # self.is_last_page = True if page == 4 else False
-        # self.next_page = min(page + 1, 4) if page else 2
 
 
 def MockResponse(page=None, **kwargs):

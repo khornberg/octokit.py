@@ -11,7 +11,7 @@ from octokit import errors
 from octokit import utils
 from routes import specifications
 
-page_regex = re.compile(r'[\?\&]page=(\d+)[_&=\w\d]*>; rel="(\w+)"')
+page_regex = re.compile(r'[\?\&]page=(\d+)[_&=%+\w\d]*>; rel="(\w+)"')
 
 
 class Base(object):
