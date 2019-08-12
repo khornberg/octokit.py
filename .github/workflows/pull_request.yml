@@ -2,7 +2,7 @@ on: pull_request
 name: Test
 jobs:
   test:
-    if: github.event.action == 'synchronize' || github.event.action == 'opened'
+    # if: github.event.action == 'synchronize' || github.event.action == 'opened'
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 2
