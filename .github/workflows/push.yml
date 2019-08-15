@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - master
+name: Publish to PyPi
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        version: 3.7
+    - name: Check
+      run: |
+        python setup.py check
+    - name: Package
+      run: |
+        pip install wheel
+        python setup.py bdist_wheel sdist
+    - name: PyPi Twine Upload
+      env:
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+      run: |
+        pip install twine
+        twine upload dist/*
