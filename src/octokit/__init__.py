@@ -9,7 +9,7 @@ import requests
 from jose import jwt
 from octokit import errors
 from octokit import utils
-from routes import specifications
+from octokit_routes import specifications
 
 page_regex = re.compile(r'[\?\&]page=(\d+)[_&=%+\w\d]*>; rel="(\w+)"')
 
