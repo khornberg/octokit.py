@@ -193,10 +193,10 @@ class Octokit(Base):
         class_attributes = defaultdict(dict)
         for path, path_object in definitions['paths'].items():
             for method, method_object in path_object.items():
-                cls_name, _id_name = method_object.get('operationId').split('/')
-                _name = method_object.get('summary')
+                _cls_name, _id_name = method_object.get('operationId').split('/')
+                cls_name = utils.snake_case(str(_cls_name))
                 method_id_name = utils.snake_case(str(_id_name))
-                method_name = utils.snake_case(str(_name))
+                method_name = utils.snake_case(str(method_object.get('summary')))
                 class_attributes[cls_name].update({
                     method_id_name: self._create_method(method_id_name, method_object),
                     method_name: self._create_method(method_name, method_object),
