@@ -183,19 +183,25 @@ class Octokit(Base):
         self._attribute_cache = defaultdict(dict)
 
     def _create(self, definitions):
-        for name, value in definitions.items():
-            cls_name = utils.snake_case(name)
-            client = self._create_client(cls_name, value)
-            setattr(self, cls_name, client)
-
-    def _create_client(self, name, methods):
-        class_attributes = {}
-        for method in methods:
-            for method_name in [utils.snake_case(str(method['name'])), utils.snake_case(str(method['idName']))]:
-                class_attributes.update({method_name: self._create_method(method_name, method)})
+        classes = self._create_classes(definitions)
         bases = [object]
-        cls = type(name, tuple(bases), class_attributes)
-        return cls
+        for cls_name, class_attributes in classes.items():
+            cls = type(cls_name, tuple(bases), class_attributes)
+            setattr(self, cls_name, cls)
+
+    def _create_classes(self, definitions):
+        class_attributes = defaultdict(dict)
+        for path, path_object in definitions['paths'].items():
+            for method, method_object in path_object.items():
+                cls_name, _id_name = method_object.get('operationId').split('/')
+                _name = method_object.get('summary')
+                method_id_name = utils.snake_case(str(_id_name))
+                method_name = utils.snake_case(str(_name))
+                class_attributes[cls_name].update({
+                    method_id_name: self._create_method(method_id_name, method_object),
+                    method_name: self._create_method(method_name, method_object),
+                })
+        return class_attributes
 
     def _create_method(self, name, definition):
 
