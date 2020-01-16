@@ -17,7 +17,12 @@ def parameter_transform(params):
     return {param['name']: param for param in params}
 
 
+def parameters_in(parameters, location):
+    return {k:v for k, v in parameters.items() if v['in'] in location}
+
+
 def walk_path(obj, path):
+    # print('walk', path, obj)
     if len(path) == 1:
         assert path[0] in obj
     else:

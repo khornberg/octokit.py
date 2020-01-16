@@ -69,3 +69,51 @@ class TestOctokit(object):
         assert '/developer.github.com' in octokit.issues.create.__doc__
         octokit = Octokit(routes='api.github.com')
         assert '/developer.github.com' in octokit.issues.create.__doc__
+
+    def test_check_against_previous_version(self):
+        # TODO keep this???
+        from octokit import Octokit
+        from previous import classes_and_methods
+        octokit = Octokit(routes='api.github.com')
+        for cls, methods in classes_and_methods.items():
+            assert getattr(octokit, cls)
+            for method in methods:
+                thing = getattr(octokit, cls)
+                try:
+                    assert getattr(thing, method)
+                except AttributeError:
+                    print(cls, method)
+        # assert False
+        # new methods
+        # (apps find_org_installation)
+        # (apps find_organization_installation)
+        # (apps find_repo_installation)
+        # (apps find_repository_installation)
+        # (apps find_user_installation)
+        # (git get_a_reference)
+        # (git get_all_references)
+        # (git list_refs)
+        # (licenses list)
+        # (licenses list_all_licenses)
+        # (migrations get_a_list_of_organization_migrations)
+        # (migrations get_a_list_of_user_migrations)
+        # (pulls create_a__pull__request_from_an__issue)
+        # (pulls create_a_comment_reply)
+        # (pulls create_comment_reply)
+        # (pulls create_from_issue)
+        # (repos create_a_file)
+        # (repos create_file)
+        # (repos get_commit_ref_sha)
+        # (repos get_the__s_h_a_1_of_a_commit_reference)
+        # (repos list_protected_branch_team_restrictions)
+        # (repos list_protected_branch_user_restrictions)
+        # (repos list_team_restrictions_of_protected_branch)
+        # (repos list_user_restrictions_of_protected_branch)
+        # (repos update_a_file)
+        # (repos update_file)
+        # (repos upload_a_release_asset)
+        # (repos upload_release_asset)
+        # (scim provision_invite_users)
+        # (scim update_a_provisioned_organization_membership)
+        # (scim update_provisioned_org_membership)
+        # (search issues)
