@@ -94,7 +94,15 @@ class TestClientMethods(object):
 
     def test_schema_types_must_match(self, mocker):
         mocker.patch('requests.get')
-        data = {'owner': 'owner', 'repo': 'repo', 'name': 'name', 'head_sha': 'master', 'actions': {'desription': 'blah'}}
+        data = {
+            'owner': 'owner',
+            'repo': 'repo',
+            'name': 'name',
+            'head_sha': 'master',
+            'actions': {
+                'desription': 'blah'
+            }
+        }
         with pytest.raises(errors.OctokitParameterError) as e:
             Octokit().checks.create(**data)
         assert f'dict type does not match the schema type of array for the data of {data["actions"]}' == str(e.value)
@@ -102,11 +110,16 @@ class TestClientMethods(object):
     def test_use_default_parameter_values(self, mocker):
         mocker.patch('requests.get')
         headers = {'Content-Type': 'application/json', 'accept': 'application/vnd.github.v3+json'}
-        data = {'visibility': 'all', 'affiliation': 'owner,collaborator,organization_member', 'type': 'all', 'sort': 'full_name', 'per_page': 30, 'page': 1}
+        data = {
+            'visibility': 'all',
+            'affiliation': 'owner,collaborator,organization_member',
+            'type': 'all',
+            'sort': 'full_name',
+            'per_page': 30,
+            'page': 1
+        }
         Octokit().repos.list()
-        requests.get.assert_called_once_with(
-            'https://api.github.com/user/repos', params=data, headers=headers
-        )
+        requests.get.assert_called_once_with('https://api.github.com/user/repos', params=data, headers=headers)
 
     def test_use_passed_value_instead_of_default_parameter_values(self, mocker):
         mocker.patch('requests.get')
@@ -181,7 +194,7 @@ class TestClientMethods(object):
         assert sut._response.__class__.__name__ == 'Response'
 
     def test_returned_object_has_json_attribute(self, mocker):
-        patch = mocker.patch('requests.patch')
+        patch = mocker.patch('requests.get')
         Request = namedtuple('Request', ['json'])
         patch.return_value = Request(json=lambda: data)
         data = {
