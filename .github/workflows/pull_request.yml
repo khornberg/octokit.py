@@ -2,18 +2,17 @@ on: pull_request
 name: Test
 jobs:
   test:
-    # if: github.event.action == 'synchronize' || github.event.action == 'opened'
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 2
+      max-parallel: 3
       matrix:
-        python-version: [3.6, 3.7]
+        python-version: [3.6, 3.7, 3.8]
     steps:
     - uses: actions/checkout@master
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
-        version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python-version }}
     - name: Curl
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
@@ -25,7 +24,7 @@ jobs:
         pip install tox
     - name: Test ${{ matrix.python-version }}
       run: |
-        tox -e py${{ matrix.python-version }} -v
+        tox -e py3 -v
     - name: Docs
       run: |
         tox -e docs -v

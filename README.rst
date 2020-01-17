@@ -52,8 +52,6 @@ Python client for GitHub API
 Installation
 ============
 
-**requires python 3.5+**
-
 *Note octokit and octokit.py were already taken in the cheese shop*
 
 ::
