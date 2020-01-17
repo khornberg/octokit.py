@@ -1,6 +1,6 @@
 import pytest
-from octokit.base import Base
 from octokit import errors
+from octokit.base import Base
 
 
 class TestBase(object):
