@@ -2,10 +2,9 @@ on: pull_request
 name: Test
 jobs:
   test:
-    # if: github.event.action == 'synchronize' || github.event.action == 'opened'
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 2
+      max-parallel: 3
       matrix:
         python-version: [3.6, 3.7, 3.8]
     steps:
@@ -25,7 +24,7 @@ jobs:
         pip install tox
     - name: Test ${{ matrix.python-version }}
       run: |
-        tox -e py${{ matrix.python-version }} -v
+        tox -e py3 -v
     - name: Docs
       run: |
         tox -e docs -v
