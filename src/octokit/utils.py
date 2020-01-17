@@ -15,7 +15,3 @@ def get_json_data(filename):
 
 def parameter_transform(params):
     return {param['name']: param for param in params}
-
-
-def parameters_in(parameters, location):
-    return {k: v for k, v in parameters.items() if v['in'] in location}
