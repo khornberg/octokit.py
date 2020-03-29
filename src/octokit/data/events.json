@@ -45,6 +45,7 @@
   "membership",
   "membership.added",
   "membership.removed",
+  "meta",
   "milestone",
   "milestone.closed",
   "milestone.created",
