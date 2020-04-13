@@ -28,9 +28,9 @@ class TestAuth(object):
 
     def test_basic_auth_used_if_set(self, mocker):
         mocker.patch("requests.get")
-        Octokit(
-            auth="basic", username="myuser", password="mypassword"
-        ).oauth_authorizations.get_authorization(authorization_id=100)
+        Octokit(auth="basic", username="myuser", password="mypassword").oauth_authorizations.get_authorization(
+            authorization_id=100
+        )
         requests.get.assert_called_once_with(
             "https://api.github.com/authorizations/100",
             params={},
@@ -51,27 +51,16 @@ class TestAuth(object):
 
     def test_token_auth_used_if_set(self, mocker):
         mocker.patch("requests.get")
-        Octokit(auth="token", token="yak").oauth_authorizations.get_authorization(
-            authorization_id=100
-        )
+        Octokit(auth="token", token="yak").oauth_authorizations.get_authorization(authorization_id=100)
         headers = dict(ChainMap(Octokit().headers, {"Authorization": "token yak"}))
-        requests.get.assert_called_once_with(
-            "https://api.github.com/authorizations/100", params={}, headers=headers
-        )
+        requests.get.assert_called_once_with("https://api.github.com/authorizations/100", params={}, headers=headers)
 
     def test_can_set_installation_authentication(self, mocker):
         Request = namedtuple("Request", ["json"])
         get = mocker.patch("requests.get")
-        get.return_value = Request(
-            json=lambda: [{"id": 13, "app_id": 1}, {"id": 37, "app_id": 42}]
-        )
+        get.return_value = Request(json=lambda: [{"id": 13, "app_id": 1}, {"id": 37, "app_id": 42}])
         post = mocker.patch("requests.post")
-        post.return_value = Request(
-            json=lambda: {
-                "token": "v1.1f699f1069f60",
-                "expires_at": "2016-07-11T22:14:10Z",
-            }
-        )
+        post.return_value = Request(json=lambda: {"token": "v1.1f699f1069f60", "expires_at": "2016-07-11T22:14:10Z"})
         with open(os.path.join(os.path.dirname(__file__), "test.pem"), "r") as f:
             private_key = f.read()
         sut = Octokit(auth="installation", app_id="42", private_key=private_key)
@@ -92,16 +81,9 @@ class TestAuth(object):
     def test_installation_token_is_used_if_set(self, mocker):
         Request = namedtuple("Request", ["json"])
         get = mocker.patch("requests.get")
-        get.return_value = Request(
-            json=lambda: [{"id": 13, "app_id": 1}, {"id": 37, "app_id": 42}]
-        )
+        get.return_value = Request(json=lambda: [{"id": 13, "app_id": 1}, {"id": 37, "app_id": 42}])
         post = mocker.patch("requests.post")
-        post.return_value = Request(
-            json=lambda: {
-                "token": "v1.1f699f1069f60",
-                "expires_at": "2016-07-11T22:14:10Z",
-            }
-        )
+        post.return_value = Request(json=lambda: {"token": "v1.1f699f1069f60", "expires_at": "2016-07-11T22:14:10Z"})
         with open(os.path.join(os.path.dirname(__file__), "test.pem"), "r") as f:
             private_key = f.read()
         sut = Octokit(auth="installation", app_id="42", private_key=private_key)
@@ -113,9 +95,7 @@ class TestAuth(object):
             "Authorization": "token v1.1f699f1069f60",
             "accept": "application/vnd.github.machine-man-preview+json",
         }
-        requests.get.assert_called_once_with(
-            "https://api.github.com/authorizations/100", params={}, headers=headers
-        )
+        requests.get.assert_called_once_with("https://api.github.com/authorizations/100", params={}, headers=headers)
 
     def test_cannot_set_app_authentication_with_out_required_data(self):
         with pytest.raises(KeyError):
@@ -151,9 +131,6 @@ class TestAuth(object):
         Octokit().users.list_followers_for_user(username="octokit")
         requests.get.assert_called_once_with(
             "https://api.github.com/users/octokit/followers",
-            headers={
-                "Content-Type": "application/json",
-                "accept": "application/vnd.github.v3+json",
-            },
+            headers={"Content-Type": "application/json", "accept": "application/vnd.github.v3+json"},
             params={"page": 1, "per_page": 30},
         )

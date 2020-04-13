@@ -29,23 +29,11 @@ class TestBase(object):
         assert Base().validate(attrs, self.definition)
 
     def test_validate_nested_request_body_properties(self):
-        attrs = {
-            "owner": "me",
-            "repo": "my_repo",
-            "name": "blah",
-            "head_sha": "master",
-            "output": {},
-        }
+        attrs = {"owner": "me", "repo": "my_repo", "name": "blah", "head_sha": "master", "output": {}}
         with pytest.raises(errors.OctokitParameterError) as e:
             Base().validate(attrs, self.definition)
         assert "title is a required parameter" == str(e.value)
-        attrs = {
-            "owner": "me",
-            "repo": "my_repo",
-            "name": "blah",
-            "head_sha": "master",
-            "output": {"title": "here"},
-        }
+        attrs = {"owner": "me", "repo": "my_repo", "name": "blah", "head_sha": "master", "output": {"title": "here"}}
         with pytest.raises(errors.OctokitParameterError) as e:
             Base().validate(attrs, self.definition)
         assert "summary is a required parameter" == str(e.value)
@@ -66,10 +54,7 @@ class TestBase(object):
                     "name": "accept",
                     "description": "This API is under preview and subject to change.",
                     "in": "header",
-                    "schema": {
-                        "type": "string",
-                        "default": "application/vnd.github.antiope-preview+json",
-                    },
+                    "schema": {"type": "string", "default": "application/vnd.github.antiope-preview+json"},
                     "required": True,
                 },
                 {
@@ -97,10 +82,7 @@ class TestBase(object):
                                     "type": "string",
                                     "description": 'The name of the check. For example, "code-coverage".',
                                 },
-                                "head_sha": {
-                                    "type": "string",
-                                    "description": "The SHA of the commit.",
-                                },
+                                "head_sha": {"type": "string", "description": "The SHA of the commit."},
                                 "details_url": {"type": "string"},
                                 "external_id": {
                                     "type": "string",
@@ -127,10 +109,7 @@ class TestBase(object):
                                 "output": {
                                     "type": "object",
                                     "properties": {
-                                        "title": {
-                                            "type": "string",
-                                            "description": "The title of the check run.",
-                                        },
+                                        "title": {"type": "string", "description": "The title of the check run."},
                                         "summary": {"type": "string"},
                                         "text": {"type": "string"},
                                         "annotations": {
@@ -151,11 +130,7 @@ class TestBase(object):
                                                     "end_column": {"type": "integer"},
                                                     "annotation_level": {
                                                         "type": "string",
-                                                        "enum": [
-                                                            "notice",
-                                                            "warning",
-                                                            "failure",
-                                                        ],
+                                                        "enum": ["notice", "warning", "failure"],
                                                     },
                                                     "message": {"type": "string"},
                                                     "title": {"type": "string"},
@@ -203,11 +178,7 @@ class TestBase(object):
                                             "description": {"type": "string"},
                                             "identifier": {"type": "string"},
                                         },
-                                        "required": [
-                                            "label",
-                                            "description",
-                                            "identifier",
-                                        ],
+                                        "required": ["label", "description", "identifier"],
                                     },
                                 },
                             },
@@ -226,10 +197,7 @@ class TestBase(object):
                     "name": "accept",
                     "description": "This API is under preview and subject to change.",
                     "in": "header",
-                    "schema": {
-                        "type": "string",
-                        "default": "application/vnd.github.antiope-preview+json",
-                    },
+                    "schema": {"type": "string", "default": "application/vnd.github.antiope-preview+json"},
                     "required": True,
                 },
                 {
