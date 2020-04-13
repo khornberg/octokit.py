@@ -166,7 +166,7 @@ class TestClientMethods(object):
             "Content-Type": "application/json",
             "accept": "application/vnd.github.v3+json",
         }
-        data = {'sort': 'updated', 'per_page': 30, 'page': 1}
+        data = {"sort": "updated", "per_page": 30, "page": 1}
         Octokit().issues.list_comments_for_repo(
             owner="testUser", repo="testRepo", **data
         )

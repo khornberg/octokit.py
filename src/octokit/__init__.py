@@ -27,9 +27,13 @@ class Octokit(Base):
         class_attributes = defaultdict(dict)
         for path, path_object in definitions["paths"].items():
             for method, method_object in path_object.items():
-                cls_name, method_id_name = self._get_names_from_operation_id(method_object)
+                cls_name, method_id_name = self._get_names_from_operation_id(
+                    method_object
+                )
                 method_name = utils.snake_case(str(method_object.get("summary")))
-                methods = self._get_class_methods(method_id_name, method_name, method_object, method, path)
+                methods = self._get_class_methods(
+                    method_id_name, method_name, method_object, method, path
+                )
                 class_attributes[cls_name].update(methods)
         return class_attributes
 
@@ -65,23 +69,27 @@ class Octokit(Base):
 
     def _get_deprecated_methods(self, methods, method_object):
         deprecated_methods = {}
-        if method_object.get('x-changes'):
-            for change in method_object['x-changes']:
+        if method_object.get("x-changes"):
+            for change in method_object["x-changes"]:
                 if change.get("type") == "operation":
-                    before_cls, before_name = self._get_names_from_operation_id(change.get("before"))
-                    after_cls, after_name = self._get_names_from_operation_id(change.get("after"))
+                    before_cls, before_name = self._get_names_from_operation_id(
+                        change.get("before")
+                    )
+                    after_cls, after_name = self._get_names_from_operation_id(
+                        change.get("after")
+                    )
                     if before_cls == after_cls and methods.get(after_name):
                         deprecated_methods.update({before_name: methods[after_name]})
         return deprecated_methods
 
-    def _get_class_methods(self, method_id_name, method_name, method_object, method, path):
+    def _get_class_methods(
+        self, method_id_name, method_name, method_object, method, path
+    ):
         methods = {
             method_id_name: self._create_method(
                 method_id_name, method_object, method, path
             ),
-            method_name: self._create_method(
-                method_name, method_object, method, path
-            ),
+            method_name: self._create_method(method_name, method_object, method, path),
         }
         methods.update(self._get_deprecated_methods(methods, method_object))
         return methods
