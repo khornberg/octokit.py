@@ -136,6 +136,25 @@ class TestClientMethods(object):
             "per_page": 30,
             "page": 1,
         }
+        Octokit().repos.list_for_authenticated_user()
+        requests.get.assert_called_once_with(
+            "https://api.github.com/user/repos", params=data, headers=headers
+        )
+
+    def test_deprecated_methods_are_available(self, mocker):
+        mocker.patch("requests.get")
+        headers = {
+            "Content-Type": "application/json",
+            "accept": "application/vnd.github.v3+json",
+        }
+        data = {
+            "visibility": "all",
+            "affiliation": "owner,collaborator,organization_member",
+            "type": "all",
+            "sort": "full_name",
+            "per_page": 30,
+            "page": 1,
+        }
         Octokit().repos.list()
         requests.get.assert_called_once_with(
             "https://api.github.com/user/repos", params=data, headers=headers
@@ -147,7 +166,7 @@ class TestClientMethods(object):
             "Content-Type": "application/json",
             "accept": "application/vnd.github.v3+json",
         }
-        data = {"sort": "updated"}
+        data = {'sort': 'updated', 'per_page': 30, 'page': 1}
         Octokit().issues.list_comments_for_repo(
             owner="testUser", repo="testRepo", **data
         )

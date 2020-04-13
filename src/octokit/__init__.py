@@ -27,20 +27,10 @@ class Octokit(Base):
         class_attributes = defaultdict(dict)
         for path, path_object in definitions["paths"].items():
             for method, method_object in path_object.items():
-                _cls_name, _id_name = method_object.get("operationId").split("/")
-                cls_name = utils.snake_case(str(_cls_name))
-                method_id_name = utils.snake_case(str(_id_name))
+                cls_name, method_id_name = self._get_names_from_operation_id(method_object)
                 method_name = utils.snake_case(str(method_object.get("summary")))
-                class_attributes[cls_name].update(
-                    {
-                        method_id_name: self._create_method(
-                            method_id_name, method_object, method, path
-                        ),
-                        method_name: self._create_method(
-                            method_name, method_object, method, path
-                        ),
-                    }
-                )
+                methods = self._get_class_methods(method_id_name, method_name, method_object, method, path)
+                class_attributes[cls_name].update(methods)
         return class_attributes
 
     def _create_method(self, name, definition, method, path):
@@ -66,6 +56,35 @@ class Octokit(Base):
         _api_call.__name__ = name
         _api_call.__doc__ = definition["description"]
         return _api_call
+
+    def _get_names_from_operation_id(self, _object):
+        _cls_name, _id_name = _object.get("operationId").split("/")
+        cls_name = utils.snake_case(str(_cls_name))
+        method_id_name = utils.snake_case(str(_id_name))
+        return cls_name, method_id_name
+
+    def _get_deprecated_methods(self, methods, method_object):
+        deprecated_methods = {}
+        if method_object.get('x-changes'):
+            for change in method_object['x-changes']:
+                if change.get("type") == "operation":
+                    before_cls, before_name = self._get_names_from_operation_id(change.get("before"))
+                    after_cls, after_name = self._get_names_from_operation_id(change.get("after"))
+                    if before_cls == after_cls and methods.get(after_name):
+                        deprecated_methods.update({before_name: methods[after_name]})
+        return deprecated_methods
+
+    def _get_class_methods(self, method_id_name, method_name, method_object, method, path):
+        methods = {
+            method_id_name: self._create_method(
+                method_id_name, method_object, method, path
+            ),
+            method_name: self._create_method(
+                method_name, method_object, method, path
+            ),
+        }
+        methods.update(self._get_deprecated_methods(methods, method_object))
+        return methods
 
     def _convert_to_object(self, item):
         if isinstance(item, dict):
