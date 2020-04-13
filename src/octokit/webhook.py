@@ -3,7 +3,7 @@ import hmac
 import json
 from uuid import UUID
 
-from octokit import utils
+from octokit_routes import webhook_names
 
 
 def valid_signature(headers, payload, secret):
@@ -23,9 +23,7 @@ def valid_guid(guid):
 
 
 def valid_event(event, events):
-    return event in utils.get_json_data("events.json") and (
-        event in events or "*" in events
-    )
+    return event in webhook_names or "*" in webhook_names
 
 
 def valid_user_agent(ua):

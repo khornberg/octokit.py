@@ -98,6 +98,9 @@ Webhooks::
     return_app_id
         boolean; whether or not you want to return the app id from the ping event for GitHub applications. This will only return the ``id`` if the event is the ``ping`` event. Otherwise the return value will be boolean.
 
+
+Note that webhook names are available at :code:`from octokit_routes import webhook_names`
+
 Authentication
 --------------
 
@@ -150,13 +153,8 @@ GitHub APIs
 Data
 ----
 
-The :code:`octokit` client based on the available `route data <https://github.com/khornberg/octokitpy-routes>`_ and `webhook data <https://github.com/octokit/webhooks.js/blob/master/lib/webhook-names.json>`_
+The :code:`octokit` client based on the available `route data <https://github.com/khornberg/octokitpy-routes>`_ and `webhook data <https://github.com/khornberg/octokitpy-routes>`_
 
-::
-
-    [x] Periodically, check if ``routes.json`` has changed and if so fetch and open a PR for it to be merged
-
-    [ ] Periodically, check if ``webhook-names.json`` has changed and if so fetch and open a PR for it to be merged
 
 Tests
 -----
@@ -204,6 +202,7 @@ Deployment
 ::
 
     [x] Deploy wheels
+
     [x] Make GitHub releases work
 
 
