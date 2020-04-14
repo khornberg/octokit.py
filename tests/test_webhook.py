@@ -77,9 +77,7 @@ class TestWebhook(object):
         payload = ""
         secret = "secret"
         events = ["push"]
-        assert webhook.verify(
-            headers, payload, secret, events=events, verify_user_agent=True
-        )
+        assert webhook.verify(headers, payload, secret, events=events, verify_user_agent=True)
 
     def test_verifies_user_agent(self):
         headers = {
@@ -91,12 +89,7 @@ class TestWebhook(object):
         payload = ""
         secret = "secret"
         events = ["push"]
-        assert (
-            webhook.verify(
-                headers, payload, secret, events=events, verify_user_agent=True
-            )
-            is False
-        )
+        assert webhook.verify(headers, payload, secret, events=events, verify_user_agent=True) is False
 
     def test_verify_ping_event(self):
         headers = {
@@ -106,21 +99,11 @@ class TestWebhook(object):
             "User-Agent": "GitHub-Hookshot/",
         }
         payload = json.dumps(
-            {
-                "hook": {
-                    "type": "App",
-                    "id": 11,
-                    "active": True,
-                    "events": ["pull_request"],
-                    "app_id": 42,
-                }
-            }
+            {"hook": {"type": "App", "id": 11, "active": True, "events": ["pull_request"], "app_id": 42}}
         )
         payload = '{"hook": {"events": ["pull_request"], "app_id": 42, "id": 11, "active": true, "type": "App"}}'
         secret = "secret"
-        app_id = webhook.verify(
-            headers, payload, secret, events=["*"], return_app_id=True
-        )
+        app_id = webhook.verify(headers, payload, secret, events=["*"], return_app_id=True)
         assert app_id == 42
 
     def test_can_request_app_id_be_returned_on_non_ping_events(self):
@@ -132,6 +115,4 @@ class TestWebhook(object):
         }
         payload = ""
         secret = "secret"
-        assert webhook.verify(
-            headers, payload, secret, events=["*"], return_app_id=True
-        )
+        assert webhook.verify(headers, payload, secret, events=["*"], return_app_id=True)

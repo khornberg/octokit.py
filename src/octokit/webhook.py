@@ -3,15 +3,13 @@ import hmac
 import json
 from uuid import UUID
 
-from octokit import utils
+from octokit_routes import webhook_names
 
 
 def valid_signature(headers, payload, secret):
     encoding = "utf-8"
     algo, sig = headers.get("X-Hub-Signature").split("=")
-    digest = hmac.new(
-        secret.encode(encoding), payload.encode(encoding), getattr(hashlib, algo)
-    ).hexdigest()
+    digest = hmac.new(secret.encode(encoding), payload.encode(encoding), getattr(hashlib, algo)).hexdigest()
     return hmac.compare_digest(sig.encode(encoding), digest.encode(encoding))
 
 
@@ -23,9 +21,7 @@ def valid_guid(guid):
 
 
 def valid_event(event, events):
-    return event in utils.get_json_data("events.json") and (
-        event in events or "*" in events
-    )
+    return event in webhook_names or "*" in webhook_names
 
 
 def valid_user_agent(ua):
@@ -42,9 +38,7 @@ def valid_headers(headers, events, verify_user_agent):
     return True
 
 
-def verify(
-    headers, payload, secret, events=None, verify_user_agent=False, return_app_id=False
-):
+def verify(headers, payload, secret, events=None, verify_user_agent=False, return_app_id=False):
     if not valid_headers(headers, events, verify_user_agent):
         return False
     validity = valid_signature(headers, payload, secret)

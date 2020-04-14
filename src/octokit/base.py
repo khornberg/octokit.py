@@ -15,10 +15,7 @@ class Base(object):
     base_url = "https://api.github.com"
 
     def __init__(self):
-        self.headers = {
-            "accept": "application/vnd.github.v3+json",
-            "Content-Type": "application/json",
-        }
+        self.headers = {"accept": "application/vnd.github.v3+json", "Content-Type": "application/json"}
         self._attribute_cache = defaultdict(dict)
 
     def _get_headers(self, method_headers):
@@ -30,17 +27,13 @@ class Base(object):
         return required_params
 
     def validate(self, parameters, definition):
-        self.validate_required_parameters(
-            parameters, self.get_required_parameters(definition)
-        )
+        self.validate_required_parameters(parameters, self.get_required_parameters(definition))
         schema = {}
         if definition.get("requestBody"):
             schema = definition["requestBody"]["content"]["application/json"]["schema"]
             self.validate_schema(parameters, schema)
         properties = schema.get("properties", {})
-        valid_parameters = [p["name"] for p in definition.get("parameters")] + list(
-            properties.keys()
-        )
+        valid_parameters = [p["name"] for p in definition.get("parameters")] + list(properties.keys())
         self.validate_other_parameters(parameters, valid_parameters, properties)
         return True
 
@@ -55,9 +48,7 @@ class Base(object):
                 self.validate_enum(parameter, value, properties)
 
     def validate_enum(self, parameter, value, properties):
-        if properties.get(parameter).get("enum") and value not in properties.get(
-            parameter
-        ).get("enum"):
+        if properties.get(parameter).get("enum") and value not in properties.get(parameter).get("enum"):
             message = "{} is not a valid option for {}; must be one of {}".format(
                 value, parameter, properties.get(parameter).get("enum")
             )
@@ -68,9 +59,7 @@ class Base(object):
             self.validate_list(parameters, schema)
         if isinstance(parameters, dict):
             self.validate_dict(parameters, schema)
-        self.validate_required_parameters(
-            parameters, self.get_required_schema_properties(schema)
-        )
+        self.validate_required_parameters(parameters, self.get_required_schema_properties(schema))
         self.type_match(parameters, schema.get("type"))
 
     def validate_dict(self, parameters, schema):
@@ -99,11 +88,7 @@ class Base(object):
             return schema.get("required")
 
     def get_required_parameters(self, definition):
-        return [
-            p.get("name")
-            for p in definition.get("parameters")
-            if p.get("required") and p.get("in") in ["path"]
-        ]
+        return [p.get("name") for p in definition.get("parameters") if p.get("required") and p.get("in") in ["path"]]
 
     def validate_required_parameters(self, parameters, required_parameters):
         for required_parameter in required_parameters or []:
@@ -145,9 +130,7 @@ class Base(object):
         data = {}
         if parameter.get("in") in ["query", "body"] and not kwargs.get(parameter_name):
             if parameter.get("schema", parameter).get("default") is not None:
-                data[parameter_name] = self._get_parameter_for_type(
-                    parameter.get("schema", parameter)
-                )
+                data[parameter_name] = self._get_parameter_for_type(parameter.get("schema", parameter))
         return data
 
     def _get_array_data(self, parameter_name, parameter, kwargs):
@@ -199,9 +182,7 @@ class Base(object):
     def _setup_installation_authentication(self, kwargs):
         assert kwargs["app_id"]
         assert kwargs["private_key"]
-        self.token, self.expires_at = self._app_auth_get_token(
-            kwargs["app_id"], kwargs["private_key"]
-        )
+        self.token, self.expires_at = self._app_auth_get_token(kwargs["app_id"], kwargs["private_key"])
         self.auth = kwargs["auth"]
         self.headers["accept"] = "application/vnd.github.machine-man-preview+json"
 
@@ -219,12 +200,8 @@ class Base(object):
         }
         installation_url = "{}/app/installations".format(self.base_url)
         installations = requests.get(installation_url, headers=headers).json()
-        self.installation_id = [
-            x.get("id") for x in installations if str(x.get("app_id")) == app_id
-        ].pop()
-        installation_token_url = "{}/installations/{}/access_tokens".format(
-            self.base_url, self.installation_id
-        )
+        self.installation_id = [x.get("id") for x in installations if str(x.get("app_id")) == app_id].pop()
+        installation_token_url = "{}/installations/{}/access_tokens".format(self.base_url, self.installation_id)
         response = requests.post(installation_token_url, headers=headers).json()
         return response["token"], response["expires_at"]
 
@@ -241,15 +218,9 @@ class Base(object):
             return {"auth": (self.username, self.password)}
         if getattr(self, "auth", None) in ["app", "token", "installation"]:
             _headers = {
-                "app": {
-                    "Authorization": "Bearer {}".format(getattr(self, "jwt", None))
-                },
-                "token": {
-                    "Authorization": "token {}".format(getattr(self, "token", None))
-                },
-                "installation": {
-                    "Authorization": "token {}".format(getattr(self, "token", None))
-                },
+                "app": {"Authorization": "Bearer {}".format(getattr(self, "jwt", None))},
+                "token": {"Authorization": "token {}".format(getattr(self, "token", None))},
+                "installation": {"Authorization": "token {}".format(getattr(self, "token", None))},
             }
             headers = requests_kwargs["headers"]
             headers.update(_headers.get(getattr(self, "auth", None)))
@@ -259,9 +230,7 @@ class Base(object):
     def _get_parameters(self, definition, method):
         p = {}
         if definition.get("requestBody"):
-            schema = definition.get("requestBody")["content"]["application/json"][
-                "schema"
-            ]
+            schema = definition.get("requestBody")["content"]["application/json"]["schema"]
             if schema["type"] == "object":
                 body_parameters = {}
                 for k, v in schema["properties"].items():

@@ -16,9 +16,7 @@ from setuptools import setup
 
 
 def read(*names, **kwargs):
-    return io.open(
-        join(dirname(__file__), *names), encoding=kwargs.get("encoding", "utf8")
-    ).read()
+    return io.open(join(dirname(__file__), *names), encoding=kwargs.get("encoding", "utf8")).read()
 
 
 setup(
@@ -28,9 +26,7 @@ setup(
     description="Python client for GitHub API",
     long_description="%s\n%s"
     % (
-        re.compile("^.. start-badges.*^.. end-badges", re.M | re.S).sub(
-            "", read("README.rst")
-        ),
+        re.compile("^.. start-badges.*^.. end-badges", re.M | re.S).sub("", read("README.rst")),
         re.sub(":[a-z]+:`~?(.*?)`", r"``\1``", read("CHANGELOG.rst")),
     ),
     author="Kyle Hornberg",
