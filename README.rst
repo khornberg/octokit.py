@@ -132,6 +132,11 @@ API Schema/Routes/Specifications
 
 One can instantiate the ``Octokit`` with ``routes=specification`` where the ``specification`` is one of ``api.github.com``, ``ghe-2.15``, etc.
 
+Data
+----
+
+The :code:`octokit` client based on the available `route data <https://github.com/khornberg/octokitpy-routes>`_ and `webhook data <https://github.com/khornberg/octokitpy-routes>`_
+
 TODOs
 ===========
 
@@ -150,10 +155,7 @@ GitHub APIs
 
     [x] Webhooks
 
-Data
-----
 
-The :code:`octokit` client based on the available `route data <https://github.com/khornberg/octokitpy-routes>`_ and `webhook data <https://github.com/khornberg/octokitpy-routes>`_
 
 
 Tests
@@ -165,18 +167,18 @@ Tests
 
     [ ] integration tests - need fixtures to assert against
 
-    [ ] coverage uploaded to code climate -- not sure why it is not working
+    [x] coverage uploaded to code climate
 
 Errors
 ------
 
 ::
 
-    [ ] Raise :code:`OctokitValidationError` for param validation error
+    [ ] Raise `OctokitValidationError` for param validation error
 
-    [ ] Raise :code:`OctokitAuthenticationError` for auth error
+    [ ] Raise `OctokitAuthenticationError` for auth error
 
-    [ ] Raise :code:`OctokitRateLimitError` for rate limiting errors
+    [ ] Raise `OctokitRateLimitError` for rate limiting errors
 
 Best Practices
 --------------
@@ -203,7 +205,7 @@ Deployment
 
     [x] Deploy wheels
 
-    [x] Make GitHub releases work
+    [ ] GitHub releases
 
 
 **Check box guide**
