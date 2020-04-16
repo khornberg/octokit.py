@@ -111,7 +111,6 @@ Instantiate a client with the authentication scheme and credentials that you wan
 basic::
 
     octokit = Octokit(auth='basic', username='myuser', password='mypassword')
-    octokit.repos.get_for_org(org='octokit', type='private')
 
 token::
 
