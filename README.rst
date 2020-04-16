@@ -70,8 +70,10 @@ Examples
 REST API::
 
     from octokit import Octokit
-    repos = Octokit().repos.get_for_org(org='octokit', type='public')
-    # Make an unauthenticated request for the public repositories of the octokit organization
+    repos = Octokit().repos.list_for_user(username="octokit")
+    for repo in repos.json:
+        print(repo["name"])
+    # Make an unauthenticated request for octokit's public repositories
 
 Webhooks::
 
