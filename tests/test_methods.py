@@ -256,8 +256,8 @@ class TestClientMethods(object):
         mocker.patch("requests.put")
         headers = {"accept": "application/vnd.github.v3+json", "Content-Type": "application/json"}
         data = {
-            "required_status_checks": {"strict": True, "contexts": []},
-            "required_pull_request_reviews": {"dismiss_stale_reviews": True},
+            "required_status_checks": {"strict": True, "contexts": ["a", "b"]},
+            "required_pull_request_reviews": {"dismiss_stale_reviews": True, "require_code_owner_reviews": True},
             "enforce_admins": True,
             "restrictions": {"users": [], "teams": []},
         }
@@ -268,6 +268,39 @@ class TestClientMethods(object):
             headers=headers,
         )
 
+    def test_dictionary_keys_are_validated_multiple_times_in_a_row(self, mocker):
+        mocker.patch("requests.put")
+        headers = {"accept": "application/vnd.github.v3+json", "Content-Type": "application/json"}
+        data = {
+            "required_status_checks": {"strict": True, "contexts": []},
+            "required_pull_request_reviews": {"dismiss_stale_reviews": True},
+            "enforce_admins": True,
+            "restrictions": {"users": [], "teams": []},
+        }
+        for run in range(4):
+            Octokit().repos.update_branch_protection(owner="user", repo="repo", branch="branch{}".format(run), **data)
+            requests.put.assert_called_with(
+                "https://api.github.com/repos/user/repo/branches/branch{}/protection".format(run),
+                data=json.dumps(data, sort_keys=True),
+                headers=headers,
+            )
+
     @property
     def doc_string(self):
         return """List all notifications for the current user, sorted by most recently updated.\n\nThe following example uses the `since` parameter to list notifications that have been updated after the specified time."""  # noqa E501
+
+
+class TestMultipleValidations:
+    def test_validation_for_several_calls(self):
+        params = {
+            "owner": "owner",
+            "repo": "repo",
+            "branch": "master",
+            "required_status_checks": {"strict": True, "contexts": []},
+            "required_pull_request_reviews": {"dismiss_stale_reviews": True},
+            "enforce_admins": True,
+            "restrictions": {"users": [], "teams": []},
+        }
+        octokit = Octokit()
+        octokit.repos.update_branch_protection(**params)
+        octokit.repos.update_branch_protection(**params)
