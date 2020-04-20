@@ -1,3 +1,4 @@
+import copy
 import datetime
 import json
 import re
@@ -230,7 +231,7 @@ class Base(object):
     def _get_parameters(self, definition, method):
         p = {}
         if definition.get("requestBody"):
-            schema = definition.get("requestBody")["content"]["application/json"]["schema"]
+            schema = copy.deepcopy(definition.get("requestBody")["content"]["application/json"]["schema"])
             if schema["type"] == "object":
                 body_parameters = {}
                 for k, v in schema["properties"].items():
