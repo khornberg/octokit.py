@@ -202,7 +202,7 @@ class Base(object):
         installation_url = "{}/app/installations".format(self.base_url)
         installations = requests.get(installation_url, headers=headers).json()
         self.installation_id = [x.get("id") for x in installations if str(x.get("app_id")) == app_id].pop()
-        installation_token_url = "{}/installations/{}/access_tokens".format(self.base_url, self.installation_id)
+        installation_token_url = "{}/app/installations/{}/access_tokens".format(self.base_url, self.installation_id)
         response = requests.post(installation_token_url, headers=headers).json()
         return response["token"], response["expires_at"]
 
