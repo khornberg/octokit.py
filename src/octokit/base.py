@@ -72,7 +72,7 @@ class Base(object):
 
     def validate_list(self, parameters, schema):
         if not parameters and schema.get("items").get("required"):
-            message = f"property is missing required items"
+            message = "property is missing required items"
             raise errors.OctokitParameterError(message)
         for parameter in parameters:
             self.validate_schema(parameter, schema.get("items", schema))
