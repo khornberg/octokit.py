@@ -73,7 +73,7 @@ REST API::
     repos = Octokit().repos.list_for_user(username="octokit")
     for repo in repos.json:
         print(repo["name"])
-    # Make an unauthenticated request for octokit's public repositories
+    # Make an unauthenticated request for octokit's public repositories.
 
 Webhooks::
 
