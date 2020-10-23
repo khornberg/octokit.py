@@ -20,5 +20,6 @@ include requirements.txt
 include .pyup.yml
 include *.json
 include *.sh
+include *.toml
 
 global-exclude *.py[cod] __pycache__ *.so *.dylib .github .github/*

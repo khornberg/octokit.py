@@ -3,9 +3,10 @@ import re
 from collections import defaultdict
 
 import requests
+from octokit_routes import specifications
+
 from octokit import utils
 from octokit.base import Base
-from octokit_routes import specifications
 
 page_regex = re.compile(r'[\?\&]page=(\d+)[_&=%+\w\d]*>; rel="(\w+)"')
 
