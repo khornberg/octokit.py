@@ -4,6 +4,7 @@ from collections import namedtuple
 
 import pytest
 import requests
+
 from octokit import Octokit
 
 

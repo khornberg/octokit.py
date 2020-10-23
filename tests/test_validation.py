@@ -1,4 +1,5 @@
 import pytest
+
 from octokit import errors
 from octokit.base import Base
 
