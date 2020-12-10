@@ -116,3 +116,14 @@ class TestWebhook(object):
         payload = ""
         secret = "secret"
         assert webhook.verify(headers, payload, secret, events=["*"], return_app_id=True)
+
+    def test_must_have_a_valid_event(self):
+        headers = {
+            "X-Hub-Signature": "sha1=25af6174a0fcecc4d346680a72b7ce644b9a88e8",
+            "X-GitHub-Event": "blah",
+            "X-GitHub-Delivery": "72d3162f-cc78-11e3-81ab-4c9367dc0958",
+        }
+        payload = ""
+        secret = "secret"
+        events = ["push"]
+        assert webhook.verify(headers, payload, secret, events=events) is False
