@@ -21,7 +21,7 @@ def valid_guid(guid):
 
 
 def valid_event(event, events):
-    return event in webhook_names or "*" in webhook_names
+    return event in webhook_names
 
 
 def valid_user_agent(ua):
