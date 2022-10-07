@@ -114,7 +114,7 @@ class Base(object):
         filtered_kwargs = {k: v for k, v in _values.items() if params.get(k)}
         data_values = filtered_kwargs.copy()
         for name, value in filtered_kwargs.items():
-            _url, subs = re.subn(fr"{{{name}}}", str(value), _url)
+            _url, subs = re.subn(rf"{{{name}}}", str(value), _url)
             if subs != 0:
                 self._attribute_cache["url"][name] = data_values.pop(name)
         url = "{}{}".format(self.base_url, _url)
