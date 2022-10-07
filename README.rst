@@ -192,8 +192,8 @@ Best Practices
 
     [x] pagination
 
-Documentation
--------------
+Generated Documentation
+-----------------------
 
 ::
 
