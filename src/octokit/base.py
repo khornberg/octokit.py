@@ -90,7 +90,7 @@ class Base(object):
             return schema.get("required")
 
     def get_required_parameters(self, definition):
-        return [p.get("name") for p in definition.get("parameters") if p.get("required") and p.get("in") in ["path"]]
+        return [p.get("name") for p in definition.get("parameters") if p.get("required") and p.get("in") in ("path")]
 
     def validate_required_parameters(self, parameters, required_parameters):
         for required_parameter in required_parameters or []:
@@ -130,7 +130,7 @@ class Base(object):
 
     def _get_default_data(self, parameter_name, parameter, kwargs):
         data = {}
-        if parameter.get("in") in ["query", "body"] and not kwargs.get(parameter_name):
+        if parameter.get("in") in ("query", "body") and not kwargs.get(parameter_name):
             if parameter.get("schema", parameter).get("default") is not None:
                 data[parameter_name] = self._get_parameter_for_type(parameter.get("schema", parameter))
         return data
@@ -155,7 +155,7 @@ class Base(object):
         data = self._get_data(data_kwargs, params)
         if method == "get":
             return {"params": data}
-        if method in ["post", "patch", "put", "delete"]:
+        if method in ("post", "patch", "put", "delete"):
             return {"data": json.dumps(data, sort_keys=True)}
         return {}
 
@@ -218,7 +218,7 @@ class Base(object):
     def _auth(self, requests_kwargs):
         if getattr(self, "auth", None) == "basic":
             return {"auth": (self.username, self.password)}
-        if getattr(self, "auth", None) in ["app", "token", "installation"]:
+        if getattr(self, "auth", None) in ("app", "token", "installation"):
             _headers = {
                 "app": {"Authorization": "Bearer {}".format(getattr(self, "jwt", None))},
                 "token": {"Authorization": "token {}".format(getattr(self, "token", None))},
