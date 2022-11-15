@@ -88,8 +88,7 @@ class Octokit(Base):
             return type("ResponseData", (object,), {k: self._convert_to_object(v) for k, v in item.items()})
         if isinstance(item, list):
             return list((self._convert_to_object(value) for index, value in enumerate(item)))
-        else:
-            return item
+        return item
 
     def set_pages(self, obj, previous_page_requested=None):
         response_headers = obj._response.headers
