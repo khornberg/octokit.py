@@ -90,7 +90,7 @@ class Base(object):
             return schema.get("required")
 
     def get_required_parameters(self, definition):
-        return [p.get("name") for p in definition.get("parameters") if p.get("required") and p.get("in") in ("path")]
+        return [p.get("name") for p in definition.get("parameters") if p.get("required") and p.get("in") in ("path",)]
 
     def validate_required_parameters(self, parameters, required_parameters):
         for required_parameter in required_parameters or []:
